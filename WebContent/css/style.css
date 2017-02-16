@@ -1,0 +1,319 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* --------------------
+	Header Section 
+-------------------- */
+
+#logo{
+	
+	text-align:center;
+		
+}
+
+#cart{
+		
+	text-align:center;
+	font-size:18px;
+	margin-top:60px;
+		
+}
+
+
+/* --------------------
+	Navigation Bar 
+-------------------- */
+
+#navigation_links{
+
+	font-size:14px;
+	font-weight:bold;
+	
+}
+
+.affix {
+      top: 0;
+      width: 100%;
+	  z-index:1;
+}
+
+.affix + .container {
+      padding-top: 70px;
+	  z-index:0;
+}
+
+#cake_flavours a{
+
+	color: black;
+	
+}
+
+#cake_flavours, #categories{
+
+	background-color: #eeeeee;
+
+}
+
+/* --------------------
+	City Selector 
+-------------------- */
+
+#city_selector{
+	
+	text-align:right;
+	margin-right:15px;
+	
+}
+
+
+/* --------------------
+	Sort and Filer buttons 
+-------------------- */
+
+#sort_filter{
+
+	text-align:right;
+	
+}
+
+
+/* --------------------
+	Cake images 
+-------------------- */
+
+.cake_image{
+
+	position: relative;
+
+}
+
+.price_tag{
+
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	padding: 10px;
+}
+
+
+/* --------------------
+	Page numbers 
+-------------------- */
+
+#page_nums{
+
+		text-align: center;
+
+}
+
+/* --------------------
+	Footer
+-------------------- */
+
+#footer{
+
+	background-color: black;
+	color: white;
+
+}
+
+#about, #connect, #contact, #credits{
+
+	padding: 15px;
+	padding-left: 20px;
+	text-align: center;
+
+}
+
+#connect img, #contact img{
+
+	width: 25px;
+	height: 25px;
+	margin: 5px;
+
+}
+
+#credits img{
+
+	width: 20px;
+	height: 20px;
+	margin: 0px;
+
+}
+
+/* --------------------
+	Registration Modal
+-------------------- */
+
+#pwd_msg, #email_msg, #mobile_msg{
+	
+	color: red;
+	
+}
+
+/* --------------------
+	Index page media queries 
+-------------------- */
+
+@media screen and (max-width: 768px){
+	
+	#cart{
+		margin-top:0px;
+	}
+	
+	#cart a{
+		width:100%;	
+	}
+	
+	#sort_filter{
+		text-align:left;
+		margin-bottom: 10px;	
+	}
+	
+}
+
+
+
+/* --------------------
+	seller-index.html
+-------------------- */
+
+
+/* --------------------
+	Header Section 
+-------------------- */
+
+#login_section{
+
+	padding: 10px;
+	margin-top: 40px;
+	
+}
+
+#login_section td{
+	
+	padding: 5px;
+			
+}
+
+#login_section input{
+	
+	height: 30px;
+		
+}
+
+#login_section .btn{
+	
+	padding-top: 3px;
+		
+}
+
+
+/* --------------------
+	Navigation Bar 
+-------------------- */
+
+#seller-navigation_links{
+
+	font-size: 16px;
+	
+}
+
+
+/* --------------------
+	Registration Message 
+-------------------- */
+
+#registration_msg{
+		
+	padding: 20px;	
+
+}
+
+#registration_msg .special{
+
+	color: #F06;
+	
+}
+
+#registration_msg .big{
+
+	font-size: 20px;
+	
+}
+
+
+/* --------------------
+	Registration Form
+-------------------- */
+
+#seller_registration_form h3{
+	
+	text-align:center;
+	
+}
+
+#seller_registration_form{
+	
+	background-color: white;
+	padding: 10px;
+	margin-top: 15px;
+	margin-bottom: 20px
+	
+}
+
+#seller_registration_form input{
+	
+	margin-bottom: 10px;
+	padding: 0px;
+	
+}
+
+#seller_registration_form input.submit{
+	
+	margin-top: 10px;
+	padding: 7px;
+	
+}
+
+
+/* --------------------
+	seller-index.html media queries 
+-------------------- */
+
+@media screen and (max-width: 767px){
+	
+	#login_section{
+		display: none;	
+	}
+	
+	#logo_section{
+		text-align: center;	
+	}
+	
+}
+
+@media screen and (min-width: 768px){
+	
+	#seller-navigation_links .navbar-right{
+		display: none;	
+	}
+	
+}
+
+
+/* --------------------
+	General 
+-------------------- */
+
+.grey{
+	
+	background-color: #eeeeee;
+	
+}
+
+.thumbnail{
+ 
+	border: 1px dotted #000000; 
+	
+}
