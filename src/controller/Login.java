@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Loginvo;
 import model.Registerdao;
@@ -51,10 +51,13 @@ public class Login extends HttpServlet {
 			Iterator<Loginvo> listIterator = ls.iterator();
 			while (listIterator.hasNext()) {
 				if(listIterator.next().getPw().equals(s2)){
-					response.sendRedirect("Home.jsp");
+					response.sendRedirect("user-home.jsp");
 				}
 				else{
-					response.sendRedirect("Login.jsp");
+					HttpSession session = request.getSession();
+					session.setAttribute("message", "Incorrect Password");
+					session.setAttribute("class", "alert-danger");
+					response.sendRedirect("index.jsp");
 				}
 			}
 		
@@ -62,7 +65,7 @@ public class Login extends HttpServlet {
 			
 		}
 		}else{
-			response.sendRedirect("Login.jsp");
+			response.sendRedirect("index.jsp"); //won't execute
 		}
 
 	}

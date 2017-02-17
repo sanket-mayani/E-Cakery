@@ -145,7 +145,7 @@
 	Registration Modal
 -------------------- */
 
-#pwd_msg, #email_msg, #mobile_msg{
+#pwd_msg, #reg_email_msg, #login_email_msg, #mobile_msg{
 	
 	color: red;
 	

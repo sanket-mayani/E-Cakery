@@ -55,6 +55,7 @@ public class Register extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("message","Registration Successfull");
+		session.setAttribute("class", "alert-success");
 		response.sendRedirect("index.jsp");
 	}
 

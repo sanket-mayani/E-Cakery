@@ -35,21 +35,21 @@ $(document).ready(function(){
 		}		
 	});
 	
-	$("#email").focus(function(){
+	$("#reg_email").focus(function(){
 		$("#submit").attr("disabled","disabled");
 	});
 	
-	$("#email").blur(function(){		
-		$("#email_msg").hide();
-		email_flag = true;
-		var uname = $("#email").val();
+	$("#reg_email").blur(function(){		
+		$("#reg_email_msg").hide();
+		reg_email_flag = true;
+		var uname = $("#reg_email").val();
 		var hreq=new XMLHttpRequest();
 		hreq.onreadystatechange= function(){
 			if(hreq.readyState==4){
 				var response=hreq.responseText;
 				if(response==1){		
-					$("#email_msg").show();
-					email_flag = false;
+					$("#reg_email_msg").show();
+					reg_email_flag = false;
 				}
 				else{
 					$("#submit").removeAttr("disabled");
@@ -76,7 +76,42 @@ $(document).ready(function(){
 	});
 
 	$("#reg_form").submit(function(){
-		return (email_flag && pwd_flag && mobile_flag);
+		return (reg_email_flag && pwd_flag && mobile_flag);
+	});
+	
+	
+	/* --------------------
+		Login Form 
+	-------------------- */
+	
+	$("#login_email").focus(function(){
+		$("#login").attr("disabled","disabled");
+	});
+	
+	$("#login_email").blur(function(){		
+		$("#login_email_msg").hide();
+		login_email_flag = true;
+		var uname = $("#login_email").val();
+		var hreq=new XMLHttpRequest();
+		hreq.onreadystatechange= function(){
+			if(hreq.readyState==4){
+				var response=hreq.responseText;
+				if(response==0){		
+					$("#login_email_msg").show();
+					login_email_flag = false;
+				}
+				else{
+					$("#login").removeAttr("disabled");
+				}
+			}		
+		}
+		
+		hreq.open("get", "UserCheck?u="+uname+"&type=user", true);
+		hreq.send();		
+	});
+	
+	$("#login_form").submit(function(){
+		return (login_email_flag);
 	});
 	
 });
