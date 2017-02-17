@@ -12,7 +12,7 @@
 		</id>
 			
 		<many-to-one name="seller" class="model.Seller" column="Seller_Id"></many-to-one>
-		<many-to-one name="city" class="model.Seller" column="City_Id"></many-to-one>
+		<many-to-one name="city" class="model.City" column="City_Id"></many-to-one>
 		
 	</class>
 </hibernate-mapping>
