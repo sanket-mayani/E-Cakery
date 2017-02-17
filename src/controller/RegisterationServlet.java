@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,23 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Loginvo;
-import model.Registerdao;
-
-
-
+import model.User;
+import model.DAO;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Register
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Register")
+public class RegisterationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public RegisterationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,37 +34,37 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.sendRedirect("Home.jsp");
-		String s1=request.getParameter("email");
-		String s2=request.getParameter("pw");
-		Loginvo v=new Loginvo();
-		v.setUn(s1);
+		String s1 = request.getParameter("fn");
+		String s2 = request.getParameter("ln");
+		String s3 = request.getParameter("email");
+		String s4 = request.getParameter("pw");
+		long l1 = Long.parseLong(request.getParameter("mobile"));
 		
-		Registerdao v1=new Registerdao();
-		List<Loginvo> ls=v1.search(v);
-		if(!ls.isEmpty())
-		{
-		try {
-			Iterator<Loginvo> listIterator = ls.iterator();
-			while (listIterator.hasNext()) {
-				if(listIterator.next().getPw().equals(s2)){
-					response.sendRedirect("user-home.jsp");
-				}
-				else{
-					HttpSession session = request.getSession();
-					session.setAttribute("message", "Incorrect Password");
-					session.setAttribute("class", "alert-danger");
-					response.sendRedirect("index.jsp");
-				}
-			}
+		HttpSession session = request.getSession();
+		DAO dao = new DAO();
+		User user = new User();
+		user.setUn(s3);
 		
-		} catch (Exception e) {
+		
+		List ls=new ArrayList();
+		ls=dao.searchUser(user);
+		if(ls.isEmpty()){
+			user.setPw(s4);
+			user.setFn(s1);
+			user.setLn(s2);
+			user.setMob(l1);
+			dao.insertUser(user);
 			
+			session.setAttribute("message","Registration Successfull");
+			session.setAttribute("class", "alert-success");
+			response.sendRedirect("index.jsp");
 		}
-		}else{
-			response.sendRedirect("index.jsp"); //won't execute
-		}
-
+		else{
+			session.setAttribute("message","Email Id Already Registered");
+			session.setAttribute("class", "alert-danger");
+			response.sendRedirect("index.jsp");
+		}		
+		
 	}
 
 	/**

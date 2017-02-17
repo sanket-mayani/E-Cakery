@@ -84,11 +84,11 @@ $(document).ready(function(){
 		Login Form 
 	-------------------- */
 	
-	$("#login_email").focus(function(){
+	$("#login_email").focu(function(){
 		$("#login").attr("disabled","disabled");
 	});
 	
-	$("#login_email").blur(function(){		
+	$("#login_email").blu(function(){		
 		$("#login_email_msg").hide();
 		login_email_flag = true;
 		var uname = $("#login_email").val();

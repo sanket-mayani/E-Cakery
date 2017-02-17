@@ -17,21 +17,21 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import model.AdminLoginvo;
-import model.Loginvo;
-import model.Registerdao;
-import model.SellerLoginvo;
+import model.User;
+import model.DAO;
+import model.Seller;
 
 /**
  * Servlet implementation class UserCheck
  */
 @WebServlet("/UserCheck")
-public class UserCheck extends HttpServlet {
+public class UserCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserCheck() {
+    public UserCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,23 +44,23 @@ public class UserCheck extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		String user=request.getParameter("u");
 		String type=request.getParameter("type");
-		Registerdao r=new Registerdao();	
+		DAO r=new DAO();	
 		try {
 			List ls=new ArrayList();
 			if(type.equals("seller"))
-			{	SellerLoginvo sl=new SellerLoginvo();
+			{	Seller sl=new Seller();
 				sl.setUn(user);
-				ls=r.search(sl);
+				ls=r.searchSeller(sl);
 			}else if(type.equals("user"))
 			{
-				Loginvo l=new Loginvo();
+				User l=new User();
 				l.setUn(user);
-				ls=r.search(l);
+				ls=r.searchUser(l);
 			}else if(type.equals("admin"))
 			{
 				AdminLoginvo al=new AdminLoginvo();
 				al.setUn(user);
-				ls=r.search(al);
+				ls=r.searchAdmin(al);
 			}
 			if(ls.isEmpty()){
 				pw.println("0");

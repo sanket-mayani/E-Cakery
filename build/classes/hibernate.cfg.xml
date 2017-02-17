@@ -16,11 +16,8 @@
 		<!-- Mapping files -->
 		
 		<!--<mapping resource="model/reg.hbm.xml"/>-->
-		<mapping resource="model/Loginvo.hbm.xml"/>
-		<mapping resource="model/Registervo.hbm.xml"/>
-		<mapping resource="model/SellerLoginvo.hbm.xml"/>
-		<mapping resource="model/SellerRegistervo.hbm.xml"/>
-		<mapping resource="model/SellerInfovo.hbm.xml"/>
+		<mapping resource="model/User.hbm.xml"/>
+		<mapping resource="model/Seller.hbm.xml"/>
 		<mapping resource="model/AdminLoginvo.hbm.xml"/>
 	
 	</session-factory>

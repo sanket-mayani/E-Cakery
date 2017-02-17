@@ -367,14 +367,14 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="email">Email:</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" id="login_email" placeholder="Enter email"  name="email">
+                                <input type="email" class="form-control" id="login_email" placeholder="Enter email"  name="email" required="required">
                                 <small><span id="login_email_msg" hidden="hidden">Email Not Registered</span></small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="pwd">Password:</label>
                             <div class="col-sm-9"> 
-                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pw">
+                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pw" required="required">
                             </div>
                         </div>
                     </div><!-- End of modal body -->

@@ -5,11 +5,20 @@
 
 <hibernate-mapping>
 	
-	<class name="model.SellerRegistervo" table="SellerRegister">
+	<class name="model.User" table="User">
 	
-		<id name="srid" type="int" column="SRID">
+		<id name="UID" type="int" column="ID">
 			<generator class="increment"></generator>
 		</id>
+			
+		<property name="un">
+			<column name="Email"></column>
+		</property>	
+		
+		<property name="pw">
+			<column name="Password"></column>
+		</property>	
+		
 		<property name="fn">
 			<column name="FirstName"></column>
 		</property>
@@ -18,11 +27,9 @@
 			<column name="LastName"></column>
 		</property>
 		
-		<property name="mob">
+		<property name="Mob">
 			<column name="Mobile"></column>
-		</property>		
-		
-		<many-to-one name="v" class="model.SellerLoginvo" column="SID"></many-to-one>
+		</property>
 		
 	</class>
 </hibernate-mapping>

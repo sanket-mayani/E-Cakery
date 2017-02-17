@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.AdminLoginvo;
-import model.Loginvo;
-import model.Registerdao;
-import model.SellerLoginvo;
+import model.User;
+import model.DAO;
+import model.Seller;
 
 
 /**
@@ -46,7 +46,7 @@ public class AdminLogin extends HttpServlet {
 		AdminLoginvo v=new AdminLoginvo();
 		v.setUn(s1);
 		
-		Registerdao v1=new Registerdao();
+		DAO v1=new DAO();
 		List<AdminLoginvo> ls=v1.search(v);
 		AdminLoginvo al;
 		if(!ls.isEmpty())

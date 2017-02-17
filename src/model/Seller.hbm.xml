@@ -5,11 +5,27 @@
 
 <hibernate-mapping>
 	
-	<class name="model.SellerInfovo" table="SellerInfo">
+	<class name="model.Seller" table="Seller">
 	
-		<id name="siid" type="int" column="SINFOID">
+		<id name="sid" type="int" column="SID">
 			<generator class="increment"></generator>
 		</id>
+		<property name="name">
+			<column name="Name"></column>
+		</property>
+		
+		<property name="un">
+			<column name="Email"></column>
+		</property>	
+		
+		<property name="pw">
+			<column name="Password"></column>
+		</property>
+		
+		<property name="mobile">
+			<column name="Mobile"></column>
+		</property>
+		
 		<property name="vatid">
 			<column name="VATID"></column>
 		</property>
@@ -20,9 +36,11 @@
 		
 		<property name="accno">
 			<column name="ACCNO"></column>
-		</property>		
+		</property>
 		
-		<many-to-one name="v" class="model.SellerLoginvo" column="SID"></many-to-one>
+		<property name="pincode">
+			<column name="Pincode"></column>
+		</property>		
 		
 	</class>
 </hibernate-mapping>

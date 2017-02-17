@@ -9,40 +9,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class Registerdao {
-
-	public void insert(Registervo rvo){
-		SessionFactory sf=new Configuration().configure().buildSessionFactory();
-		Session s=sf.openSession();
-		Transaction tr=s.beginTransaction();
-
-		s.save(rvo);
-
-		tr.commit();
-
-	}
+public class DAO {
 	
-	public void insert(Loginvo lvo){
+	public void insertUser(User user){
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
 		Transaction tr=s.beginTransaction();
 
-		s.save(lvo);
+		s.save(user);
 
 		tr.commit();
 
 	}
-	public void insert(SellerRegistervo srvo){
-		SessionFactory sf=new Configuration().configure().buildSessionFactory();
-		Session s=sf.openSession();
-		Transaction tr=s.beginTransaction();
 
-		s.save(srvo);
-
-		tr.commit();
-
-	}
-	public void insert(SellerLoginvo slvo){
+	public void insertSeller(Seller slvo){
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
 		Transaction tr=s.beginTransaction();
@@ -52,17 +32,18 @@ public class Registerdao {
 		tr.commit();
 
 	}
-	public List<Loginvo> search(Loginvo log)
+	
+	public List<User> searchUser(User log)
 	{
 		SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
 
 		Session session = sessionFactory.openSession();
 
-		List<Loginvo> al=new ArrayList<Loginvo>();
+		List<User> al=new ArrayList<User>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Loginvo where un='"+log.getUn()+"'");
+			Query q=session.createQuery("from User where un='"+log.getUn()+"'");
 			al=q.list();
 			tr.commit();
 		}
@@ -76,17 +57,17 @@ public class Registerdao {
 			return al;
 
 }
-	public List<SellerLoginvo> search(SellerLoginvo log)
+	public List<Seller> searchSeller(Seller log)
 	{
 		SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
 
 		Session session = sessionFactory.openSession();
 
-		List<SellerLoginvo> al=new ArrayList<SellerLoginvo>();
+		List<Seller> al=new ArrayList<Seller>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from SellerLoginvo where un='"+log.getUn()+"'");
+			Query q=session.createQuery("from Seller where un='"+log.getUn()+"'");
 			al=q.list();
 			tr.commit();
 		}
@@ -100,7 +81,7 @@ public class Registerdao {
 			return al;
 
 }
-	public List<AdminLoginvo> search(AdminLoginvo log)
+	public List<AdminLoginvo> searchAdmin(AdminLoginvo log)
 	{
 		SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
 
@@ -110,7 +91,7 @@ public class Registerdao {
 		try 
 		{
 			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from AdminLoginvo where un='"+log.getUn()+"'");
+			Query q=session.createQuery("from Admin where un='"+log.getUn()+"'");
 			al=q.list();
 			tr.commit();
 		}
