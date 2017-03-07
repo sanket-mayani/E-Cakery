@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Product;
 import model.User;
 import model.DAO;
 
@@ -44,10 +45,12 @@ public class ProductServlet extends HttpServlet {
 		String tier=request.getParameter("tier");
 		DAO dao=new DAO();
 		List l=new ArrayList();
-		l=dao.getCity();
-		HttpSession s1=request.getSession();
-		s1.setAttribute("city",l);
-		response.sendRedirect("get-city.jsp");
+		Product product=new Product();
+		product.setName(name);
+		product.setDescription(description);
+		product.setPrice(price);
+		product.setTier(tier);
+		dao.insertProduct(product);
 
 	}
 

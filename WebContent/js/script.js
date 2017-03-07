@@ -119,19 +119,6 @@ $(document).ready(function(){
 	/* --------------------
 		Seller Home 
 	-------------------- */
-	$("#add-city_body").ready(function(){
-		
-		$.ajax({ url: "GetCity",
-	        	success: function(result){
-	    		
-	    				var json=JSON.parse(result);
-	    				for(var i=0;i<json.length;i++){	    		
-	    					var text=json[i].cityname;
-	    					$("#city").append('<input type="checkbox" name="city" value='+ text +' /> ' + text + '<br />');
-	    				}
-
-        }});
-	});
 	
 	$("#add-product_body").ready(function(){
 		
@@ -145,16 +132,6 @@ $(document).ready(function(){
 					}
 
     }});
-	$.ajax({ url: "GetCity",
-    	success: function(result){
-		
-				var json=JSON.parse(result);
-				for(var i=0;i<json.length;i++){	    		
-					var text=json[i].cityname;
-					$("#quantity").append('<lable> ' + text + '');
-					$("#quantity").append('<input type="text" name='+ text +'> <br/>');
-				}
 
-    }});
 	});
 });
