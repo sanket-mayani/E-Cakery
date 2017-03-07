@@ -9,7 +9,6 @@ public class Seller {
 	private String vatid;
 	private String pan;
 	private String accno;
-	private int pincode;
 	private long mobile;
 	
 	public long getMobile() {
@@ -23,12 +22,6 @@ public class Seller {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public int getPincode() {
-		return pincode;
-	}
-	public void setPincode(int pincode) {
-		this.pincode = pincode;
 	}
 	public String getVatid() {
 		return vatid;

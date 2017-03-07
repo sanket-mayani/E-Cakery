@@ -49,11 +49,16 @@
                         <td><span>Forgot Password?</span></td>
                         <td></td>
                     </tr>
-              		<form action="SellerLogin" method="post">
+              		<form action="SellerLogin" method="post" id="seller_login_form">
                     <tr>
-                    	<td><input type="email" placeholder="Email" name="email" required="required"></td>
+                    	<td><input type="email" placeholder="Email" name="email" required="required" id="seller_login_email"></td>
                         <td><input type="password" placeholder="Password" name="pw" required="required"></td>
-                        <td><input type="submit" value="LogIn" class="btn btn-danger"></td>
+                        <td><input type="submit" value="LogIn" class="btn btn-danger" id="seller_login"></td>
+                    </tr>
+                    <tr>
+                    	<td><small><span id="seller_login_email_msg" hidden="hidden" class="red">Email Not Registered</span></small></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     </form>
                 </table>
@@ -98,10 +103,11 @@
                     <h1>All you <span class="special">need</span> is:</h1><br>
                     <span class="special big glyphicon glyphicon-check"></span><span class="big"> VAT Number</span><br>
                     <span class="special big glyphicon glyphicon-check"></span><span class="big"> PAN Card</span><br>
-                    <span class="special big glyphicon glyphicon-check"></span><span class="big"> Account Number</span>
+                    <span class="special big glyphicon glyphicon-check"></span><span class="big"> Account Number</span><br>
+                    <span class="special big glyphicon glyphicon-check"></span><span class="big"> IFSC Code</span>
                 </div>
                 <div class="col-sm-5">
-                    <div id="seller_registration_form">
+                    <div id="seller_reg_form">
                         <h3>Register Now</h3>
                         <form action="SellerRegistration" method="post">
 	                        <div class="row">
@@ -113,7 +119,8 @@
 	                        <div class="row">
 	                            <div class="col-sm-6">
 	                                <span>Email</span><br>
-	                                <input type="email" class="col-sm-12 col-xs-12" name="email" required="required">
+	                                <input type="email" class="col-sm-12 col-xs-12" name="email" required="required" id="seller_reg_email">
+	                                <small><span id="seller_reg_email_msg" hidden="hidden" class="red">Email Already Registered</span></small>
 	                            </div>
 	                            <div class="col-sm-6">
 	                                <span>Password</span><br>
@@ -123,11 +130,12 @@
 	                        <div class="row">
 	                            <div class="col-sm-6">
 	                                <span>Mobile</span><br>
-	                                <input type="text" class="col-sm-12 col-xs-12" name="mobile" required="required">
+	                                <input type="text" class="col-sm-12 col-xs-12" maxlength="10" name="mobile" required="required" id="seller_mobile">
+	                                <span id="seller_mobile_msg" hidden="hidden" class="red"><small>Invalid Mobile Number</small></span>
 	                            </div>
-	                            <div class="col-sm-6">
-	                                <span>Pickup Pincode</span><br>
-	                                <input type="text" class="col-sm-12 col-xs-12" name="pincode" required="required">
+	                        	<div class="col-sm-6">
+	                            	<span>Account Number</span><br>
+	                        		<input type="text" class="col-sm-12 col-xs-12" name="acc" required="required">
 	                            </div>
 	                        </div>
 	                        <div class="row">
@@ -142,13 +150,7 @@
 	                        </div>
 	                        <div class="row">
 	                        	<div class="col-sm-12">
-	                            	<span>Account Number</span><br>
-	                        		<input type="text" class="col-sm-12 col-xs-12" name="acc" required="required">
-	                            </div>
-	                        </div>
-	                        <div class="row">
-	                        	<div class="col-sm-12">
-	                        		<input type="submit" class="col-sm- col-xs-12 btn btn-danger submit" value="Start Selling!">
+	                        		<input type="submit" class="col-sm- col-xs-12 btn btn-danger submit" value="Start Selling!" id="start_selling">
 	                            </div>
 	                        </div>
                         </form>
@@ -203,12 +205,13 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Login</h4>
                 </div>
-                <form class="form-horizontal" action="SellerLogin" method="post">
+                <form class="form-horizontal" action="SellerLogin" method="post" id="seller_login_form2">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="email">Email:</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required="required">
+                                <input type="email" class="form-control" id="seller_login_email2" placeholder="Enter email" name="email" required="required">
+                                <small><span id="seller_login_email_msg2" hidden="hidden" class="red">Email Not Registered</span></small>
                             </div>
                         </div>
                         <div class="form-group">
@@ -219,7 +222,7 @@
                         </div>
                     </div><!-- End of modal body -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary" id="seller_login2">Login</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div><!-- End of modal footer -->    
                 </form><!-- End of login form -->

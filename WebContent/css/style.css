@@ -145,11 +145,7 @@
 	Registration Modal
 -------------------- */
 
-#pwd_msg, #reg_email_msg, #login_email_msg, #mobile_msg{
-	
-	color: red;
-	
-}
+
 
 /* --------------------
 	Index page media queries 
@@ -247,13 +243,13 @@
 	Registration Form
 -------------------- */
 
-#seller_registration_form h3{
+#seller_reg_form h3{
 	
 	text-align:center;
 	
 }
 
-#seller_registration_form{
+#seller_reg_form{
 	
 	background-color: white;
 	padding: 10px;
@@ -262,14 +258,14 @@
 	
 }
 
-#seller_registration_form input{
+#seller_reg_form input{
 	
 	margin-bottom: 10px;
 	padding: 0px;
 	
 }
 
-#seller_registration_form input.submit{
+#seller_reg_form input.submit{
 	
 	margin-top: 10px;
 	padding: 7px;
@@ -315,5 +311,11 @@
 .thumbnail{
  
 	border: 1px dotted #000000; 
+	
+}
+
+.red{
+	
+	color: red;
 	
 }

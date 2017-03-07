@@ -38,7 +38,6 @@ public class SellerRegisterationServlet extends HttpServlet {
 		String s2=request.getParameter("email");
 		String s3=request.getParameter("pw");
 		long l1=Long.parseLong(request.getParameter("mobile"));
-		int i1=Integer.parseInt(request.getParameter("pincode"));
 		String s4=request.getParameter("vat");
 		String s5=request.getParameter("pan");
 		String s6=request.getParameter("acc");
@@ -55,7 +54,6 @@ public class SellerRegisterationServlet extends HttpServlet {
 			seller.setName(s1);
 			seller.setPw(s3);
 			seller.setMobile(l1);
-			seller.setPincode(i1);
 			seller.setVatid(s4);
 			seller.setPan(s5);
 			seller.setAccno(s6);
