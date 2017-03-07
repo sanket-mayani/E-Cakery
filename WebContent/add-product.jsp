@@ -34,7 +34,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="add-product_body">
 
 	<div class="container">
     	
@@ -59,10 +59,10 @@
             <div class="collapse navbar-collapse" id="seller-home-navigation_links">
                 
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="seller-home.html"><span class="glyphicon glyphicon-briefcase"></span><span> My Orders</span></a></li>
+                    <li><a href="seller-home.html"><span class="glyphicon glyphicon-briefcase"></span><span> My Orders</span></a></li>
                    	<li><a href="add-city.jsp"><span class="glyphicon glyphicon-plus"></span> Add City</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> View Products</a></li>
-                    <li><a href="add-product.jsp"><span class="glyphicon glyphicon-plus"></span> Add Product</a></li>            
+                    <li class="active"><a href="add-product.jsp"><span class="glyphicon glyphicon-plus"></span> Add Product</a></li>             
                 </ul>
                 <ul class="nav navbar-nav navbar-right">                    
                     <li><a data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span><span> My Account</span></a></li>
@@ -74,7 +74,15 @@
         </div>
         
     </nav><!-- End of Navigation Bar -->
-	
+	<form id="add-product" action="AddProduct" method="post">
+	Name:<input type="text" name="name" required="required"><br>
+	Description:<input type="text" name="description" required="required"><br>
+	Price:<input type="text" name="price" required="required"><br>
+	Tier:<input type="text" name="tier" required="required"><br>
+	Flavour:<div id="flavour"></div>
+	Quantity:<div id="quantity"></div>
+	<input type="submit" value="Add">
+	</form>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>

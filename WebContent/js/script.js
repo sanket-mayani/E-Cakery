@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
-	
+
+
+
 	/* --------------------
 		Navigation Bar 
 	-------------------- */
@@ -84,11 +86,11 @@ $(document).ready(function(){
 		Login Form 
 	-------------------- */
 	
-	$("#login_email").focu(function(){
+	$("#login_email").focus(function(){
 		$("#login").attr("disabled","disabled");
 	});
 	
-	$("#login_email").blu(function(){		
+	$("#login_email").blur(function(){		
 		$("#login_email_msg").hide();
 		login_email_flag = true;
 		var uname = $("#login_email").val();
@@ -114,4 +116,45 @@ $(document).ready(function(){
 		return (login_email_flag);
 	});
 	
+	/* --------------------
+		Seller Home 
+	-------------------- */
+	$("#add-city_body").ready(function(){
+		
+		$.ajax({ url: "GetCity",
+	        	success: function(result){
+	    		
+	    				var json=JSON.parse(result);
+	    				for(var i=0;i<json.length;i++){	    		
+	    					var text=json[i].cityname;
+	    					$("#city").append('<input type="checkbox" name="city" value='+ text +' /> ' + text + '<br />');
+	    				}
+
+        }});
+	});
+	
+	$("#add-product_body").ready(function(){
+		
+		$.ajax({ url: "GetFlavour",
+	    	success: function(result){
+			
+					var json=JSON.parse(result);
+					for(var i=0;i<json.length;i++){	    		
+						var text=json[i].flavourname;
+						$("#flavour").append('<input type="checkbox" name="flavour" value='+ text +' /> ' + text + '<br />');
+					}
+
+    }});
+	$.ajax({ url: "GetCity",
+    	success: function(result){
+		
+				var json=JSON.parse(result);
+				for(var i=0;i<json.length;i++){	    		
+					var text=json[i].cityname;
+					$("#quantity").append('<lable> ' + text + '');
+					$("#quantity").append('<input type="text" name='+ text +'> <br/>');
+				}
+
+    }});
+	});
 });

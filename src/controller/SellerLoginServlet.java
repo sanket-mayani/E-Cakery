@@ -57,7 +57,7 @@ public class SellerLoginServlet extends HttpServlet {
 				sl=listIterator.next();
 				if(sl.getPw().equals(s2)){
 					 
-					//session.setAttribute("seller", sl);
+					session.setAttribute("seller", sl);
 					session.setAttribute("message", "Welcome");
 					session.setAttribute("class", "alert-success");
 					response.sendRedirect("seller-home.jsp");

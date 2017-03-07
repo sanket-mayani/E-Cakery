@@ -32,9 +32,10 @@
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    
 </head>
 
-<body>
+<body id="add-city_body">
 
 	<div class="container">
     	
@@ -59,10 +60,10 @@
             <div class="collapse navbar-collapse" id="seller-home-navigation_links">
                 
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="seller-home.html"><span class="glyphicon glyphicon-briefcase"></span><span> My Orders</span></a></li>
-                   	<li><a href="add-city.jsp"><span class="glyphicon glyphicon-plus"></span> Add City</a></li>
+                    <li><a href="seller-home.html"><span class="glyphicon glyphicon-briefcase"></span><span> My Orders</span></a></li>
+                   	<li  class="active"><a href="add-city.jsp"><span class="glyphicon glyphicon-plus"></span> Add City</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> View Products</a></li>
-                    <li><a href="add-product.jsp"><span class="glyphicon glyphicon-plus"></span> Add Product</a></li>            
+                    <li><a href="add-product.jsp" id="add-product"><span class="glyphicon glyphicon-plus"></span> Add Product</a></li>             
                 </ul>
                 <ul class="nav navbar-nav navbar-right">                    
                     <li><a data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span><span> My Account</span></a></li>
@@ -74,7 +75,10 @@
         </div>
         
     </nav><!-- End of Navigation Bar -->
-	
+	<form id="add-city" action="AddCity">
+	<div id="city"></div>
+	<input type="submit" value="Add">
+	</form> 
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>

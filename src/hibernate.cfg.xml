@@ -19,6 +19,10 @@
 		<mapping resource="model/User.hbm.xml"/>
 		<mapping resource="model/Seller.hbm.xml"/>
 		<mapping resource="model/AdminLoginvo.hbm.xml"/>
+		<mapping resource="model/City.hbm.xml"/>
+		<mapping resource="model/Flavour.hbm.xml"/>
+		<mapping resource="model/SellerCity.hbm.xml"/>
+		
 	
 	</session-factory>
 </hibernate-configuration>
