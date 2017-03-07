@@ -36,11 +36,7 @@
 		
 		<property name="accno">
 			<column name="ACCNO"></column>
-		</property>
-		
-		<property name="pincode">
-			<column name="Pincode"></column>
-		</property>		
+		</property>	
 		
 	</class>
 </hibernate-mapping>
