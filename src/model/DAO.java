@@ -116,6 +116,30 @@ public class DAO {
 			return al;
 
 }
+	public List<Flavour> searchFlavour(Flavour flavour)
+	{
+		SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		List<Flavour> al=new ArrayList<Flavour>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Flavour where name='"+flavour.getName()+"'");
+			al=q.list();
+			tr.commit();
+		}
+
+		catch (Exception e) 
+		{
+
+				e.printStackTrace();
+
+		}
+			return al;
+
+}
 		public List<Flavour> getFlavour()
 	{
 		SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();

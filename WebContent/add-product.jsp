@@ -59,8 +59,7 @@
             <div class="collapse navbar-collapse" id="seller-home-navigation_links">
                 
                 <ul class="nav navbar-nav">
-                    <li><a href="seller-home.html"><span class="glyphicon glyphicon-briefcase"></span><span> My Orders</span></a></li>
-                   	<li><a href="add-city.jsp"><span class="glyphicon glyphicon-plus"></span> Add City</a></li>
+                    <li><a href="seller-home.jsp"><span class="glyphicon glyphicon-briefcase"></span><span> My Orders</span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> View Products</a></li>
                     <li class="active"><a href="add-product.jsp"><span class="glyphicon glyphicon-plus"></span> Add Product</a></li>             
                 </ul>
@@ -79,8 +78,8 @@
 	Description:<input type="text" name="description" required="required"><br>
 	Price:<input type="text" name="price" required="required"><br>
 	Tier:<input type="text" name="tier" required="required"><br>
+	Image_Id:<input type="text" name="imageid" required="required"><br>
 	Flavour:<div id="flavour"></div>
-	Quantity:<div id="quantity"></div>
 	<input type="submit" value="Add">
 	</form>
     <script src="js/jquery-3.1.1.min.js"></script>

@@ -149,7 +149,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="row">
-	                        	<div class="col-sm-12">
+	                        	<div class="col-sm-12"><br>	
 	                        		<input type="submit" class="col-sm- col-xs-12 btn btn-danger submit" value="Start Selling!" id="start_selling">
 	                            </div>
 	                        </div>

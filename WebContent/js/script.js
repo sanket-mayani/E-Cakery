@@ -129,7 +129,7 @@ $(document).ready(function(){
 					var json=JSON.parse(result);
 					for(var i=0;i<json.length;i++){	    		
 						var text=json[i].flavourname;
-						$("#flavour").append('<input type="checkbox" name="flavour" value='+ text +' /> ' + text + '<br />');
+						$("#flavour").append('<input type="radio" name="flavour" value='+ text +' /> ' + text + '<br />');
 					}
 
     }});
@@ -213,6 +213,7 @@ $(document).ready(function(){
 		
 		hreq.open("get", "UserCheck?u="+uname+"&type=seller", true);
 		hreq.send();		
+
 	});
 	
 	$("#seller_login_form, #seller_login_form2").submit(function(){

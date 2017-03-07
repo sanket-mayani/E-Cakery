@@ -20,6 +20,7 @@
 		<mapping resource="model/Seller.hbm.xml"/>
 		<mapping resource="model/AdminLoginvo.hbm.xml"/>
 		<mapping resource="model/Flavour.hbm.xml"/>
+		<mapping resource="model/Product.hbm.xml"/>
 		
 	
 	</session-factory>
