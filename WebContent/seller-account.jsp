@@ -59,7 +59,7 @@
     		
     		<div class="row">
     		    		
-	    		<div id="seller_basic_details" class="col-md-6">
+	    		<div class="col-md-6">
 	    			<h3>Basic Details <button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
 	    			<div class="row">
 		    			<div class="col-md-12">

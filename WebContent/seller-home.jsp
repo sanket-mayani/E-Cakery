@@ -89,7 +89,7 @@
                 <div class="modal-body">
                 	<p>You have not entered your address details.<br>
                 	Enter your address now to start selling products.<br>
-                	Go to <span><a href="seller-account.jsp">My Account > Address Details</a></span></p>        
+                	Go to <span><a href="seller-account.jsp#seller_address_details">My Account > Address Details</a></span></p>        
                 </div><!-- End of modal body -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -105,8 +105,8 @@
     <script src="js/script.js"></script>
     <%
     	Seller s = (Seller)session.getAttribute("seller");
-		String city = s.getCity();
-		if(city == null)
+		String address = s.getAddress();
+		if(address == null)
 		{
 	%>
 			<script type="text/javascript">
