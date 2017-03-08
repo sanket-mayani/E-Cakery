@@ -298,6 +298,25 @@
 }
 
 
+
+/* --------------------
+	seller-account.jsp
+-------------------- */
+
+/* --------------------
+	Apply changes Div
+-------------------- */
+
+#apply_changes_div{
+	text-align: center;
+}
+
+#apply_changes_div .btn{
+	margin-bottom: 20px;
+}
+
+
+
 /* --------------------
 	General 
 -------------------- */
