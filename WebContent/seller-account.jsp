@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="model.Seller"%>
+    pageEncoding="ISO-8859-1" import="model.Seller,model.DAO,model.City,java.util.ArrayList,java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -55,18 +55,18 @@
     
     <div class="container">
     
-    	<form action="" class="form-horizontal">
+    	<form action="UpdateSellerAddressServlet" class="form-horizontal" method="post">
     		
     		<div class="row">
     		    		
-	    		<div class="col-md-6">
-	    			<h3>Basic Details <button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
+	    		<div class="col-md-6" id="seller_basic_details">
+	    			<h3>Basic Details <button type="button" class="btn btn-primary edit"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
 	    			<div class="row">
 		    			<div class="col-md-12">
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="name">Name:</label>
 		    					<div class="col-xs-9">
-		    						<input type="text" class="form-control" id="name" disabled="disabled" value="<%out.print(s.getName());%>">    						
+		    						<input type="text" name="name" class="form-control" id="name" disabled="disabled" value="<%out.print(s.getName());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -76,7 +76,7 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="email">Email:</label>
 		    					<div class="col-xs-9">
-		    						<input type="email" class="form-control" id="email" disabled="disabled" value="<%out.print(s.getUn());%>">    						
+		    						<input type="email" name="email" class="form-control" id="email" disabled="disabled" value="<%out.print(s.getUn());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -86,7 +86,7 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="mobile">Mobile:</label>
 		    					<div class="col-xs-9">
-		    						<input type="text" class="form-control" id="mobile" disabled="disabled" value="<%out.print(s.getMobile());%>">    						
+		    						<input type="text" name="mobile" class="form-control" id="mobile" disabled="disabled" value="<%out.print(s.getMobile());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -96,7 +96,7 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="acc">Account No:</label>
 		    					<div class="col-xs-9">
-		    						<input type="text" class="form-control" id="acc" disabled="disabled" value="<%out.print(s.getAccno());%>">    						
+		    						<input type="text" name="acc" class="form-control" id="acc" disabled="disabled" value="<%out.print(s.getAccno());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -106,7 +106,7 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="pan">PAN No:</label>
 		    					<div class="col-xs-9">
-		    						<input type="text" class="form-control" id="pan" disabled="disabled" value="<%out.print(s.getPan());%>">    						
+		    						<input type="text" name="pan" class="form-control" id="pan" disabled="disabled" value="<%out.print(s.getPan());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -116,7 +116,7 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="ifsc">IFSC Code:</label>
 		    					<div class="col-xs-9">
-		    						<input type="text" class="form-control" id="ifsc" disabled="disabled" value="<%out.print(s.getIfsc());%>">    						
+		    						<input type="text" name="ifsc" class="form-control" id="ifsc" disabled="disabled" value="<%out.print(s.getIfsc());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -126,7 +126,7 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="vat">VAT ID:</label>
 		    					<div class="col-xs-9">
-		    						<input type="text" class="form-control" id="vat" disabled="disabled" value="<%out.print(s.getVatid());%>">    						
+		    						<input type="text" name="vat" class="form-control" id="vat" disabled="disabled" value="<%out.print(s.getVatid());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -134,13 +134,13 @@
 	    		</div>
     		
     			<div id="seller_address_details" class="col-md-6">
-	    			<h3>Address Details <button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
+	    			<h3>Address Details <button type="button" class="btn btn-primary edit"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
 	    			<div class="row">
 		    			<div class="col-md-12">
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="address">Address:</label>
 		    					<div class="col-xs-9">
-		    						<textarea class="form-control" id="address" disabled="disabled"><%out.print(s.getAddress());%></textarea>   						
+		    						<textarea class="form-control" name="address" id="address" disabled="disabled" required><%if(s.getAddress()!= null)	out.print(s.getAddress());%></textarea>   						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -150,7 +150,7 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="pin">Pincode:</label>
 		    					<div class="col-xs-9">
-		    						<input type="text" class="form-control" id="pin" disabled="disabled" value="<%out.print(s.getPincode());%>">    						
+		    						<input type="text" name="pin" class="form-control" id="pin" disabled="disabled" value="<%if(s.getPincode()!= 0) out.print(s.getPincode());%>" required>    						
 		    					</div>
 		    				</div>
 		    			</div>
@@ -160,7 +160,21 @@
 		    				<div class="form-group">
 		    					<label class="control-label col-xs-3" for="city">City:</label>
 		    					<div class="col-xs-9">
-		    						<select class="form-control" id="city" disabled="disabled"></select>    						
+		    						<select class="form-control" name="city" id="city" disabled="disabled" required>
+		    							<option value="0">--Select City--</option>
+		    							<%
+		    								DAO dao = new DAO();
+		    								List<City> cities = new ArrayList<City>();
+		    								cities = dao.getCity();
+		    								
+		    								for(City city:cities)
+		    								{
+		    							%>
+		    									<option><%out.print(city.getName());%></option>
+		    							<%		
+		    								}
+		    							%>
+		    						</select>    						
 		    					</div>
 		    				</div>
 		    			</div>

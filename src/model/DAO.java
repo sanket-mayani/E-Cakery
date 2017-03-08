@@ -139,14 +139,15 @@ public class DAO {
 		}
 			return al;
 
-}
+		}
+	
 		public List<Flavour> getFlavour()
-	{
-		SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+		{
+			SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
 
-		Session session = sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 
-		List<Flavour> al=new ArrayList<Flavour>();
+			List<Flavour> al=new ArrayList<Flavour>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
@@ -163,5 +164,31 @@ public class DAO {
 		}
 			return al;
 
-}
+		}
+		
+		public List<City> getCity()
+		{
+			SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+
+			Session session = sessionFactory.openSession();
+
+			List<City> cities=new ArrayList<City>();
+			try 
+			{
+				Transaction tr=session.beginTransaction();
+				Query q=session.createQuery("from City");
+				cities=q.list();
+				tr.commit();
+			}
+	
+			catch (Exception e) 
+			{
+	
+					e.printStackTrace();
+	
+			}
+			return cities;
+
+		}
+		
 }

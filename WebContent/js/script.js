@@ -227,8 +227,20 @@ $(document).ready(function(){
 	
 	
 /* --------------------
-	seller-home.jsp 
+	seller-account.jsp 
 -------------------- */
+	
+	$("#seller_basic_details .edit").click(function(){
+		
+		$("#name,#mobile,#acc,#pan,#ifsc,#vat").removeAttr("disabled");
+		
+	});
+	
+	$("#seller_address_details .edit").click(function(){
+		
+		$("#address,#pin,#city").removeAttr("disabled");
+		
+	});
 	
 	
 	
