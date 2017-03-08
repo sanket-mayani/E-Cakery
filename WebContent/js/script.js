@@ -1,8 +1,11 @@
 
 $(document).ready(function(){
-
-
-
+	
+/* --------------------
+	index.jsp 
+-------------------- */
+	
+	
 	/* --------------------
 		Navigation Bar 
 	-------------------- */
@@ -117,24 +120,12 @@ $(document).ready(function(){
 		return (login_email_flag);
 	});
 	
-	/* --------------------
-		Seller Home 
-	-------------------- */
 	
-	$("#add-product_body").ready(function(){
-		
-		$.ajax({ url: "GetFlavour",
-	    	success: function(result){
-			
-					var json=JSON.parse(result);
-					for(var i=0;i<json.length;i++){	    		
-						var text=json[i].flavourname;
-						$("#flavour").append('<input type="radio" name="flavour" value='+ text +' /> ' + text + '<br />');
-					}
-
-    }});
-
-	});
+/* --------------------
+	seller-index.jsp 
+-------------------- */
+	
+	
 	/* --------------------
 		Seller Registration Form 
 	-------------------- */
@@ -179,9 +170,24 @@ $(document).ready(function(){
 		       seller_mobile_flag = false;
 		  }		
 	});
+	
+	$("#seller_re-pwd, #seller_pwd").keyup(function(){		
+		var x = $("#seller_pwd").val();
+		var y = $("#seller_re-pwd").val();
+		
+		if(x != y){
+			$("#seller_pwd_msg").show();
+			seller_pwd_flag = false;
+		}
+		
+		else{
+			$("#seller_pwd_msg").hide();
+			seller_pwd_flag = true;
+		}		
+	});
 
 	$("#seller_reg_form").submit(function(){
-		return (seller_reg_email_flag && seller_mobile_flag);
+		return (seller_reg_email_flag && seller_mobile_flag && seller_pwd_flag);
 	});
 	
 	
@@ -213,11 +219,17 @@ $(document).ready(function(){
 		
 		hreq.open("get", "UserCheck?u="+uname+"&type=seller", true);
 		hreq.send();		
-
 	});
 	
 	$("#seller_login_form, #seller_login_form2").submit(function(){
 		return (seller_login_email_flag);
 	});
+	
+	
+/* --------------------
+	seller-home.jsp 
+-------------------- */
+	
+	
 	
 });
