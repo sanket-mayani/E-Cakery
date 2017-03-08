@@ -15,12 +15,15 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- Mapping files -->
 		
-		<!--<mapping resource="model/reg.hbm.xml"/>-->
 		<mapping resource="model/User.hbm.xml"/>
 		<mapping resource="model/Seller.hbm.xml"/>
 		<mapping resource="model/AdminLoginvo.hbm.xml"/>
 		<mapping resource="model/Flavour.hbm.xml"/>
 		<mapping resource="model/Product.hbm.xml"/>
+		<mapping resource="model/City.hbm.xml"/>
+		<mapping resource="model/Occassion.hbm.xml"/>
+		<mapping resource="model/ProductOccassion.hbm.xml"/>
+		<mapping resource="model/Order.hbm.xml"/>
 		
 	
 	</session-factory>

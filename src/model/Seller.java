@@ -13,7 +13,7 @@ public class Seller {
 	private String ifsc;
 	private String address;
 	private int pincode;
-	private String city;
+	private City city;
 	
 	public String getAddress() {
 		return address;
@@ -27,10 +27,10 @@ public class Seller {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
-	public String getCity() {
+	public City getCity() {
 		return city;
 	}
-	public void setCity(String city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 	public String getIfsc() {

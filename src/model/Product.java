@@ -10,6 +10,7 @@ public class Product {
 	private String tier;
 	private Flavour flavour;
 	private Seller seller;
+	
 	public int getPid() {
 		return pid;
 	}

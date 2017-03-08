@@ -19,14 +19,11 @@ public class ProductOccassion {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
 	public Occassion getOccassion() {
 		return occassion;
 	}
 	public void setOccassion(Occassion occassion) {
 		this.occassion = occassion;
-	}
-	
-	
+	}	
 
 }

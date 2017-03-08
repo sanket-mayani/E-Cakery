@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	
+	<class name="model.Order" table="Order">
+	
+		<id name="oid" type="int" column="oid">
+			<generator class="increment"></generator>
+		</id>
+			
+		<property name="quantity">
+			<column name="Quantity"></column>
+		</property>
+		
+		<property name="amount">
+			<column name="Amount"></column>
+		</property>
+		
+		<property name="address">
+			<column name="Address"></column>
+		</property>
+		
+		<property name="pincode">
+			<column name="Pincode"></column>
+		</property>
+		
+		<property name="status">
+			<column name="Status"></column>
+		</property>	
+		
+		<property name="date">
+			<column name="Date"></column>
+		</property>
+		
+		<property name="time">
+			<column name="Time"></column>
+		</property>
+		
+		<many-to-one name="user" class="model.User" column="User_ID"></many-to-one>
+		<many-to-one name="product" class="model.Product" column="Product_ID"></many-to-one>
+		<many-to-one name="city" class="model.City" column="City_ID"></many-to-one>
+		
+	</class>
+</hibernate-mapping>

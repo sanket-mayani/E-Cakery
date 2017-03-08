@@ -38,5 +38,19 @@
 			<column name="ACCNO"></column>
 		</property>	
 		
+		<property name="ifsc">
+			<column name="IFSC"></column>
+		</property>
+		
+		<property name="address">
+			<column name="Address"></column>
+		</property>
+		
+		<property name="pincode">
+			<column name="Pincode"></column>
+		</property>
+		
+		<many-to-one name="city" class="model.City" column="City_ID"></many-to-one>
+		
 	</class>
 </hibernate-mapping>
