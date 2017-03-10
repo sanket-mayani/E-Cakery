@@ -58,7 +58,7 @@ public class UpdateSellerAddressServlet extends HttpServlet {
 		List al=new ArrayList();
 		City city=new City();
 		DAO dao=new DAO();
-		if(c!=null)
+		if(c!=null && !c.equals("0"))
 		{
 			city.setName(c);
 			al=dao.searchCity(city);
