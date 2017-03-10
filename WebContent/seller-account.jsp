@@ -170,7 +170,7 @@
 		    								for(City city:cities)
 		    								{
 		    							%>
-		    									<option><%out.print(city.getName());%></option>
+		    									<option value="<%out.print(city.getName());%>"><%out.print(city.getName());%></option>
 		    							<%		
 		    								}
 		    							%>

@@ -25,11 +25,19 @@ public class DAO {
 	public void insertSeller(Seller slvo){
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
+		try{
 		Transaction tr=s.beginTransaction();
 
 		s.save(slvo);
 
 		tr.commit();
+		}catch(Exception ex){
+			
+		}finally{
+			 if (s.isOpen()){
+	                s.close();
+	            }
+		}
 
 	}
 	
@@ -42,6 +50,24 @@ public class DAO {
 
 		tr.commit();
 
+	}
+	
+	public void updateSeller(Seller seller){
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		try{
+			Transaction tr=s.beginTransaction();
+	
+			s.update(seller);
+	
+			tr.commit();
+		}catch(Exception ex){
+			
+		}finally{
+			 if (s.isOpen()){
+	                s.close();
+	            }
+		}
 	}
 	
 	public List<User> searchUser(User log)
@@ -88,6 +114,10 @@ public class DAO {
 
 				e.printStackTrace();
 
+		}finally{
+			 if (session.isOpen()){
+	                session.close();
+	            }
 		}
 			return al;
 
@@ -140,7 +170,30 @@ public class DAO {
 			return al;
 
 		}
-	
+	public List<City> searchCity(City city)
+	{
+		SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		List<City> al=new ArrayList<City>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from City where name='"+city.getName()+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+		
+		}finally{
+			 if (session.isOpen()){
+	                session.close();
+	            }
+		}
+			return al;
+
+		}
+
 		public List<Flavour> getFlavour()
 		{
 			SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
