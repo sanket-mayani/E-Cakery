@@ -47,7 +47,7 @@ public class AdminLogin extends HttpServlet {
 		v.setUn(s1);
 		
 		DAO v1=new DAO();
-		List<AdminLoginvo> ls=v1.search(v);
+		List<AdminLoginvo> ls=v1.searchAdmin(v);
 		AdminLoginvo al;
 		if(!ls.isEmpty())
 		{
