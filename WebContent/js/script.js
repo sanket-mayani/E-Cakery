@@ -242,6 +242,46 @@ $(document).ready(function(){
 		
 	});
 	
+
+	
+/* --------------------
+	add-product.jsp 
+-------------------- */	
+	
+	$("#choose_file").change(function(){
+
+		var reader = new FileReader();
+		
+		reader.onload = function(e){
+			$("#product_img_div img").attr("src",e.target.result);
+			$("#product_img_div img").css("height",$("#product_img_div").height());
+			$("#product_img_div img").css("width",$("#product_img_div").width());
+		}
+		
+		reader.readAsDataURL(this.files[0]);
+	});
+	
+	$(window).resize(function(){
+		$("#product_img_div img").css("width",$("#product_img_div").width());
+	});
+	
+	function flavourCheck(){
+		
+		alert("outside");
+		if($("#flavour").val() == "0")
+		{
+			alert("insid");
+			$("#flavour + p").removeAttribute("hidden");
+			return false;
+		}
+		return true;
+		
+	}
+	
+	function productCheck(){
+		alert("Hi");
+		return;
+	}
 	
 	
 });

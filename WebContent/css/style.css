@@ -320,13 +320,13 @@
 	add-product.jsp
 -------------------- */
 
-#product_img_div div:FIRST-CHILD{
+#product_img_div{
 	border: 1px solid black;
 	height: 150px;
 	margin-bottom: 20px;
 }
 
-#product_img_div{
+#choose_file{
 	margin-bottom: 20px;
 }
 

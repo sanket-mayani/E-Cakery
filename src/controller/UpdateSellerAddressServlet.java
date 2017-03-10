@@ -102,7 +102,6 @@ public class UpdateSellerAddressServlet extends HttpServlet {
 		session.setAttribute("seller", seller);
 		response.sendRedirect("seller-home.jsp");
 		}
-		//Update the details in the database
 		
 		
 }

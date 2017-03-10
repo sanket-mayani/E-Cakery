@@ -77,14 +77,14 @@
     
 	<div class="container">
 		
-		<form action="AddProduct" class="form-horizontal" method="post" enctype="multipart/form-data">
+		<form action="AddProduct" class="form-horizontal" method="post" enctype="multipart/form-data" id="add_product_form">
 			<div class="row">
-				<div class="col-sm-3 col-md-2" id="product_img_div">
-					<div class="col-sm-12">
-						
+				<div class="col-sm-3 col-md-2">
+					<div class=""  id="product_img_div">
+						<img alt="" src="" >
 					</div>
 					<div class="">
-						<input type="file" name="image">
+						<input type="file" name="image" accept="image/gif, image/jpeg, image/png" id="choose_file" required>
 					</div>
 				</div>
 				<div class="col-sm-9 col-md-10">
@@ -109,7 +109,7 @@
 							<label class="control-label col-xs-4 col-sm-3" for="flavour">Flavour:</label>
 							<div class="col-xs-8 col-sm-3">
 								<select class="form-control" name="flavour" id="flavour" required>
-									<option>-- Choose a flavour --</option>
+									<option value="0">-- Choose a flavour --</option>
 									<%
 										DAO dao = new DAO();
 										List<Flavour> list = new ArrayList<Flavour>();
@@ -126,6 +126,7 @@
 										}
 									%>
 								</select>
+								<p class="red" hidden>Please select a flavour</p>
 							</div>
 						</div>
 					</div>
@@ -150,6 +151,7 @@
 										}
 									%>
 								</select>
+								<p class="red" hidden>Please select a Category</p>
 							</div>
 						</div>
 					</div>
@@ -165,6 +167,7 @@
 									<option>4</option>
 									<option>5</option>
 								</select>
+								<p class="red" hidden>Please select no. of floors</p>
 							</div>
 						</div>
 					</div>

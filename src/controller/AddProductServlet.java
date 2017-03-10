@@ -67,10 +67,12 @@ public class AddProductServlet extends HttpServlet {
 					if(!fileItem.isFormField())
 					{
 						String name = new File(fileItem.getName()).getName();
+						name = name.toLowerCase();
 						
 						if(name.endsWith(".jpg") || name.endsWith(".jpeg"))
 						{
 							fileItem.write(new File(getServletContext().getInitParameter("Upload-Path") + File.separator + name));
+							out.print((fileItem.getName()));
 							out.print("Success");
 						}
 						else
