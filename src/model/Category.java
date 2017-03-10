@@ -1,15 +1,15 @@
 package model;
 
-public class Occassion {
+public class Category {
 	
-	private int oid;
+	private int cid;
 	private String name;
 	
-	public int getOid() {
-		return oid;
+	public int getCid() {
+		return cid;
 	}
-	public void setOid(int oid) {
-		this.oid = oid;
+	public void setCid(int cid) {
+		this.cid = cid;
 	}
 	
 	public String getName() {

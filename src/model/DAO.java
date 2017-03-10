@@ -191,4 +191,29 @@ public class DAO {
 
 		}
 		
+		public List<Category> getCategory()
+		{
+			SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+
+			Session session = sessionFactory.openSession();
+
+			List<Category> list=new ArrayList<Category>();
+			try 
+			{
+				Transaction tr=session.beginTransaction();
+				Query q=session.createQuery("from Category");
+				list=q.list();
+				tr.commit();
+			}
+	
+			catch (Exception e) 
+			{
+	
+					e.printStackTrace();
+	
+			}
+			return list;
+
+		}
+		
 }

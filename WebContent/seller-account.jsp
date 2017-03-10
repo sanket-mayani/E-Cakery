@@ -28,19 +28,19 @@
     
         <div class="container-fluid">
             
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#seller-navigation_links">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#seller-account-navigation_links">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span> 
             </button>
             
-            <div class="collapse navbar-collapse" id="seller-home-navigation_links">
+            <div class="collapse navbar-collapse" id="seller-account-navigation_links">
                 
                 <ul class="nav navbar-nav">
                     <li><a href="seller-home.jsp"><span class="glyphicon glyphicon-briefcase"></span><span> My Orders</span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Catalogue</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-usd"></span> Payments</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span> Returns</a></li>            
+                    <li><a href="catalogue.jsp"><span class="glyphicon glyphicon-list-alt"></span> Catalogue</a></li>
+                    <li><a href="payments.jsp"><span class="glyphicon glyphicon-usd"></span> Payments</a></li>
+                    <li><a href="returns.jsp"><span class="glyphicon glyphicon-exclamation-sign"></span> Returns</a></li>            
                 </ul>
                 <ul class="nav navbar-nav navbar-right">                    
                     <li class="active"><a href="seller-account.jsp"><span class="glyphicon glyphicon-user"></span><span> My Account</span></a></li>

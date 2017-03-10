@@ -316,6 +316,26 @@
 }
 
 
+/* --------------------
+	add-product.jsp
+-------------------- */
+
+#product_img_div div:FIRST-CHILD{
+	border: 1px solid black;
+	height: 150px;
+	margin-bottom: 20px;
+}
+
+#product_img_div{
+	margin-bottom: 20px;
+}
+
+#add_product_btn{
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+
 
 /* --------------------
 	General 

@@ -5,15 +5,13 @@
 
 <hibernate-mapping>
 	
-	<class name="model.Occassion" table="Occassion">
+	<class name="model.ProductCategory" table="productcategory">
 	
-		<id name="oid" type="int" column="OID">
+		<id name="pcid" type="int" column="PCID">
 			<generator class="increment"></generator>
 		</id>
-			
-		<property name="name">
-			<column name="Occassion_Name"></column>
-		</property>	
+		<many-to-one name="product" class="model.Product" column="Product_Id"></many-to-one>
+		<many-to-one name="category" class="model.Category" column="Category_Id"></many-to-one>
 		
 	</class>
 </hibernate-mapping>

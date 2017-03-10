@@ -24,7 +24,7 @@
 		</property>		
 		
 		<property name="image_id">
-			<column name="Image_Id"></column>
+			<column name="Image_ID"></column>
 		</property>	
 		
 		<property name="tier">

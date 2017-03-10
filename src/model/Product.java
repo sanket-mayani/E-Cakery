@@ -6,7 +6,7 @@ public class Product {
 	private String name;
 	private String description;
 	private float price;
-	private String image_id;
+	private int image_id;
 	private String tier;
 	private Flavour flavour;
 	private Seller seller;
@@ -35,10 +35,10 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	public String getImage_id() {
+	public int getImage_id() {
 		return image_id;
 	}
-	public void setImage_id(String image_id) {
+	public void setImage_id(int image_id) {
 		this.image_id = image_id;
 	}
 	public String getTier() {
