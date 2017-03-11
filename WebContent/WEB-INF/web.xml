@@ -7,7 +7,7 @@
 
 	<context-param>
 		<param-name>Upload-Path</param-name>
-		<param-value>C:\Users\sanket\Downloads\Uploads</param-value>
+		<param-value>C:\Uploads</param-value>
 	</context-param>
   
 </web-app>

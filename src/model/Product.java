@@ -10,6 +10,8 @@ public class Product {
 	private String tier;
 	private Flavour flavour;
 	private Seller seller;
+	private Category category;
+	private String quantity;
 	
 	public int getPid() {
 		return pid;
@@ -38,8 +40,8 @@ public class Product {
 	public int getImage_id() {
 		return image_id;
 	}
-	public void setImage_id(int image_id) {
-		this.image_id = image_id;
+	public void setImage_id(int i) {
+		this.image_id = i;
 	}
 	public String getTier() {
 		return tier;
@@ -58,6 +60,18 @@ public class Product {
 	}
 	public void setSeller(Seller seller) {
 		this.seller = seller;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category=category;
+	}
+	public String getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(String quantity) {
+		this.quantity=quantity;
 	}
 	
 	

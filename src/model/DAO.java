@@ -89,6 +89,22 @@ public class DAO {
 		}
 	}
 	
+	public void updateProduct(Product product) {
+		// TODO Auto-generated method stub
+	Session session=getSession();
+		
+		try{
+			Transaction tr=session.beginTransaction();
+			session.update(product);
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		
+	}
+	
 	public List<User> searchUser(User log)
 	{
 		Session session = getSession();
@@ -186,6 +202,26 @@ public class DAO {
 		return al;
 
 	}
+	
+	public List<Category> searchCategory(Category category)
+	{
+		Session session = getSession();
+
+		List<Category> al=new ArrayList<Category>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Category where name='"+category.getName()+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return al;
+
+	}
 
 	public List<Flavour> getFlavour()
 	{
@@ -247,5 +283,6 @@ public class DAO {
 		return list;
 
 	}
+	
 		
 }
