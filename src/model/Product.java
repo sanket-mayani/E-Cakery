@@ -1,5 +1,8 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Product {
 	
 	private int pid;
@@ -10,7 +13,7 @@ public class Product {
 	private String tier;
 	private Flavour flavour;
 	private Seller seller;
-	private Category category;
+	private Set<Category> categories = new HashSet<Category>(0);
 	private String quantity;
 	
 	public int getPid() {
@@ -61,19 +64,17 @@ public class Product {
 	public void setSeller(Seller seller) {
 		this.seller = seller;
 	}
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category=category;
-	}
 	public String getQuantity() {
 		return quantity;
+	}
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
 	}
 	public void setQuantity(String quantity) {
 		this.quantity=quantity;
 	}
 	
-	
-
 }

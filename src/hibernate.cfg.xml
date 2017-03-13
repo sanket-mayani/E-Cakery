@@ -21,8 +21,7 @@
 		<mapping resource="model/Flavour.hbm.xml"/>
 		<mapping resource="model/Product.hbm.xml"/>
 		<mapping resource="model/City.hbm.xml"/>
-		<mapping resource="model/Category.hbm.xml"/>
-		<mapping resource="model/ProductCategory.hbm.xml"/>
+   		<mapping resource="model/Category.hbm.xml"/>
 		<mapping resource="model/Order.hbm.xml"/>
 		
 	

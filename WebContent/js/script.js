@@ -248,6 +248,8 @@ $(document).ready(function(){
 	add-product.jsp 
 -------------------- */	
 	
+	var flavour_flag, category_flag, floor_flag, price_flag, quantity_flag;
+	
 	$("#choose_file").change(function(){
 
 		var reader = new FileReader();
@@ -265,23 +267,95 @@ $(document).ready(function(){
 		$("#product_img_div img").css("width",$("#product_img_div").width());
 	});
 	
-	function flavourCheck(){
-		
-		alert("outside");
-		if($("#flavour").val() == "0")
+	$("#flavour").change(function(){
+		if($("#flavour").val() == 0)
 		{
-			alert("insid");
-			$("#flavour + p").removeAttribute("hidden");
-			return false;
+			$("#flavour_msg").removeAttr("hidden");
+			flavour_flag = false;
 		}
-		return true;
-		
-	}
+		else{
+			$("#flavour_msg").attr("hidden","hidden");
+			flavour_flag = true;
+		}
+	});
 	
-	function productCheck(){
-		alert("Hi");
-		return;
-	}
+	$("#add_product_btn").click(function(){
+		if($("#flavour").val() == 0)
+		{
+			$("#flavour_msg").removeAttr("hidden");
+			flavour_flag = false;
+		}
+		else{
+			$("#flavour_msg").attr("hidden","hidden");
+			flavour_flag = true;
+		}
+	});
+	
+	$("#category").change(function(){
+		if($("#category").val() == 0)
+		{
+			$("#category_msg").removeAttr("hidden");
+			category_flag = false;
+		}
+		else{
+			$("#category_msg").attr("hidden","hidden");
+			category_flag = true;
+		}
+	});
+	
+	$("#floor").change(function(){
+		if($("#floor").val() == 0)
+		{
+			$("#floor_msg").removeAttr("hidden");
+			floor_flag = false;
+		}
+		else{
+			$("#floor_msg").attr("hidden","hidden");
+			floor_flag = true;
+		}
+	});
+	
+	$("#add_product_btn").click(function(){
+		if($("#floor").val() == 0)
+		{
+			$("#floor_msg").removeAttr("hidden");
+			floor_flag = false;
+		}
+		else{
+			$("#floor_msg").attr("hidden","hidden");
+			floor_flag = true;
+		}
+	});
+	
+	$("#price").change(function(){
+		var price = $("#price").val();
+		if(/^\d*(.\d{2})?$/.test(price))
+		{
+			price_flag = true;
+			$("#price_msg").attr("hidden","hidden");
+		}
+		else{
+			price_flag = false;
+			$("#price_msg").removeAttr("hidden");
+		}
+	});
+	
+	$("#quantity").change(function(){
+		var quantity = $("#quantity").val();
+		if(/^\+?([1-9]\d*)$/.test(quantity))
+		{
+			quantity_flag = true;
+			$("#quantity_msg").attr("hidden","hidden");
+		}
+		else{
+			quantity_flag = false;
+			$("#quantity_msg").removeAttr("hidden");
+		}
+	});
+	
+	$("#add_product_form").submit(function(){
+		return flavour_flag && category_flag && floor_flag && price_flag && quantity_flag;
+	});
 	
 	
 });

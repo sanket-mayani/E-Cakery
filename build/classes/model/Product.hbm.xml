@@ -35,8 +35,12 @@
 			<column name="Quantity"></column>
 		</property>	
 		
+		<set name="categories" table="ProductCategory">
+			<key column="pid"></key>
+			<many-to-many column="cid" class="model.Category"/>
+		</set>
+		
 		<many-to-one name="flavour" class="model.Flavour" column="Flavour_Id"></many-to-one>
-		<many-to-one name="category" class="model.Category" column="Category_Id"></many-to-one>
 		<many-to-one name="seller" class="model.Seller" column="Seller_Id"></many-to-one>
 		
 		

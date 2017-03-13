@@ -2,10 +2,11 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,8 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -24,7 +23,6 @@ import model.Category;
 import model.DAO;
 import model.Flavour;
 import model.Product;
-import model.Seller;
 
 /**
  * Servlet implementation class AddProductServlet
@@ -71,7 +69,8 @@ public class AddProductServlet extends HttpServlet {
 		{
 			try{
 				List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-				String value; 
+				String value;
+				List<String> values = new ArrayList<String>();
 				for(FileItem fileItem : fileItems)
 				{
 					if(fileItem.isFormField()){
@@ -90,11 +89,20 @@ public class AddProductServlet extends HttpServlet {
 								product.setFlavour((Flavour)al.get(0));
 						 }
 						 else if(n.equals("occassion")){
-							 Category category=new Category();
-								category.setName(value);
-								List category_list=new ArrayList();
-								category_list=dao.searchCategory(category);
-								product.setCategory((Category)category_list.get(0));
+							 	
+							 	values.add(value);
+							 	Set<Category> categories = new HashSet<Category>();
+							 	
+							 	for(String s: values)
+							 	{
+							 		Category category=new Category();
+									category.setName(s);
+									List category_list=new ArrayList();
+									category_list=dao.searchCategory(category);
+									categories.add((Category)category_list.get(0));
+							 	}
+								
+								product.setCategories(categories);
 						 }
 						 else if(n.equals("floor")){
 							 product.setTier(value);
@@ -132,22 +140,6 @@ public class AddProductServlet extends HttpServlet {
 				System.out.println(e);
 			}
 		}
-		
-
-//		Part image=request.getPart("image");
-//		InputStream input = null ;
-//		if(image!=null){
-//			System.out.println(image.getName());
-//			System.out.println(image.getSize());
-//			System.out.println(image.getContentType());
-//			
-//			input = image.getInputStream();
-//		}
-//			
-//		byte[] bytes = new byte[5000000];
-//		if(input!=null){
-//			input.read(bytes);
-//		}
 		
 		
 //		product.setSeller(seller);
