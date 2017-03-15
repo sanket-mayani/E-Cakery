@@ -3,11 +3,15 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 
 public class DAO {
 	
@@ -283,6 +287,25 @@ public class DAO {
 		return list;
 
 	}
+	
+	public List<Product> getProducts(Seller seller)
+	{
+		Session session = getSession();
+		
+		List<Product> list=new ArrayList<Product>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Product where Seller_Id="+seller.getSid());
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}	
 	
 		
 }

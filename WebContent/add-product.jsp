@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="model.DAO,java.util.List,java.util.ArrayList,model.Flavour,model.Category"%>
+    pageEncoding="ISO-8859-1" import="model.DAO,java.util.List,java.util.ArrayList,model.Flavour,model.Category,model.Seller"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<%!
+	Seller seller;
+%>
+<%	
+	if(session.getAttribute("seller") != null)
+		seller = (Seller)session.getAttribute("seller");
+	else
+		response.sendRedirect("seller-index.jsp");
+%>
 
 <%
 	if(session.getAttribute("message") != null)

@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -23,6 +24,7 @@ import model.Category;
 import model.DAO;
 import model.Flavour;
 import model.Product;
+import model.Seller;
 
 /**
  * Servlet implementation class AddProductServlet
@@ -55,14 +57,14 @@ public class AddProductServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String name1;
+		String name1 = null;
 		FileItem file = null;
 		DAO dao=new DAO();
 		
 		
 		Product product=new Product();
-//		HttpSession session = request.getSession();
-//		Seller seller=(Seller)session.getAttribute("seller");
+		HttpSession session = request.getSession();
+		Seller seller=(Seller)session.getAttribute("seller");
 
 
 		if(ServletFileUpload.isMultipartContent(request))
@@ -142,9 +144,10 @@ public class AddProductServlet extends HttpServlet {
 		}
 		
 		
-//		product.setSeller(seller);
+		product.setSeller(seller);
 		dao.insertProduct(product);
-		product.setImage_id(product.getPid());
+		String extension = name1.substring(name1.lastIndexOf("."));
+		product.setImage(product.getPid()+extension);
 		dao.updateProduct(product);
 		try {
 			name1 = new File(file.getName()).getName();

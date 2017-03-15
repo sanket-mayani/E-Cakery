@@ -3,7 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<%Seller s = (Seller)session.getAttribute("seller"); %>
+<%!
+	Seller s;
+%>
+<%	
+	if(session.getAttribute("seller") != null)
+		s = (Seller)session.getAttribute("seller");
+	else
+		response.sendRedirect("seller-index.jsp");
+%>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
