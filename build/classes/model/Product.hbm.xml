@@ -41,7 +41,7 @@
 		</set>
 		
 		<many-to-one name="flavour" class="model.Flavour" column="Flavour_Id" fetch="join" lazy="false"></many-to-one>
-		<many-to-one name="seller" class="model.Seller" column="Seller_Id"></many-to-one>
+		<many-to-one name="seller" class="model.Seller" column="Seller_Id" fetch="join" lazy="false"></many-to-one>
 		
 		
 	</class>

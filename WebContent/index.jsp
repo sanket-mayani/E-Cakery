@@ -1,3 +1,4 @@
+<%@page import="model.Product"%>
 <%@page import="model.City"%>
 <%@page import="model.Category"%>
 <%@page import="model.Flavour"%>
@@ -26,6 +27,30 @@
 		}	
 	}
 
+%>
+<%! 
+	DAO dao = new DAO();
+	City city = null;
+	List<Product> products = null;
+	int currentPage = 1;
+	int maxPages = 0;
+	int start = 0;
+	int count = 0;
+%>
+<%
+	if(session.getAttribute("city") == null)
+		city = dao.getCity().get(0);
+	else
+		city = (City)session.getAttribute("city");
+
+	if(request.getParameter("page") != null)
+		currentPage = Integer.parseInt(request.getParameter("page"));
+
+	start = currentPage*8-8;
+
+	products = dao.fetchCakesByCity(city, start);
+	maxPages = dao.getMaxPages(city);
+	count = products.size();
 %>
 
 <head>
@@ -74,7 +99,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Cakes by Flavour <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="cake_flavours">
                         <%
-                        	DAO dao = new DAO();
                         	List<Flavour> flavours = dao.getFlavour();
                         	
                         	for(Flavour flavour : flavours)
@@ -135,14 +159,14 @@
             <form class="form-horizontal col-sm-4 pull-right" id="city_selector">
                 <div class="form-group">
                     <label for="city_options"><span class="glyphicon glyphicon-globe"></span> Select Location</label>
-                    <select id="city_options">
+                    <select id="city_options" onchange="location = this.value">
                     <%
                     	List<City> cities = dao.getCity();
                     		
-                    	for(City city : cities)
+                    	for(City c : cities)
                     	{
                     %>
-                    		<option value="<%out.print(city.getName());%>"><%out.print(city.getName());%></option>
+                    		<option value="ChangeCity?city=<%out.print(c.getName());%>" <%if(city.getCid() == c.getCid()){%>selected<%}%> ><%out.print(c.getName());%></option>
                     <%
                     	}
                     %>
@@ -174,6 +198,8 @@
         
         <br><br>
         
+        
+        <%if(count>0){%>
         <div class="row">
         
             <h3 class="col-sm-6">All Cakes</h3>
@@ -195,130 +221,74 @@
         <br>
              
         <div class="row">
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>
+        	<%
+        		int i = 0;
+        		for(Product product : products)
+        		{
+        	%>
+        			<div class="col-sm-3 col-xs-12">
+		                <div class="thumbnail cake_image">
+		                    <a href="#"><img src="FetchImage?id=<%out.print(product.getImage());%>" alt="" width="100%" style="height:200px"></a>
+		                    <div class="caption">
+		                        <h4><%out.print(product.getName());%></h4>
+		                        <p><small>Sold by: <%out.print(product.getSeller().getName());%></small></p>
+		                        <div class="row">
+		                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
+		                        </div>
+		                    </div>
+		                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 <%out.print(product.getPrice());%></div>
+		                </div>
+		            </div>		
+        	<%	
+        			i++;
+        			if(i == 4) break;
+        		}
+        	%>
         </div><!-- End of First row of cake images -->    
 
         <br>
                 
         <div class="row">
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-                <div class="thumbnail cake_image">
-                    <a href="#"><img src="images/cake.jpg" alt="" width="100%" style="height:200px"></a>
-                    <div class="caption">
-                        <h4>Black Forest</h4>
-                        <p><small>Sold by: Seller name</small></p>
-                        <div class="row">
-                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 500</div>
-                </div>
-            </div>    
+        	<%
+        		if(count > 4)
+        		{
+        			List<Product> products2 = products.subList(i,count);
+        			for(Product product : products2)
+        			{
+        	%>
+	        			<div class="col-sm-3 col-xs-12">
+			                <div class="thumbnail cake_image">
+			                    <a href="#"><img src="FetchImage?id=<%out.print(product.getImage());%>" alt="" width="100%" style="height:200px"></a>
+			                    <div class="caption">
+			                        <h4><%out.print(product.getName());%></h4>
+			                        <p><small>Sold by: <%out.print(product.getSeller().getName());%></small></p>
+			                        <div class="row">
+			                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
+			                        </div>
+			                    </div>
+			                    <div class="btn-danger price_tag"><span class="glyphicon glyphicon-tag"></span> &#8377 <%out.print(product.getPrice());%></div>
+			                </div>
+			            </div>		
+        	<%	
+        			}
+        		} 			       
+        	%>
         </div><!-- End of Second row of cake images -->
 
         <div class="row container">
             <ul class="pager col-xs-4 col-sm-4">
-                <li class="previous"><a href="#"><span class="glyphicon glyphicon-hand-left "></span> Previous</a></li>
+                <li class="previous" <%if(currentPage<=1){%> style="display:none;" <%}%>><a href="index.jsp?page=<%out.print(currentPage-1);%>"><span class="glyphicon glyphicon-hand-left "></span> Previous</a></li>
             </ul>
             <ul class="pager col-xs-4 col-sm-4 pull-right">
-                <li class="next"><a href="#">Next <span class="glyphicon glyphicon-hand-right"></span></a></li>
+                <li class="next" <%if(currentPage>=maxPages){%> style="display:none;" <%}%>><a href="index.jsp?page=<%out.print(currentPage+1);%>">Next <span class="glyphicon glyphicon-hand-right"></span></a></li>
             </ul>
             <div id="page_nums" class="col-sm-4"> 
                 <ul class="pagination">
-                    <li>Page <input type="text" size="2" maxlength="2"> of 5</li>
+                    <li>Page <input type="number" style="width: 40px;" min="1" max="<%out.print(maxPages);%>" value="<%out.print(currentPage);%>"> of <%out.print(maxPages);%></li>
                 </ul>
             </div>
         </div>
+        <%}else{%><h1 class="red" style="margin-bottom: 30px;">No cakes Found</h1><%}%>
 
     </div><!-- End of main container -->
 

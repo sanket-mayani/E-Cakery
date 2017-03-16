@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -305,7 +307,51 @@ public class DAO {
 			closeSession(session); 
 		}
 		return list;
-	}	
+	}
+
+	public List<Product> fetchCakesByCity(City city, int start) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		
+		List<Product> list = new ArrayList<Product>();
+		try
+		{
+			Transaction tr = session.beginTransaction();
+			int records=((Long)session.createQuery("select count(*) from Product p where p.seller.city.cid="+city.getCid()).uniqueResult()).intValue();
+			int maxPages = records/8 + (records%8>0?1:0);
+			
+			Query q=session.createQuery("from Product p where p.seller.city.cid="+city.getCid());
+			q.setFirstResult(start);
+			q.setMaxResults(8);
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}
+	
+	public int getMaxPages(City city) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		
+		int maxPages = 0;
+		try
+		{
+			Transaction tr = session.beginTransaction();
+			int records=((Long)session.createQuery("select count(*) from Product p where p.seller.city.cid="+city.getCid()).uniqueResult()).intValue();
+			maxPages = records/8 + (records%8>0?1:0);
+			
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return maxPages;
+	}
 	
 		
 }
