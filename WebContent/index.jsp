@@ -1,3 +1,8 @@
+<%@page import="model.City"%>
+<%@page import="model.Category"%>
+<%@page import="model.Flavour"%>
+<%@page import="java.util.List"%>
+<%@page import="model.DAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -68,24 +73,45 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Cakes by Flavour <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="cake_flavours">
-                            <li><a href="#">Chocolate Cakes</a></li>
+                        <%
+                        	DAO dao = new DAO();
+                        	List<Flavour> flavours = dao.getFlavour();
+                        	
+                        	for(Flavour flavour : flavours)
+                        	{
+                        %>
+                        		<li><a href="#"><%out.print(flavour.getName());%> Cakes</a></li>
+                        <%		
+                        	}
+                        %>
+                            <!-- <li><a href="#">Chocolate Cakes</a></li>
                             <li><a href="#">Black Forest Cakes</a></li>
                             <li><a href="#">Butterscotch Cakes</a></li>
                             <li><a href="#">Pineapple Cakes</a></li>
                             <li><a href="#">Strawberry Cakes</a></li>
                             <li><a href="#">Vanilla Cakes</a></li>
-                            <li><a href="#">Mixed Fruit Cakes</a></li>
+                            <li><a href="#">Mixed Fruit Cakes</a></li> -->
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Cake Categories <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="categories">
-                            <li><a href="#">Birthday Cakes</a></li>
+                        <%
+                        	List<Category> categories = dao.getCategory();
+                        	
+                        	for(Category category : categories)
+                        	{
+                        %>
+                        		<li><a href="#"><%out.print(category.getName());%> Cakes</a></li>
+                        <%		
+                        	}
+                        %>
+                            <!-- <li><a href="#">Birthday Cakes</a></li>
                             <li><a href="#">Anniversary Cakes</a></li>
                             <li><a href="#">Valentine Cakes</a></li>
                             <li><a href="#">Celebration Cakes</a></li>
                             <li><a href="#">Cartoon Cakes</a></li>
-                            <li><a href="#">Eggless Cakes</a></li>
+                            <li><a href="#">Eggless Cakes</a></li> -->
                         </ul>
                     </li>
                     <li><a href="#">Photo Cakes</a></li>            
@@ -110,10 +136,16 @@
                 <div class="form-group">
                     <label for="city_options"><span class="glyphicon glyphicon-globe"></span> Select Location</label>
                     <select id="city_options">
-                        <option>Ahmedabad</option>
-                        <option>Surat</option>
-                        <option>Vadodara</option>
-                        <option>Rajkot</option>
+                    <%
+                    	List<City> cities = dao.getCity();
+                    		
+                    	for(City city : cities)
+                    	{
+                    %>
+                    		<option value="<%out.print(city.getName());%>"><%out.print(city.getName());%></option>
+                    <%
+                    	}
+                    %>
                     </select>
                 </div>
             </form>            
