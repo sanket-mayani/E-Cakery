@@ -4,12 +4,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 import org.hibernate.HibernateException;
+
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Criteria;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 public class DAO {
 	
@@ -89,6 +99,22 @@ public class DAO {
 		}finally{
 			closeSession(s); 
 		}
+	}
+	
+	public void updateProduct(Product product) {
+		// TODO Auto-generated method stub
+	Session session=getSession();
+		
+		try{
+			Transaction tr=session.beginTransaction();
+			session.update(product);
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		
 	}
 	
 	public List<User> searchUser(User log)
@@ -188,6 +214,26 @@ public class DAO {
 		return al;
 
 	}
+	
+	public List<Category> searchCategory(Category category)
+	{
+		Session session = getSession();
+
+		List<Category> al=new ArrayList<Category>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Category where name='"+category.getName()+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return al;
+
+	}
 
 	public List<Flavour> getFlavour()
 	{
@@ -213,19 +259,19 @@ public class DAO {
 	{
 		Session session = getSession();
 
-		List<City> cities=new ArrayList<City>();
+		List<City> al=new ArrayList<City>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
 			Query q=session.createQuery("from City");
-			cities=q.list();
+			al=q.list();
 			tr.commit();
 		}catch(Exception ex){
 			System.out.println(ex);
 		}finally{
 			closeSession(session); 
 		}
-		return cities;
+		return al;
 
 	}
 		
@@ -250,6 +296,7 @@ public class DAO {
 
 	}
 	
+//<<<<<<< HEAD
 	public List<Product> getProduct()
 	{
 		Session session = getSession();
@@ -267,8 +314,29 @@ public class DAO {
 			closeSession(session); 
 		}
 		return products;
-
+		
 	}
+			
+//=======
+	public List<Product> getProducts(Seller seller)
+	{
+		Session session = getSession();
+		
+		List<Product> list=new ArrayList<Product>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Product where Seller_Id="+seller.getSid());
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+			return list;
+		}
+		
 
 	// Product class data fetch from database by pid methods added frm here
 	
@@ -375,22 +443,64 @@ public class DAO {
 	      }
 	      return pricee;
 	 	}
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+
+
+	public List<Product> fetchCakesByCity(City city,Flavour flavour,Category category,int start) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		
+		List<Product> list = new ArrayList<Product>();
+		try
+		{			
+			Transaction tr = session.beginTransaction();
+			//Query q=session.createQuery("from Product p where p.seller.city.cid="+city.getCid());
+			Criteria cr = session.createCriteria(Product.class);
+			cr.createCriteria("seller").add(Restrictions.eq("city.cid", city.getCid()));
+			if(flavour != null)
+				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
+			if(category != null)
+				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
+			cr.setFirstResult(start);
+			cr.setMaxResults(8);
+			list=cr.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}
+	
+	public long getMaxPages(City city,Flavour flavour,Category category) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		
+		long maxPages = 0;
+		try
+		{
+			Transaction tr = session.beginTransaction();
+			//int records=((Long)session.createQuery("select count(*) from Product p where p.seller.city.cid="+city.getCid()).uniqueResult()).intValue();
+			Criteria cr = session.createCriteria(Product.class);
+			cr.setProjection(Projections.rowCount());
+			cr.createCriteria("seller").add(Restrictions.eq("city.cid", city.getCid()));
+			if(flavour != null)
+				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
+			if(category != null)
+				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
+			
+			long records = (long)cr.uniqueResult();
+			maxPages = records/8 + (records%8>0?1:0);
+			
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return maxPages;
+	}
+
 	
 		
 }

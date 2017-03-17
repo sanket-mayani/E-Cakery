@@ -6,6 +6,9 @@
   </welcome-file-list>
   <context-param>
     <param-name>Upload-Path</param-name>
-    <param-value>C:\Downloads\Uploads</param-value>
+    <param-value>C:\Uploads</param-value>
   </context-param>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
 </web-app>

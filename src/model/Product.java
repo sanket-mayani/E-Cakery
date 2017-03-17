@@ -1,15 +1,19 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Product {
 	
 	private int pid;
 	private String name;
 	private String description;
 	private float price;
-	private int image_id;
+	private String image;
 	private String tier;
 	private Flavour flavour;
 	private Seller seller;
+//<<<<<<< HEAD
 
 		public Product(){}
 	
@@ -18,6 +22,10 @@ public class Product {
 			this.pid=pid;
 		}
 	
+//=======
+	private Set<Category> categories = new HashSet<Category>(0);
+	private String quantity;
+//>>>>>>> 06332925d9f39ef242afd3ccfffec6beb4c2eab7
 	
 	public int getPid() {
 		return pid;
@@ -43,11 +51,11 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	public int getImage_id() {
-		return image_id;
+	public String getImage() {
+		return image;
 	}
-	public void setImage_id(int image_id) {
-		this.image_id = image_id;
+	public void setImage(String image) {
+		this.image = image;
 	}
 	public String getTier() {
 		return tier;
@@ -66,6 +74,18 @@ public class Product {
 	}
 	public void setSeller(Seller seller) {
 		this.seller = seller;
+	}
+	public String getQuantity() {
+		return quantity;
+	}
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+	public void setQuantity(String quantity) {
+		this.quantity=quantity;
 	}
 	
 }

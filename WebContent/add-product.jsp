@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="model.DAO,java.util.List,java.util.ArrayList,model.Flavour,model.Category"%>
+    pageEncoding="ISO-8859-1" import="model.DAO,java.util.List,java.util.ArrayList,model.Flavour,model.Category,model.Seller"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<%!
+	Seller seller;
+%>
+<%	
+	if(session.getAttribute("seller") != null)
+		seller = (Seller)session.getAttribute("seller");
+	else
+		response.sendRedirect("seller-index.jsp");
+%>
 
 <%
 	if(session.getAttribute("message") != null)
@@ -126,16 +136,15 @@
 										}
 									%>
 								</select>
-								<p class="red" hidden>Please select a flavour</p>
+								<p id="flavour_msg" class="red" hidden>Please select a flavour</p>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-xs-12">
-							<label class="control-label col-xs-4 col-sm-3" for="occassion">Category:</label>
+							<label class="control-label col-xs-4 col-sm-3" for="category">Category:</label>
 							<div class="col-xs-8 col-sm-3">
-								<select class="form-control" name="occassion" id="occassion" required>
-									<option>-- Select Category --</option>
+								<select class="form-control" name="occassion" id="category" required multiple="multiple">
 									<%
 										List<Category> list2 = new ArrayList<Category>();
 										list2 = dao.getCategory();
@@ -145,13 +154,13 @@
 											for(Category category:list2)
 											{
 									%>
-												<option><%out.print(category.getName());%></option>
+												<option value="<%out.print(category.getName());%>"><%out.print(category.getName());%></option>
 									<%
 											}
 										}
 									%>
 								</select>
-								<p class="red" hidden>Please select a Category</p>
+								<p id="category_msg" class="red" hidden>Please select a Category</p>
 							</div>
 						</div>
 					</div>
@@ -160,14 +169,14 @@
 							<label class="control-label col-xs-4 col-sm-3" for="floor">Floor (Tier):</label>
 							<div class="col-xs-8 col-sm-3">
 								<select class="form-control" name="floor" id="floor" required>
-									<option>-- Choose no. of floors --</option>
+									<option value="0">-- Choose no. of floors --</option>
 									<option>1</option>
 									<option>2</option>
 									<option>3</option>
 									<option>4</option>
 									<option>5</option>
 								</select>
-								<p class="red" hidden>Please select no. of floors</p>
+								<p id="floor_msg" class="red" hidden>Please select no. of floors</p>
 							</div>
 						</div>
 					</div>
@@ -176,6 +185,7 @@
 							<label class="control-label col-xs-4 col-sm-3" for="price">Price (in rupees):</label>
 							<div class="col-xs-8 col-sm-3">
 								<input type="text" class="form-control" name="price" placeholder="Enter selling price" id="price" required>
+								<p id="price_msg" class="red" hidden>Invalid Price</p>
 							</div>
 						</div>
 					</div>
@@ -184,6 +194,7 @@
 							<label class="control-label col-xs-4 col-sm-3" for="quantity">Quantity:</label>
 							<div class="col-xs-8 col-sm-3">
 								<input type="text" class="form-control" name="quantity" placeholder="How many do you have?" id="quantity" required>
+								<p id="quantity_msg" class="red" hidden>Invalid Quantity</p>
 							</div>
 						</div>
 					</div>

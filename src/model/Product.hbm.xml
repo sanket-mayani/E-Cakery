@@ -23,17 +23,31 @@
 			<column name="Price"></column>
 		</property>		
 		
-		<property name="image_id">
-			<column name="Image_ID"></column>
+		<property name="image">
+			<column name="Image"></column>
 		</property>	
 		
 		<property name="tier">
 			<column name="Tier"></column>
 		</property>	
 		
+<<<<<<< HEAD
 		
 		<many-to-one name="flavour" class="model.Flavour" column="Flavour_Id"></many-to-one>
 		<many-to-one name="seller" class="model.Seller" column="Seller_Id"></many-to-one>
+=======
+		<property name="quantity">
+			<column name="Quantity"></column>
+		</property>	
+		
+		<set name="categories" table="ProductCategory" lazy="false">
+			<key column="pid"></key>
+			<many-to-many column="cid" class="model.Category"/>
+		</set>
+		
+		<many-to-one name="flavour" class="model.Flavour" column="Flavour_Id" lazy="false"></many-to-one>
+		<many-to-one name="seller" class="model.Seller" column="Seller_Id" lazy="false"></many-to-one>
+>>>>>>> 06332925d9f39ef242afd3ccfffec6beb4c2eab7
 		
 		
 	</class>

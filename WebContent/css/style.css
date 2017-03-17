@@ -42,9 +42,16 @@
 	  z-index:0;
 }
 
-#cake_flavours a{
+#cake_flavours a, #categories a{
 
 	color: black;
+	
+}
+
+#cake_flavours a.active_link, #categories a.active_link{
+
+	color: white;
+	background-color: #526369;
 	
 }
 
@@ -335,6 +342,21 @@
 	margin-top: 10px;
 }
 
+
+/* --------------------
+	catalogue.jsp
+-------------------- */
+
+#catalogue .image{
+	width: 200px; 
+	height: 200px; 
+	margin-bottom: 10px;
+	border: 1px solid black;
+}
+
+#catalogue .product{
+	
+}
 
 
 /* --------------------
