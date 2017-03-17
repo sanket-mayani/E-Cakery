@@ -10,6 +10,14 @@ public class Product {
 	private String tier;
 	private Flavour flavour;
 	private Seller seller;
+
+		public Product(){}
+	
+		public Product(int pid)        // constructor of a Product class with pid as parameter
+		{
+			this.pid=pid;
+		}
+	
 	
 	public int getPid() {
 		return pid;
@@ -60,6 +68,4 @@ public class Product {
 		this.seller = seller;
 	}
 	
-	
-
 }

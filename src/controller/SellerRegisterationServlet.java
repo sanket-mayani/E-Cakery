@@ -61,7 +61,7 @@ public class SellerRegisterationServlet extends HttpServlet {
 			seller.setIfsc(s7);
 			dao.insertSeller(seller);
 			
-			session.setAttribute("message","Registration Successfull");
+			session.setAttribute("message","Registration Successfull : Please login below");
 			session.setAttribute("class", "alert-success");
 			response.sendRedirect("seller-index.jsp");
 		}

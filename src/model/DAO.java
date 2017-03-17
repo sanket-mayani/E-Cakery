@@ -1,8 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -247,5 +249,148 @@ public class DAO {
 		return list;
 
 	}
+	
+	public List<Product> getProduct()
+	{
+		Session session = getSession();
+
+		List<Product> products=new ArrayList<Product>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Product");
+			products=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return products;
+
+	}
+
+	// Product class data fetch from database by pid methods added frm here
+	
+	 public String fetchProductName(int pid)
+	 	{
+		 Session session = getSession();
+		 Transaction tr=null;
+		 String str="";
+	      try
+	      {
+	          tr= session.beginTransaction();
+	         Product product = 
+	                    (Product)session.get(Product.class, pid); 
+	         
+	         String hql = "SELECT P.name FROM Product P WHERE P.pid = :productid";
+	         Query query = session.createQuery(hql);
+	         query.setParameter("productid",pid);
+	         List results = query.list();
+	         
+	         Iterator itr= results.iterator();  
+	         while(itr.hasNext())
+	         	{  
+	         str=(String)itr.next();  
+	         	}  
+	         
+	         tr.commit();
+	   
+	      	}
+	      catch (HibernateException e) {
+	         if (tr!=null) tr.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	      }
+	      return str;
+	 	}
+	 
+	 public String fetchProductDescription(int pid)
+	 	{
+		 Session session = getSession();
+		 Transaction tr=null;
+		 String str="";
+	      try
+	      {
+	          tr= session.beginTransaction();
+	         Product product = 
+	                    (Product)session.get(Product.class, pid); 
+	         
+	         String hql = "SELECT P.description FROM Product P WHERE P.pid = :productid";
+	         Query query = session.createQuery(hql);
+	         query.setParameter("productid",pid);
+	         List results = query.list();
+	         
+	         Iterator itr= results.iterator();  
+	         while(itr.hasNext())
+	         	{  
+	         str=(String)itr.next();  
+	         	}  
+	         
+	         tr.commit();
+	   
+	      	}
+	      catch (HibernateException e) {
+	         if (tr!=null) tr.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	      }
+	      return str;
+	 	}
+	 
+	 
+	 public float fetchProductPrice(int pid)
+	 	{
+		 Session session = getSession();
+		 Transaction tr=null;
+		 float pricee=0;
+	      try
+	      {
+	          tr= session.beginTransaction();
+	         Product product = 
+	                    (Product)session.get(Product.class, pid); 
+	         
+	         String hql = "SELECT P.price FROM Product P WHERE P.pid = :productid";
+	         Query query = session.createQuery(hql);
+	         query.setParameter("productid",pid);
+	         List<Float> results = query.list();
+	         
+	         Iterator itr= results.iterator();  
+	         while(itr.hasNext())
+	         	{  
+	        	 pricee =Float.valueOf((String)itr.next());  // directly objct cnt be converted to float 
+	     // problem to be solved of Object to float
+	         	}  
+	         
+	         tr.commit();
+	   
+	      	}
+	      catch (HibernateException e) {
+	         if (tr!=null) tr.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	      }
+	      return pricee;
+	 	}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	
 		
 }

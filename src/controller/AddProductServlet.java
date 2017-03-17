@@ -1,13 +1,15 @@
 package controller;
 
-import java.io.File;
+import java.io.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,14 +68,21 @@ public class AddProductServlet extends HttpServlet {
 				{
 					if(!fileItem.isFormField())
 					{
-						String name = new File(fileItem.getName()).getName();
-						name = name.toLowerCase();
+						String FileName = new File(fileItem.getName()).getName();
+						FileName = FileName.toLowerCase();
 						
-						if(name.endsWith(".jpg") || name.endsWith(".jpeg"))
+						if(FileName.endsWith(".jpg") || FileName.endsWith(".jpeg"))
 						{
-							fileItem.write(new File(getServletContext().getInitParameter("Upload-Path") + File.separator + name));
+							fileItem.write(new File(getServletContext().getInitParameter("Upload-Path") + File.separator + FileName));
 							out.print((fileItem.getName()));
-							out.print("Success");
+							out.print("  Success");
+							/*
+							request.setAttribute("image",FileName);
+							
+							RequestDispatcher dispatcher = request.getRequestDispatcher("FetchImageServlet");
+							
+							dispatcher.forward(request,response);
+							*/
 						}
 						else
 							out.println("Not a photo");
@@ -83,7 +92,12 @@ public class AddProductServlet extends HttpServlet {
 			}catch(Exception e){
 				System.out.println(e);
 			}
-		}
+			
+		}   
+		
+		
+	}
+		
 		
 		
 		/*String name=request.getParameter("name");
@@ -130,4 +144,4 @@ public class AddProductServlet extends HttpServlet {
 
 	}
 
-}
+

@@ -31,6 +31,7 @@
 			<column name="Tier"></column>
 		</property>	
 		
+		
 		<many-to-one name="flavour" class="model.Flavour" column="Flavour_Id"></many-to-one>
 		<many-to-one name="seller" class="model.Seller" column="Seller_Id"></many-to-one>
 		

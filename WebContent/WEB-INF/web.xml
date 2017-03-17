@@ -4,10 +4,8 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-
-	<context-param>
-		<param-name>Upload-Path</param-name>
-		<param-value>C:\Users\sanket\Downloads\Uploads</param-value>
-	</context-param>
-  
+  <context-param>
+    <param-name>Upload-Path</param-name>
+    <param-value>C:\Downloads\Uploads</param-value>
+  </context-param>
 </web-app>
