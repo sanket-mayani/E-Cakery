@@ -14,6 +14,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 public class DAO {
 	
@@ -253,19 +254,19 @@ public class DAO {
 	{
 		Session session = getSession();
 
-		List<City> cities=new ArrayList<City>();
+		List<City> al=new ArrayList<City>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
 			Query q=session.createQuery("from City");
-			cities=q.list();
+			al=q.list();
 			tr.commit();
 		}catch(Exception ex){
 			System.out.println(ex);
 		}finally{
 			closeSession(session); 
 		}
-		return cities;
+		return al;
 
 	}
 		
@@ -309,21 +310,24 @@ public class DAO {
 		return list;
 	}
 
-	public List<Product> fetchCakesByCity(City city, int start) {
+	public List<Product> fetchCakesByCity(City city,Flavour flavour,Category category,int start) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
 		
 		List<Product> list = new ArrayList<Product>();
 		try
-		{
+		{			
 			Transaction tr = session.beginTransaction();
-			int records=((Long)session.createQuery("select count(*) from Product p where p.seller.city.cid="+city.getCid()).uniqueResult()).intValue();
-			int maxPages = records/8 + (records%8>0?1:0);
-			
-			Query q=session.createQuery("from Product p where p.seller.city.cid="+city.getCid());
-			q.setFirstResult(start);
-			q.setMaxResults(8);
-			list=q.list();
+			//Query q=session.createQuery("from Product p where p.seller.city.cid="+city.getCid());
+			Criteria cr = session.createCriteria(Product.class);
+			cr.createCriteria("seller").add(Restrictions.eq("city.cid", city.getCid()));
+			if(flavour != null)
+				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
+			if(category != null)
+				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
+			cr.setFirstResult(start);
+			cr.setMaxResults(8);
+			list=cr.list();
 			tr.commit();
 		}catch(Exception ex){
 			System.out.println(ex);
@@ -333,15 +337,24 @@ public class DAO {
 		return list;
 	}
 	
-	public int getMaxPages(City city) {
+	public long getMaxPages(City city,Flavour flavour,Category category) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
 		
-		int maxPages = 0;
+		long maxPages = 0;
 		try
 		{
 			Transaction tr = session.beginTransaction();
-			int records=((Long)session.createQuery("select count(*) from Product p where p.seller.city.cid="+city.getCid()).uniqueResult()).intValue();
+			//int records=((Long)session.createQuery("select count(*) from Product p where p.seller.city.cid="+city.getCid()).uniqueResult()).intValue();
+			Criteria cr = session.createCriteria(Product.class);
+			cr.setProjection(Projections.rowCount());
+			cr.createCriteria("seller").add(Restrictions.eq("city.cid", city.getCid()));
+			if(flavour != null)
+				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
+			if(category != null)
+				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
+			
+			long records = (long)cr.uniqueResult();
 			maxPages = records/8 + (records%8>0?1:0);
 			
 			tr.commit();

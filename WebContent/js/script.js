@@ -20,6 +20,11 @@ $(document).ready(function(){
 		$(this).css("background-color","#eeeeee");		
 	});
 	
+	$("#cake_flavours a.active_link, #categories a.active_link").mouseleave(function(){
+		$(this).css("color","white");
+		$(this).css("background-color","#526369");		
+	});
+	
 	
 	/* --------------------
 		Registration Form 

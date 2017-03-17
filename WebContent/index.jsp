@@ -28,12 +28,14 @@
 	}
 
 %>
-<%! 
+<% 
 	DAO dao = new DAO();
 	City city = null;
 	List<Product> products = null;
+	Flavour flavour = null;
+	Category category = null;
 	int currentPage = 1;
-	int maxPages = 0;
+	long maxPages = 0;
 	int start = 0;
 	int count = 0;
 %>
@@ -43,13 +45,29 @@
 	else
 		city = (City)session.getAttribute("city");
 
+	if(request.getParameter("flavour") != null)
+	{
+		String flavourName = request.getParameter("flavour");
+		flavour = new Flavour();
+		flavour.setName(flavourName);
+		flavour = dao.searchFlavour(flavour).get(0);
+	}
+	
+	if(request.getParameter("category") != null)
+	{
+		String categoryName = request.getParameter("category");
+		category = new Category();
+		category.setName(categoryName);
+		category = dao.searchCategory(category).get(0);
+	}
+
 	if(request.getParameter("page") != null)
 		currentPage = Integer.parseInt(request.getParameter("page"));
 
 	start = currentPage*8-8;
 
-	products = dao.fetchCakesByCity(city, start);
-	maxPages = dao.getMaxPages(city);
+	products = dao.fetchCakesByCity(city,flavour,category,start);
+	maxPages = dao.getMaxPages(city,flavour,category);
 	count = products.size();
 %>
 
@@ -101,10 +119,10 @@
                         <%
                         	List<Flavour> flavours = dao.getFlavour();
                         	
-                        	for(Flavour flavour : flavours)
+                        	for(Flavour f : flavours)
                         	{
                         %>
-                        		<li><a href="#"><%out.print(flavour.getName());%> Cakes</a></li>
+                        		<li><a href="index.jsp?flavour=<%out.print(f.getName());%>" <%if(flavour!=null && flavour.getFid() == f.getFid()){%>class="active_link"<%}%>><%out.print(f.getName());%> Cakes</a></li>
                         <%		
                         	}
                         %>
@@ -123,10 +141,10 @@
                         <%
                         	List<Category> categories = dao.getCategory();
                         	
-                        	for(Category category : categories)
+                        	for(Category c : categories)
                         	{
                         %>
-                        		<li><a href="#"><%out.print(category.getName());%> Cakes</a></li>
+                        		<li><a href="index.jsp?category=<%out.print(c.getName());%>" <%if(category!=null && category.getCid() == c.getCid()){%>class="active_link"<%}%> ><%out.print(c.getName());%> Cakes</a></li>
                         <%		
                         	}
                         %>
@@ -202,7 +220,10 @@
         <%if(count>0){%>
         <div class="row">
         
-            <h3 class="col-sm-6">All Cakes</h3>
+        	<%if(flavour != null && category != null){%><h3 class="col-sm-6"><%out.print(flavour.getName()+" + "+category.getName());%> Cakes</h3>
+            <%}else if(flavour != null){%><h3 class="col-sm-6"><%out.print(flavour.getName());%> Cakes</h3>
+            <%}else if(category != null){%><h3 class="col-sm-6"><%out.print(category.getName());%> Cakes</h3>
+            <%}else{%><h3 class="col-sm-6">All Cakes</h3><%}%>
             <div class="col-sm-6 " id="sort_filter">
                 <span class="dropdown">
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-sort"></span> Sort By <span class="caret"></span></a>
@@ -230,7 +251,7 @@
 		                <div class="thumbnail cake_image">
 		                    <a href="#"><img src="FetchImage?id=<%out.print(product.getImage());%>" alt="" width="100%" style="height:200px"></a>
 		                    <div class="caption">
-		                        <h4><%out.print(product.getName());%></h4>
+		                        <h4><%out.print(product.getName()+" "+product.getPid());%></h4>
 		                        <p><small>Sold by: <%out.print(product.getSeller().getName());%></small></p>
 		                        <div class="row">
 		                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
@@ -260,7 +281,7 @@
 			                <div class="thumbnail cake_image">
 			                    <a href="#"><img src="FetchImage?id=<%out.print(product.getImage());%>" alt="" width="100%" style="height:200px"></a>
 			                    <div class="caption">
-			                        <h4><%out.print(product.getName());%></h4>
+			                        <h4><%out.print(product.getName()+" "+product.getPid());%></h4>
 			                        <p><small>Sold by: <%out.print(product.getSeller().getName());%></small></p>
 			                        <div class="row">
 			                            <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</button>
@@ -277,14 +298,14 @@
 
         <div class="row container">
             <ul class="pager col-xs-4 col-sm-4">
-                <li class="previous" <%if(currentPage<=1){%> style="display:none;" <%}%>><a href="index.jsp?page=<%out.print(currentPage-1);%>"><span class="glyphicon glyphicon-hand-left "></span> Previous</a></li>
+                <li class="previous" <%if(currentPage<=1){%> style="display:none;" <%}%>><a href="index.jsp?page=<%out.print(currentPage-1);if(flavour!=null){%>&flavour=<%out.print(flavour.getName());}if(category!=null){%>&category=<%out.print(category.getName());}%>"><span class="glyphicon glyphicon-hand-left "></span> Previous</a></li>
             </ul>
             <ul class="pager col-xs-4 col-sm-4 pull-right">
-                <li class="next" <%if(currentPage>=maxPages){%> style="display:none;" <%}%>><a href="index.jsp?page=<%out.print(currentPage+1);%>">Next <span class="glyphicon glyphicon-hand-right"></span></a></li>
+                <li class="next" <%if(currentPage>=maxPages){%> style="display:none;" <%}%>><a href="index.jsp?page=<%out.print(currentPage+1);if(flavour!=null){%>&flavour=<%out.print(flavour.getName());}if(category!=null){%>&category=<%out.print(category.getName());}%>">Next <span class="glyphicon glyphicon-hand-right"></span></a></li>
             </ul>
             <div id="page_nums" class="col-sm-4"> 
                 <ul class="pagination">
-                    <li>Page <input type="number" style="width: 40px;" min="1" max="<%out.print(maxPages);%>" value="<%out.print(currentPage);%>"> of <%out.print(maxPages);%></li>
+                    <li><form action="index.jsp">Page<input name="page" type="number" style="width: 40px;" min="1" max="<%out.print(maxPages);%>" value="<%out.print(currentPage);%>"> of <%out.print(maxPages);%><%if(flavour!=null){%><input type="hidden" name="flavour" value="<%out.print(flavour.getName());%>"><%}%><%if(category!=null){%><input type="hidden" name="category" value="<%out.print(category.getName());%>"><%}%> <input type="submit" value="Go"></form></li>
                 </ul>
             </div>
         </div>

@@ -35,13 +35,13 @@
 			<column name="Quantity"></column>
 		</property>	
 		
-		<set name="categories" table="ProductCategory" fetch="join" lazy="false">
+		<set name="categories" table="ProductCategory" lazy="false">
 			<key column="pid"></key>
 			<many-to-many column="cid" class="model.Category"/>
 		</set>
 		
-		<many-to-one name="flavour" class="model.Flavour" column="Flavour_Id" fetch="join" lazy="false"></many-to-one>
-		<many-to-one name="seller" class="model.Seller" column="Seller_Id" fetch="join" lazy="false"></many-to-one>
+		<many-to-one name="flavour" class="model.Flavour" column="Flavour_Id" lazy="false"></many-to-one>
+		<many-to-one name="seller" class="model.Seller" column="Seller_Id" lazy="false"></many-to-one>
 		
 		
 	</class>

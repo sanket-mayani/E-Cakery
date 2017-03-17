@@ -42,9 +42,16 @@
 	  z-index:0;
 }
 
-#cake_flavours a{
+#cake_flavours a, #categories a{
 
 	color: black;
+	
+}
+
+#cake_flavours a.active_link, #categories a.active_link{
+
+	color: white;
+	background-color: #526369;
 	
 }
 
