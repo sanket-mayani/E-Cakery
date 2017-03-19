@@ -48,7 +48,7 @@
 		session.setAttribute("cart", cart);
 	
 	if(session.getAttribute("city") == null)
-		city = dao.getCity().get(0);
+		city = dao.getAllCities().get(0);
 	else
 		city = (City)session.getAttribute("city");
 	
@@ -115,7 +115,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Cakes by Flavour <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="cake_flavours">
                         <%
-                        	List<Flavour> flavours = dao.getFlavour();
+                        	List<Flavour> flavours = dao.getAllFlavours();
                         	
                         	for(Flavour f : flavours)
                         	{
@@ -131,7 +131,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Cake Categories <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="categories">
                         <%
-                        	List<Category> categories = dao.getCategory();
+                        	List<Category> categories = dao.getAllCategories();
                         	
                         	for(Category c : categories)
                         	{
@@ -166,7 +166,7 @@
                     <label for="city_options"><span class="glyphicon glyphicon-globe"></span> Select Location</label>
                     <select id="city_options" onchange="location = this.value">
                     <%
-                    	List<City> cities = dao.getCity();
+                    	List<City> cities = dao.getAllCities();
                     		
                     	for(City c : cities)
                     	{

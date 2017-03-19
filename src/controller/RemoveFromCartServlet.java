@@ -31,7 +31,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 		
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		DAO dao = new DAO();
-		Product product = dao.searchProductById(pid);
+		Product product = dao.getProductById(pid);
 		
 		Item item = new Item();
 		item.setProduct(product);

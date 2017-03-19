@@ -173,7 +173,7 @@
 		    							<%
 		    								DAO dao = new DAO();
 		    								List<City> cities = new ArrayList<City>();
-		    								cities = dao.getCity();
+		    								cities = dao.getAllCities();
 		    								
 		    								for(City city:cities)
 		    								{

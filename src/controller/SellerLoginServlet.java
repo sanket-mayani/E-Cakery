@@ -42,37 +42,29 @@ public class SellerLoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String s1=request.getParameter("email");
 		String s2=request.getParameter("pw");
-		Seller v=new Seller();
-		v.setUn(s1);
 		
 		HttpSession session = request.getSession();
 		DAO v1=new DAO();
-		List<Seller> ls=v1.searchSeller(v);
-		Seller sl;
-		if(!ls.isEmpty())
-		{
-		try {
-			Iterator<Seller> listIterator = ls.iterator();
-			while (listIterator.hasNext()) {
-				sl=listIterator.next();
-				if(sl.getPw().equals(s2)){
-					 
-					session.setAttribute("seller", sl);
-					session.setAttribute("message", "Welcome");
-					session.setAttribute("class", "alert-success");
-					response.sendRedirect("seller-home.jsp");
-				}
-				else{
-					session.setAttribute("message", "Invalid Password");
-					session.setAttribute("class", "alert-danger");
-					response.sendRedirect("seller-index.jsp");
-				}
-			}
 		
-		} catch (Exception e) {
-			
+		Seller v=v1.getSellerByEmail(s1);
+		if(v!=null)
+		{
+			if(v.getPw().equals(s2))
+			{
+				session.setAttribute("seller", v);
+				session.setAttribute("message", "Welcome");
+				session.setAttribute("class", "alert-success");
+				response.sendRedirect("seller-home.jsp");
+			}
+			else
+			{
+				session.setAttribute("message", "Invalid Password");
+				session.setAttribute("class", "alert-danger");
+				response.sendRedirect("seller-index.jsp");
+			}
 		}
-		}else{
+		else
+		{
 			session.setAttribute("message", "Email Id Not Registered");
 			session.setAttribute("class", "alert-danger");
 			response.sendRedirect("seller-index.jsp");

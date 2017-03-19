@@ -123,7 +123,7 @@
 									<%
 										DAO dao = new DAO();
 										List<Flavour> list = new ArrayList<Flavour>();
-										list = dao.getFlavour();
+										list = dao.getAllFlavours();
 										
 										if(!list.isEmpty())
 										{
@@ -147,7 +147,7 @@
 								<select class="form-control" name="occassion" id="category" required multiple="multiple">
 									<%
 										List<Category> list2 = new ArrayList<Category>();
-										list2 = dao.getCategory();
+										list2 = dao.getAllCategories();
 										
 										if(!list2.isEmpty())
 										{

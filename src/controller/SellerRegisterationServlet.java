@@ -46,12 +46,10 @@ public class SellerRegisterationServlet extends HttpServlet {
 		DAO dao = new DAO();
 		HttpSession session = request.getSession();
 		
-		Seller seller = new Seller();
-		seller.setUn(s2);
-		
-		List ls=new ArrayList();
-		ls=dao.searchSeller(seller);
-		if(ls.isEmpty()){
+		Seller s=dao.getSellerByEmail(s2);
+		if(s == null){
+			Seller seller = new Seller();
+			seller.setUn(s2);
 			seller.setName(s1);
 			seller.setPw(s3);
 			seller.setMobile(l1);

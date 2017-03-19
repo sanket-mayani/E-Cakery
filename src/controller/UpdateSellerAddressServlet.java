@@ -55,16 +55,11 @@ public class UpdateSellerAddressServlet extends HttpServlet {
 		String p=request.getParameter("pin");
 		int pin;
 		String c = request.getParameter("city");
-		List al=new ArrayList();
-		City city=new City();
+		City city = new City();
 		DAO dao=new DAO();
 		if(c!=null && !c.equals("0"))
 		{
-			city.setName(c);
-			al=dao.searchCityByName(city);
-			if(!al.isEmpty()){
-				city=(City)al.get(0);
-			}
+			city=dao.getCityByName(c);
 		}
 		HttpSession session=request.getSession();
 		Seller seller=(Seller) session.getAttribute("seller");

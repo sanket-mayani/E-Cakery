@@ -42,13 +42,11 @@ public class RegisterationServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		DAO dao = new DAO();
-		User user = new User();
-		user.setUn(s3);
-		
-		
-		List ls=new ArrayList();
-		ls=dao.searchUser(user);
-		if(ls.isEmpty()){
+		 
+		User u=dao.getUserByEmail(s3);
+		if(u == null){
+			User user = new User();
+			user.setUn(s3);
 			user.setPw(s4);
 			user.setFn(s1);
 			user.setLn(s2);

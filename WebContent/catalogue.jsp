@@ -66,7 +66,7 @@
     
     	<%
     		DAO dao = new DAO();
-    		List<Product> products =  dao.getProducts(seller);
+    		List<Product> products =  dao.getProductsBySeller(seller);
     		
     		if(products.isEmpty())
     		{

@@ -23,6 +23,9 @@ import org.hibernate.criterion.Restrictions;
 
 public class DAO {
 	
+	
+	// Methods regarding Session
+	
 	public Session getSession()
 	{
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
@@ -33,13 +36,14 @@ public class DAO {
 	public void closeSession(Session session)
 	{
 		if (session.isOpen())
-		{
             session.close();
-        }
 	}
 	
-	public void insertUser(User user){
-		
+	
+	// Methods regarding User
+	
+	public void insertUser(User user)
+	{	
 		Session s = getSession();
 		
 		try{
@@ -50,13 +54,36 @@ public class DAO {
 			System.out.println(e);
 		}finally{
 			closeSession(s);
-		}
-		
-
+		}	
 	}
-
-	public void insertSeller(Seller slvo){
 	
+	public User getUserByEmail(String email)
+	{
+		Session session = getSession();
+
+		List<User> al=new ArrayList<User>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from User where un='"+email+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
+	}
+	
+	
+	// Methods regarding Seller
+
+	public void insertSeller(Seller slvo)
+	{
 		Session s=getSession();
 		
 		try{
@@ -71,13 +98,13 @@ public class DAO {
 
 	}
 	
-	public void insertProduct(Product product){
-		
+	public void updateSeller(Seller seller)
+	{	
 		Session s=getSession();
 		
 		try{
-			Transaction tr=s.beginTransaction();	
-			s.save(product);
+			Transaction tr=s.beginTransaction();
+			s.update(seller);
 			tr.commit();
 		}catch(Exception ex){
 			System.out.println(ex);
@@ -86,13 +113,102 @@ public class DAO {
 		}
 	}
 	
-	public void updateSeller(Seller seller){
+	public Seller getSellerByEmail(String email)
+	{
+		Session session = getSession();
+
+		List<Seller> al=new ArrayList<Seller>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Seller where un='"+email+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
+	}
+	
+	
+	// Methods regarding Admin
+	
+	public AdminLoginvo getAdminByEmail(String email)
+	{
+		Session session = getSession();
+
+		List<AdminLoginvo> al=new ArrayList<AdminLoginvo>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Admin where un='"+email+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
+	}
+	
+	
+	// Methods regarding Product
+	
+	public List<Product> getAllProducts()
+	{
+		Session session = getSession();
+
+		List<Product> products=new ArrayList<Product>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Product");
+			products=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return products;
+		
+	}
+
+	public List<Product> getProductsBySeller(Seller seller)
+	{
+		Session session = getSession();
+		
+		List<Product> list=new ArrayList<Product>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Product where Seller_Id="+seller.getSid());
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+			return list;
+	}
+	
+	public void insertProduct(Product product){
 		
 		Session s=getSession();
 		
 		try{
-			Transaction tr=s.beginTransaction();
-			s.update(seller);
+			Transaction tr=s.beginTransaction();	
+			s.save(product);
 			tr.commit();
 		}catch(Exception ex){
 			System.out.println(ex);
@@ -114,68 +230,35 @@ public class DAO {
 		}finally{
 			closeSession(session); 
 		}
+	}
+	
+	public Product getProductById(int pid) {
+		// TODO Auto-generated method stub
 		
+		Session session = getSession();
+		
+		List<Product> list=new ArrayList<Product>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Product where pid="+pid);
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		if(!list.isEmpty())
+			return list.get(0);
+		else
+			return null;
 	}
 	
-	public List<User> searchUser(User log)
-	{
-		Session session = getSession();
-
-		List<User> al=new ArrayList<User>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from User where un='"+log.getUn()+"'");
-			al=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-		return al;
-
-}
-	public List<Seller> searchSeller(Seller log)
-	{
-		Session session = getSession();
-
-		List<Seller> al=new ArrayList<Seller>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Seller where un='"+log.getUn()+"'");
-			al=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-		return al;
-
-}
-	public List<AdminLoginvo> searchAdmin(AdminLoginvo log)
-	{
-		Session session = getSession();
-
-		List<AdminLoginvo> al=new ArrayList<AdminLoginvo>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Admin where un='"+log.getUn()+"'");
-			al=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-		return al;
-
-	}
 	
-	public Flavour searchFlavourByName(String name)
+	// Methods regarding Flavour
+	
+	public Flavour getFlavourByName(String name)
 	{
 		Session session = getSession();
 
@@ -191,19 +274,21 @@ public class DAO {
 		}finally{
 			closeSession(session); 
 		}
-		return al.get(0);
-
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
 	}
 	
-	public City searchCityByName(String name)
+	public List<Flavour> getAllFlavours()
 	{
 		Session session = getSession();
 
-		List<City> al=new ArrayList<City>();
+		List<Flavour> al=new ArrayList<Flavour>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from City where name='"+name+"'");
+			Query q=session.createQuery("from Flavour");
 			al=q.list();
 			tr.commit();
 		}catch(Exception ex){
@@ -211,11 +296,13 @@ public class DAO {
 		}finally{
 			closeSession(session); 
 		}
-		return al.get(0);
-
+		return al;
 	}
 	
-	public Category searchCategoryByName(String name)
+	
+	// Methods regarding Category
+	
+	public Category getCategoryByName(String name)
 	{
 		Session session = getSession();
 
@@ -231,31 +318,57 @@ public class DAO {
 		}finally{
 			closeSession(session); 
 		}
-		return al.get(0);
-
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
 	}
-
-	public List<Flavour> getFlavour()
+	
+	public List<Category> getAllCategories()
 	{
 		Session session = getSession();
 
-		List<Flavour> al=new ArrayList<Flavour>();
-	try 
+		List<Category> list=new ArrayList<Category>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Category");
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}	
+	
+	
+	// Methods regarding City
+	
+	public City getCityByName(String name)
 	{
-		Transaction tr=session.beginTransaction();
-		Query q=session.createQuery("from Flavour");
-		al=q.list();
-		tr.commit();
-	}catch(Exception ex){
-		System.out.println(ex);
-	}finally{
-		closeSession(session); 
-	}
-	return al;
+		Session session = getSession();
 
+		List<City> al=new ArrayList<City>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from City where name='"+name+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
 	}
 		
-	public List<City> getCity()
+	public List<City> getAllCities()
 	{
 		Session session = getSession();
 
@@ -272,68 +385,10 @@ public class DAO {
 			closeSession(session); 
 		}
 		return al;
-
-	}
-		
-	public List<Category> getCategory()
-	{
-
-		Session session = getSession();
-
-		List<Category> list=new ArrayList<Category>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Category");
-			list=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-		return list;
-
 	}
 	
-	public List<Product> getProduct()
-	{
-		Session session = getSession();
-
-		List<Product> products=new ArrayList<Product>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Product");
-			products=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-		return products;
-		
-	}
-			
-	public List<Product> getProducts(Seller seller)
-	{
-		Session session = getSession();
-		
-		List<Product> list=new ArrayList<Product>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Product where Seller_Id="+seller.getSid());
-			list=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-			return list;
-	}
+	
+	// Other Methods
 		
 	public List<Product> fetchCakes(City city,Flavour flavour,Category category,int start) {
 		// TODO Auto-generated method stub
@@ -391,26 +446,7 @@ public class DAO {
 		return maxPages;
 	}
 
-	public Product searchProductById(int pid) {
-		// TODO Auto-generated method stub
-		
-		Session session = getSession();
-		
-		List<Product> list=new ArrayList<Product>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Product where pid="+pid);
-			list=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-
-		return list.get(0);
-	}
+	
 
 	
 		

@@ -21,24 +21,15 @@ import model.User;
 import model.DAO;
 import model.Seller;
 
-/**
- * Servlet implementation class UserCheck
- */
 @WebServlet("/UserCheck")
 public class UserCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public UserCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter pw=response.getWriter();
@@ -46,37 +37,42 @@ public class UserCheckServlet extends HttpServlet {
 		String type=request.getParameter("type");
 		DAO r=new DAO();	
 		try {
-			List ls=new ArrayList();
+			
 			if(type.equals("seller"))
-			{	Seller sl=new Seller();
-				sl.setUn(user);
-				ls=r.searchSeller(sl);
+			{	
+				Seller sl=r.getSellerByEmail(user);
+				if(sl == null){
+					pw.println("0");
+				}
+				else{
+					pw.println("1");
+				}
 			}else if(type.equals("user"))
 			{
-				User l=new User();
-				l.setUn(user);
-				ls=r.searchUser(l);
+				User l=r.getUserByEmail(user);
+				if(l == null){
+					pw.println("0");
+				}
+				else{
+					pw.println("1");
+				}
 			}else if(type.equals("admin"))
 			{
-				AdminLoginvo al=new AdminLoginvo();
-				al.setUn(user);
-				ls=r.searchAdmin(al);
+				AdminLoginvo al=r.getAdminByEmail(user);
+				if(al == null){
+					pw.println("0");
+				}
+				else{
+					pw.println("1");
+				}
 			}
-			if(ls.isEmpty()){
-				pw.println("0");
-			}
-			else{
-				pw.println("1");
-			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

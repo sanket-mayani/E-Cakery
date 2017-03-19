@@ -37,7 +37,7 @@ public class ChangePreferenceServlet extends HttpServlet {
 		{
 			String cityName = request.getParameter("city");		
 			DAO dao = new DAO();
-			City city = dao.searchCityByName(cityName);
+			City city = dao.getCityByName(cityName);
 			session.setAttribute("city",city);
 		}
 		
@@ -49,7 +49,7 @@ public class ChangePreferenceServlet extends HttpServlet {
 			else
 			{
 				DAO dao = new DAO();
-				Flavour flavour = dao.searchFlavourByName(flavourName);
+				Flavour flavour = dao.getFlavourByName(flavourName);
 				session.setAttribute("flavour",flavour);
 			}
 		}
@@ -61,7 +61,7 @@ public class ChangePreferenceServlet extends HttpServlet {
 				session.removeAttribute("category");
 			else{
 				DAO dao = new DAO();
-				Category category = dao.searchCategoryByName(categoryName);
+				Category category = dao.getCategoryByName(categoryName);
 				session.setAttribute("category",category);
 			}
 		}

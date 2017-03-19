@@ -43,32 +43,24 @@ public class AdminLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		String s1=request.getParameter("email");
 		String s2=request.getParameter("pw");
-		AdminLoginvo v=new AdminLoginvo();
-		v.setUn(s1);
 		
 		DAO v1=new DAO();
-		List<AdminLoginvo> ls=v1.searchAdmin(v);
-		AdminLoginvo al;
-		if(!ls.isEmpty())
+		AdminLoginvo v=v1.getAdminByEmail(s1);
+		if(v != null)
 		{
-		try {
-			Iterator<AdminLoginvo> listIterator = ls.iterator();
-			while (listIterator.hasNext()) {
-				al=listIterator.next();
-				if(al.getPw().equals(s2)){
-					HttpSession session = request.getSession(); 
-					session.setAttribute("aloginvo", al);
-					response.sendRedirect("AdminHome.jsp");
-				}
-				else{
-					response.sendRedirect("AdminLogin.jsp");
-				}
+			if(v.getPw().equals(s2))
+			{
+				HttpSession session = request.getSession(); 
+				session.setAttribute("aloginvo", v);
+				response.sendRedirect("AdminHome.jsp");
 			}
-		
-		} catch (Exception e) {
-			
+			else
+			{
+				response.sendRedirect("AdminLogin.jsp");
+			}
 		}
-		}else{
+		else
+		{
 			response.sendRedirect("AdminLogin.jsp");
 		}
 						

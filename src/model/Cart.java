@@ -89,4 +89,14 @@ public class Cart
 		return total;
 	}
 	
+	public int getTotalQuantity()
+	{
+		int total = 0;
+		for(Item i : items)
+		{
+			total += i.getQuantity();
+		}
+		return total;
+	}
+	
 }

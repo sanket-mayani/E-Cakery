@@ -57,136 +57,100 @@ public class AddProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		String name1 = null;
 		FileItem file = null;
 		DAO dao=new DAO();
 		
 		
 		Product product=new Product();
-		HttpSession session = request.getSession();
-		Seller seller=(Seller)session.getAttribute("seller");
-
-
-		if(ServletFileUpload.isMultipartContent(request))
+		HttpSession session = request.getSession();		
+		Seller seller = null;
+		
+		if(session.getAttribute("seller")!=null)
 		{
-			try{
-				List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-				String value;
-				List<String> values = new ArrayList<String>();
-				for(FileItem fileItem : fileItems)
-				{
+			seller=(Seller)session.getAttribute("seller");
 
-					if(!fileItem.isFormField())
-					{
-						String FileName = new File(fileItem.getName()).getName();
-						FileName = FileName.toLowerCase();
-						
-						if(FileName.endsWith(".jpg") || FileName.endsWith(".jpeg"))
-						{
-							fileItem.write(new File(getServletContext().getInitParameter("Upload-Path") + File.separator + FileName));
 
-					if(fileItem.isFormField()){
-						String n = fileItem.getFieldName();
-						 value = fileItem.getString();
-						 if(n.equals("name")){
-							 product.setName(value);
-						 }else if(n.equals("desc")){
-							 product.setDescription(value);
-						 }
-						 else if(n.equals("flavour")){
-							 Flavour flavour=new Flavour();
-								flavour.setName(value);
-								List al=new ArrayList();
-								al=dao.searchFlavourByName(flavour);
-								product.setFlavour((Flavour)al.get(0));
-						 }
-						 else if(n.equals("occassion")){
-							 	
-							 	values.add(value);
-							 	Set<Category> categories = new HashSet<Category>();
-							 	
-							 	for(String s: values)
-							 	{
-							 		Category category=new Category();
-									category.setName(s);
-									List category_list=new ArrayList();
-									category_list=dao.searchCategoryByName(category);
-									categories.add((Category)category_list.get(0));
-							 	}
-								
-								product.setCategories(categories);
-						 }
-						 else if(n.equals("floor")){
-							 product.setTier(value);
-						 }
-						 else if(n.equals("price")){
-							 float value1 = 0;	
-							 if(value!=null){
-									value1=Float.parseFloat(value);
-								}
-							 if(value1!=0){
-							 product.setPrice(value1);}
-						 }
-						 else if(n.equals("quantity")){
-							 product.setQuantity(value);
-						 }
-					}
-					else if(!fileItem.isFormField()){
-						file=fileItem;
-						name1 = new File(file.getName()).getName();
-						name1 = name1.toLowerCase();
-						
-						if(name1.endsWith(".jpg") || name1.endsWith(".jpeg"))
-						{
-
-							out.print((fileItem.getName()));
-							out.print("  Success");
-							/*
-							request.setAttribute("image",FileName);
-							
-							RequestDispatcher dispatcher = request.getRequestDispatcher("FetchImageServlet");
-							
-							dispatcher.forward(request,response);
-							*/
-						}
-						
-						else if(!name1.endsWith(".jpg") || !name1.endsWith(".jpeg")){
-							out.print("Not a photo");
-						}
-					}
-					
-				}
-					}}}
-				catch(Exception e)
-					{
-				System.out.println(e);
-					}
-			
-		}   
-		
-		
-	
-		
-		
-		
-		product.setSeller(seller);
-		dao.insertProduct(product);
-		String extension = name1.substring(name1.lastIndexOf("."));
-		product.setImage(product.getPid()+extension);
-		dao.updateProduct(product);
-		try {
-			name1 = new File(file.getName()).getName();
-			name1 = name1.toLowerCase();
-			
-			if(name1.endsWith(".jpg") || name1.endsWith(".jpeg"))
+			if(ServletFileUpload.isMultipartContent(request))
 			{
-				file.write(new File(getServletContext().getInitParameter("Upload-Path") + File.separator + (product.getPid()+".jpg")));
+				try{
+					List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+					String value;
+					List<String> values = new ArrayList<String>();
+					
+					for(FileItem fileItem : fileItems)
+					{
+	
+						if(fileItem.isFormField()){
+							String n = fileItem.getFieldName();
+							 value = fileItem.getString();
+							 if(n.equals("name")){
+								 product.setName(value);
+							 }else if(n.equals("desc")){
+								 product.setDescription(value);
+							 }
+							 else if(n.equals("flavour")){
+								 	Flavour flavour=dao.getFlavourByName(value);
+									product.setFlavour(flavour);
+							 }
+							 else if(n.equals("occassion")){
+								 	values.add(value);
+							 }
+							 else if(n.equals("floor")){
+								 product.setTier(value);
+							 }
+							 else if(n.equals("price")){
+								 float value1 = 0;	
+								 if(value!=null){
+										value1=Float.parseFloat(value);
+									}
+								 if(value1!=0){
+								 product.setPrice(value1);}
+							 }
+							 else if(n.equals("quantity")){
+								 product.setQuantity(value);
+							 }
+						}
+						else if(!fileItem.isFormField()){
+							file=fileItem;
+							name1 = new File(file.getName()).getName();
+							name1 = name1.toLowerCase();
+							if(name1.endsWith(".jpg") || name1.endsWith(".jpeg"))
+								product.setImage(name1);
+							else
+								response.sendRedirect("add-product.jsp");
+						}
+						
+					}
+					Set<Category> categories = new HashSet<Category>();
+				 	for(String s: values)
+				 	{
+						Category category=dao.getCategoryByName(s);
+						categories.add(category);
+				 	}
+					product.setCategories(categories);
+				}
+				catch(Exception e)
+				{
+					System.out.println(e);
+				}
+				
+			}   
+		
+			product.setSeller(seller);
+			dao.insertProduct(product);
+			
+			String extension = name1.substring(name1.lastIndexOf("."));
+			product.setImage(product.getPid()+extension);
+			dao.updateProduct(product);
+			
+			try {
+					file.write(new File(getServletContext().getInitParameter("Upload-Path") + File.separator + (product.getImage())));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		}
 		response.sendRedirect("add-product.jsp"); 
 

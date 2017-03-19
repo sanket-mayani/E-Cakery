@@ -40,7 +40,7 @@ public class FlavourServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		DAO dao=new DAO();
 		List l=new ArrayList();
-		l=dao.getFlavour();
+		l=dao.getAllFlavours();
 		HttpSession s1=request.getSession();
 		s1.setAttribute("flavour",l);
 		response.sendRedirect("get-flavour.jsp");

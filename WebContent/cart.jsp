@@ -102,11 +102,11 @@
 					</div>
 					<div class="row">
 						<h4 class="col-sm-7">+ Delivery :</h4>
-						<h4 class="col-sm-5"><%out.print((float)cart.getCount() * 30);%></h4>
+						<h4 class="col-sm-5"><%out.print((float)cart.getTotalQuantity() * 30);%></h4>
 					</div>
 					<div class="row">
 						<h4 class="col-sm-7">Total :</h4>
-						<h4 class="col-sm-5"><%out.print(cart.getCount() * 30 + cart.getCartTotal());%></h4>
+						<h4 class="col-sm-5"><%out.print(cart.getTotalQuantity() * 30 + cart.getCartTotal());%></h4>
 					</div>
 					<div class="row">
 						<h4 class="col-sm-5"></h4>
@@ -145,24 +145,26 @@
 			<hr>
 		<%}%>
 		
-		<div class="row bg-success" style="text-align: right; border-radius:10px; padding:10px; margin-bottom: 50px">
-			<div class="row">
-				<h4 class="col-xs-7">Subtotal :</h4>
-				<h4 class="col-xs-5"><%out.print(cart.getCartTotal());%></h4>
-			</div>		
-			<div class="row">
-				<h4 class="col-xs-7">+ Delivery :</h4>
-				<h4 class="col-xs-5"><%out.print((float)cart.getCount() * 30);%></h4>
+		<%if(!items.isEmpty()){%>
+			<div class="row bg-success" style="text-align: right; border-radius:10px; padding:10px; margin-bottom: 50px">
+				<div class="row">
+					<h4 class="col-xs-7">Subtotal :</h4>
+					<h4 class="col-xs-5"><%out.print(cart.getCartTotal());%></h4>
+				</div>		
+				<div class="row">
+					<h4 class="col-xs-7">+ Delivery :</h4>
+					<h4 class="col-xs-5"><%out.print((float)cart.getTotalQuantity() * 30);%></h4>
+				</div>
+				<div class="row">
+					<h4 class="col-xs-7">Total :</h4>
+					<h4 class="col-xs-5"><%out.print(cart.getTotalQuantity() * 30 + cart.getCartTotal());%></h4>
+				</div>
+				<div class="row">
+					<h4 class="col-xs-5"></h4>
+					<h4 class="col-xs-7"><a class="btn btn-danger">Checkout</a></h4>
+				</div>
 			</div>
-			<div class="row">
-				<h4 class="col-xs-7">Total :</h4>
-				<h4 class="col-xs-5"><%out.print(cart.getCount() * 30 + cart.getCartTotal());%></h4>
-			</div>
-			<div class="row">
-				<h4 class="col-xs-5"></h4>
-				<h4 class="col-xs-7"><a class="btn btn-danger">Checkout</a></h4>
-			</div>
-		</div>
+		<%}%>
 	
 	</div><!-- End of main container for extra small devices -->
 

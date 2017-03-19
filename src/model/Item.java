@@ -32,10 +32,4 @@ public class Item {
 			return quantity;
 		}
 	
-	public double getTotalPriceOfProduct()
-	{
-		double total = product.getPrice() * this.quantity;   // quantity ll be considered of the object on which its called
-		return total;
-	}
-	
 }
