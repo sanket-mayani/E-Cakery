@@ -7,6 +7,13 @@ public class Order {
 	private float amount;
 	private String address;
 	private int pincode;
+	private String Status;
+	private String date;
+	private String time;
+	
+	private User user;
+	private Product product;
+	private City city;
 	
 	public int getOid() {
 		return oid;
@@ -74,12 +81,6 @@ public class Order {
 	public void setCity(City city) {
 		this.city = city;
 	}
-	private String Status;
-	private String date;
-	private String time;
-	
-	private User user;
-	private Product product;
-	private City city;
+
 
 }
