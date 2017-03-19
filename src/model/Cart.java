@@ -26,46 +26,67 @@ public class Cart
 		return items.size();
 	}
 	
-	public void addItem(Item item)        // ultimately increasing the quantity
+	public void addItem(Item item)
 	{
-		int pid = item.getProduct().getPid();
-		
-		int quantity = item.getQuantity();
-		
-		for(int i=0; i<items.size(); i++)
-		{
-			
-			Item itemm =items.get(i);  // this method returns the elemnt at specified positin in the list "items"
-			
-			if(itemm.getProduct().getPid() == pid)     // comapring the pids
-			{
-				itemm.setQuantity(quantity);
-				return;     // if so then finish or return
-			}
-		}
-		
-		items.add(item);    // this method append the specified elemnt to d end of the list
+		if(contains(item.getProduct()))
+			updateQuantity(item.getProduct().getPid(),item.getQuantity());
+		else
+			items.add(item);
 	}
 	
 	
 	public void removeItem(Item item)
 	{
-			int pid = item.getProduct().getPid();
-		
-			int quantity = item.getQuantity();
-		
+		for(Item i:items)
+		{
+			if(i.getProduct().getPid() == item.getProduct().getPid()){
+				items.remove(i);
+				break;
+			}
+		}
+	}
+	
+	public void updateQuantity(int pid,int quantity)
+	{
 		for(int i=0; i<items.size(); i++)
 		{
-			
-			Item itemm =items.get(i);  // this method returns the elemnt at specified positin in the list "items"
-			
-			if(itemm.getProduct().getPid() == pid)     // comapring the pids
+			if(items.get(i).getProduct().getPid() == pid)
 			{
-				items.remove(i);     // removing the item frm d list of specified positin and other elmnts shifts automatically
-				return;
+				items.get(i).setQuantity(quantity);
 			}
-	
+		}
 	}
 	
+	public Item getItemByPid(int pid)
+	{
+		for(Item i:items)
+		{
+			if(i.getProduct().getPid() == pid)
+				return i;
+		}
+		
+		return null;
 	}
+	
+	
+	public boolean contains(Product product)
+	{
+		for(Item i:items)
+		{
+			if(i.getProduct().getPid() == product.getPid())
+				return true;
+		}
+		return false;
+	}
+	
+	public float getCartTotal()
+	{
+		float total = 0;
+		for(Item i : items)
+		{
+			total += i.getProduct().getPrice() * i.getQuantity();
+		}
+		return total;
+	}
+	
 }

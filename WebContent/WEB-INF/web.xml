@@ -11,4 +11,12 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+  <servlet>
+    <servlet-name>Cart</servlet-name>
+    <jsp-file>/cart.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cart</servlet-name>
+    <url-pattern>/Cart</url-pattern>
+  </servlet-mapping>
 </web-app>

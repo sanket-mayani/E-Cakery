@@ -99,7 +99,7 @@ public class AddProductServlet extends HttpServlet {
 							 Flavour flavour=new Flavour();
 								flavour.setName(value);
 								List al=new ArrayList();
-								al=dao.searchFlavour(flavour);
+								al=dao.searchFlavourByName(flavour);
 								product.setFlavour((Flavour)al.get(0));
 						 }
 						 else if(n.equals("occassion")){
@@ -112,7 +112,7 @@ public class AddProductServlet extends HttpServlet {
 							 		Category category=new Category();
 									category.setName(s);
 									List category_list=new ArrayList();
-									category_list=dao.searchCategory(category);
+									category_list=dao.searchCategoryByName(category);
 									categories.add((Category)category_list.get(0));
 							 	}
 								

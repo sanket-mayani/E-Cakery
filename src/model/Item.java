@@ -2,7 +2,6 @@
 	// details of tht product in the cart : as ex quantity and etc will be handled by
 	// this Item class
 
-
 package model;
 
 public class Item {

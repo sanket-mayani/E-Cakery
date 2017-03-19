@@ -13,19 +13,8 @@ public class Product {
 	private String tier;
 	private Flavour flavour;
 	private Seller seller;
-//<<<<<<< HEAD
-
-		public Product(){}
-	
-		public Product(int pid)        // constructor of a Product class with pid as parameter
-		{
-			this.pid=pid;
-		}
-	
-//=======
 	private Set<Category> categories = new HashSet<Category>(0);
 	private String quantity;
-//>>>>>>> 06332925d9f39ef242afd3ccfffec6beb4c2eab7
 	
 	public int getPid() {
 		return pid;
