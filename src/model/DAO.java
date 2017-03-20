@@ -5,12 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 
 
+
 import org.hibernate.HibernateException;
 
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,7 +36,6 @@ public class DAO {
 	
 	public void closeSession(Session session)
 	{
-		if (session.isOpen())
             session.close();
 	}
 	
@@ -65,8 +65,8 @@ public class DAO {
 		try 
 		{
 			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from User where un='"+email+"'");
-			al=q.list();
+			TypedQuery<User> q=session.createQuery("from User where un='"+email+"'");
+			al=q.getResultList();
 			tr.commit();
 		}catch(Exception ex){
 			System.out.println(ex);
