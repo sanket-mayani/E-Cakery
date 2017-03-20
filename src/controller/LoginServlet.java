@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 		{
 			if(user.getPw().equals(s2))
 			{
+				session.setAttribute("user", user);
 				response.sendRedirect("user-home.jsp");
 			}
 			else

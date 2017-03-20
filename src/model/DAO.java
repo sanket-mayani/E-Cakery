@@ -35,8 +35,9 @@ public class DAO {
 	
 	public void closeSession(Session session)
 	{
-		if (session.isOpen())
-            session.close();
+		if (session.isOpen()){
+			session.close();
+		}
 	}
 	
 	

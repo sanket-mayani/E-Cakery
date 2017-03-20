@@ -110,7 +110,7 @@
 					</div>
 					<div class="row">
 						<h4 class="col-sm-5"></h4>
-						<h4 class="col-sm-7"><a class="btn btn-danger">Checkout</a></h4>
+						<h4 class="col-sm-7"><a href="Checkout" class="btn btn-danger">Checkout</a></h4>
 					</div>
 				</div>
 			</div>
@@ -161,7 +161,7 @@
 				</div>
 				<div class="row">
 					<h4 class="col-xs-5"></h4>
-					<h4 class="col-xs-7"><a class="btn btn-danger">Checkout</a></h4>
+					<h4 class="col-xs-7"><a href="Checkout" class="btn btn-danger">Checkout</a></h4>
 				</div>
 			</div>
 		<%}%>
