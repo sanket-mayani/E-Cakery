@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@page import="model.Cart"%>
 <%@page import="model.Product"%>
 <%@page import="model.City"%>
@@ -27,7 +28,6 @@
 <% 			
 		}	
 	}
-
 %>
 <% 
 	DAO dao = new DAO();
@@ -40,6 +40,7 @@
 	int start = 0;
 	int count = 0;
 	Cart cart = new Cart();
+	User user = null;
 %>
 <%
 	if(session.getAttribute("cart") != null)
@@ -67,6 +68,8 @@
 	maxPages = dao.getMaxPages(city,flavour,category);
 	count = products.size();
 	
+	if(session.getAttribute("user") != null)
+		user = (User)session.getAttribute("user");
 %>
 
 <head>
@@ -146,8 +149,13 @@
                     <li><a href="#">Photo Cakes</a></li>            
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                	<%if(user == null){%>
                     <li><a data-toggle="modal" href="#registration_modal"><span class="glyphicon glyphicon-user"> SignUp</span></a></li>                    
                     <li><a data-toggle="modal" href="#login_modal"><span class="glyphicon glyphicon-log-in"> LogIn</span></a></li>
+                	<%}else{%>
+                	<li><a href="MyAccount"><span class="glyphicon glyphicon-user"></span> <span>My Account</span></a></li>                    
+                    <li><a href="LogOut"><span class="glyphicon glyphicon-off"></span> <span>Sign Out</span></a></li>
+                	<%}%>
                 </ul>
                 
             </div>

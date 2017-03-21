@@ -1,43 +1,30 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-
-import org.hibernate.HibernateException;
-
-import javax.servlet.http.HttpSession;
-
 import org.hibernate.Criteria;
-
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 public class DAO {
 	
+	SessionFactory factory = HibernateUtil.getSessionFactory();
 	
 	// Methods regarding Session
 	
 	public Session getSession()
 	{
-		SessionFactory sf=new Configuration().configure().buildSessionFactory();
-		Session session = sf.openSession();
+		Session session = factory.openSession();
 		return session;
 	}
 	
 	public void closeSession(Session session)
-	{
-		if (session.isOpen()){
-			session.close();
-		}
+	{	
+		session.close();
 	}
 	
 	

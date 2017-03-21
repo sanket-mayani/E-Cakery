@@ -43,7 +43,9 @@ public class LoginServlet extends HttpServlet {
 			if(user.getPw().equals(s2))
 			{
 				session.setAttribute("user", user);
-				response.sendRedirect("user-home.jsp");
+				session.setAttribute("message", "Welcome "+user.getFn()+" "+user.getLn());
+				session.setAttribute("class", "alert-success");
+				response.sendRedirect("index.jsp");
 			}
 			else
 			{

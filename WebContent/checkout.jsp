@@ -17,8 +17,6 @@
 
 	if(session.getAttribute("user") != null)
 		user = (User)session.getAttribute("user");
-	else
-		response.sendRedirect("index.jsp");
 %>
 
 <head>
@@ -31,6 +29,7 @@
 
 <body>
 
+	<%if(user != null){%>
 	<div class="container">
 	    <div class="row">
 	        <div class="col-sm-4">
@@ -150,7 +149,8 @@
         </div>
 
     </div><!-- End of footer -->
-
+	<%}else{response.sendRedirect("index.jsp");}%>
+	
 	<script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
