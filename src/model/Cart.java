@@ -10,10 +10,23 @@ import java.util.ArrayList;
 public class Cart 
 {
 	private ArrayList<Item> items;
+	String city = null;
 	
 	public Cart()							// creates a list of items in the cart
 	{
 		items = new ArrayList<Item>();
+	}
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setItems(ArrayList<Item> items) {
+		this.items = items;
 	}
 	
 	public ArrayList<Item> getItems()          // return tht list of items in the cart rit now

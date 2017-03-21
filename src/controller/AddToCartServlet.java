@@ -47,10 +47,22 @@ public class AddToCartServlet extends HttpServlet {
 		else
 			item.setQuantity(1);
 		
-		cart.addItem(item);
+		if(cart.getCount() == 0)
+		{
+			cart.setCity(item.getProduct().getSeller().getCity().getName());
+			cart.addItem(item);
+		}
+		else if(item.getProduct().getSeller().getCity().getName().equals(cart.getCity()))
+			cart.addItem(item);
+		else
+		{
+			session.setAttribute("message", "Can't add items to cart from different cities");
+			session.setAttribute("class", "alert-danger");
+		}
+		
 		session.setAttribute("cart", cart);
 		
-		response.sendRedirect("index.jsp");
+		response.sendRedirect(request.getHeader("referer"));
 		
 	}
 

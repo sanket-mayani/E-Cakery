@@ -53,6 +53,8 @@
 	else
 		city = (City)session.getAttribute("city");
 	
+	session.setAttribute("city", city);
+	
 	if(session.getAttribute("flavour") != null)
 		flavour = (Flavour)session.getAttribute("flavour");
 	

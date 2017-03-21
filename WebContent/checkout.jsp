@@ -1,9 +1,29 @@
+<%@page import="model.City"%>
 <%@page import="model.User"%>
 <%@page import="model.Cart"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+
+<%
+	if(session.getAttribute("message") != null)
+	{
+		String message = session.getAttribute("message").toString();
+		String class_var = session.getAttribute("class").toString();
+		session.removeAttribute("message");
+		session.removeAttribute("class");
+		if(message != null)	
+		{
+%>
+			<div class="alert alert-dismissable <%out.print(class_var);%>" style="text-align: center">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<p style="font-size: 18px"><%out.print(message);%></p>
+			</div>
+<% 			
+		}	
+	}
+%>
 
 <%
 	Cart cart = new Cart();
@@ -98,7 +118,7 @@
 			</div>
 			<div class="col-sm-3" style="margin-top: 5px;">
 				<small>City</small>
-				<input class="form-control" type="text" name="city" value="<%if(user.getCity()!=null)out.print(user.getCity().getName());%>" required>
+				<input class="form-control" type="text" name="city" value="<%if(cart.getCity()!=null)out.print(cart.getCity());%>" disabled required>
 			</div>
 		</div>
 		
@@ -149,11 +169,59 @@
         </div>
 
     </div><!-- End of footer -->
-	<%}else{response.sendRedirect("index.jsp");}%>
+	<%}else{%>
+		<p style="text-align: center; margin-top: 10px;"><a data-toggle="modal" href="#login_modal">Click here to login</a></p>
+	<%}%>
+	
+	<!-- Login Modal -->
+    <div id="login_modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title red">You must login first</h4>
+                </div>
+                <form class="form-horizontal" action="Login" id="login_form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="email">Email:</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="login_email" placeholder="Enter email"  name="email" required="required">
+                                <small><span id="login_email_msg" hidden="hidden" class="red">Email Not Registered</span></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="pwd">Password:</label>
+                            <div class="col-sm-9"> 
+                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pw" required="required">
+                            </div>
+                        </div>
+                    </div><!-- End of modal body -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="login">Login</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div><!-- End of modal footer -->    
+                </form><!-- End of login form -->
+            </div><!-- End of modal content -->
+
+        </div><!-- End of modal dialogue -->
+    </div><!-- End of login Modal -->
 	
 	<script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
+     <%
+		if(session.getAttribute("user")==null)
+		{
+	%>
+			<script type="text/javascript">
+				$("#login_modal").modal('show');
+			</script>
+	<%		
+		}
+    %>
 	
 </body>
 
