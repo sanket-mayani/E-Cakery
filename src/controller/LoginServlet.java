@@ -42,20 +42,23 @@ public class LoginServlet extends HttpServlet {
 		{
 			if(user.getPw().equals(s2))
 			{
-				response.sendRedirect("user-home.jsp");
+				session.setAttribute("user", user);
+				session.setAttribute("message", "Welcome "+user.getFn()+" "+user.getLn());
+				session.setAttribute("class", "alert-success");
+				response.sendRedirect(request.getHeader("referer"));
 			}
 			else
 			{
 				session.setAttribute("message", "Incorrect Password");
 				session.setAttribute("class", "alert-danger");
-				response.sendRedirect("index.jsp");
+				response.sendRedirect(request.getHeader("referer"));
 			}
 		}
 		else
 		{
 			session.setAttribute("message", "Email Id Not Registered");
 			session.setAttribute("class", "alert-danger");
-			response.sendRedirect("index.jsp");
+			response.sendRedirect(request.getHeader("referer"));
 		}
 
 	}

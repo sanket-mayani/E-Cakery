@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 	
-	<class name="model.Order" table="Order">
+	<class name="model.Order" table="Orders">
 	
 		<id name="oid" type="int" column="oid">
 			<generator class="increment"></generator>
@@ -17,6 +17,22 @@
 		
 		<property name="amount">
 			<column name="Amount"></column>
+		</property>
+		
+		<property name="fname">
+			<column name="FirstName"></column>
+		</property>
+		
+		<property name="lname">
+			<column name="LastName"></column>
+		</property>
+		
+		<property name="email">
+			<column name="Email"></column>
+		</property>
+		
+		<property name="mobile">
+			<column name="Mobile"></column>
 		</property>
 		
 		<property name="address">
@@ -39,9 +55,9 @@
 			<column name="Time"></column>
 		</property>
 		
-		<many-to-one name="user" class="model.User" column="User_ID"></many-to-one>
-		<many-to-one name="product" class="model.Product" column="Product_ID"></many-to-one>
-		<many-to-one name="city" class="model.City" column="City_ID"></many-to-one>
+		<many-to-one name="user" class="model.User" column="User_ID" lazy="false"></many-to-one>
+		<many-to-one name="product" class="model.Product" column="Product_ID" lazy="false"></many-to-one>
+		<many-to-one name="seller" class="model.Seller" column="Seller_ID" lazy="false"></many-to-one>
 		
 	</class>
 </hibernate-mapping>

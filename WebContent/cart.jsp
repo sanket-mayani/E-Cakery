@@ -85,7 +85,7 @@
 							</td>
 							<td style="width:80px; border-radius:0px 10px 10px 0px;">
 								<a href="RemoveFromCart?pid=<%out.print(i.getProduct().getPid());%>">Remove</a><br>
-								<button type="submit" style="background-color: white; border:0px; padding:0px;" /><a>Update Qty</a></button></form>
+								<button type="submit" style="background-color: white; border:0px; padding:0px;"><a>Update Qty</a></button></form>
 							</td>
 						</tr>
 					<%}%>
@@ -110,7 +110,7 @@
 					</div>
 					<div class="row">
 						<h4 class="col-sm-5"></h4>
-						<h4 class="col-sm-7"><a class="btn btn-danger">Checkout</a></h4>
+						<h4 class="col-sm-7"><a href="Checkout" class="btn btn-danger">Checkout</a></h4>
 					</div>
 				</div>
 			</div>
@@ -135,7 +135,7 @@
 				<form action="UpdateQuantity">
 					<input type="hidden" name="pid" value="<%out.print(i.getProduct().getPid());%>">
 					Quantity: <input type="number" name="quantity" style="width: 30px;" min="1" max="10" value="<%out.print(i.getQuantity());%>">
-					<button type="submit" style="background-color: white; border:0px; padding:0px;"/><a> Update</a></button>
+					<button type="submit" style="background-color: white; border:0px; padding:0px;"><a> Update</a></button>
 					or <a href="RemoveFromCart?pid=<%out.print(i.getProduct().getPid());%>">Remove</a>
 				</form>
 			</div>
@@ -161,7 +161,7 @@
 				</div>
 				<div class="row">
 					<h4 class="col-xs-5"></h4>
-					<h4 class="col-xs-7"><a class="btn btn-danger">Checkout</a></h4>
+					<h4 class="col-xs-7"><a href="Checkout" class="btn btn-danger">Checkout</a></h4>
 				</div>
 			</div>
 		<%}%>
