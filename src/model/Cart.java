@@ -10,18 +10,18 @@ import java.util.ArrayList;
 public class Cart 
 {
 	private ArrayList<Item> items;
-	String city = null;
+	City city = null;
 	
 	public Cart()							// creates a list of items in the cart
 	{
 		items = new ArrayList<Item>();
 	}
 	
-	public String getCity() {
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 

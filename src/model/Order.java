@@ -5,6 +5,10 @@ public class Order {
 	private int oid;
 	private int quantity;
 	private float amount;
+	private String fname;
+	private String lname;
+	private String email;
+	private long mobile;
 	private String address;
 	private int pincode;
 	private String Status;
@@ -13,8 +17,32 @@ public class Order {
 	
 	private User user;
 	private Product product;
-	private City city;
 	private Seller seller;
+	
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public String getLname() {
+		return lname;
+	}
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public long getMobile() {
+		return mobile;
+	}
+	public void setMobile(long mobile) {
+		this.mobile = mobile;
+	}
 	
 	public Seller getSeller() {
 		return seller;
@@ -81,12 +109,6 @@ public class Order {
 	}
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-	public City getCity() {
-		return city;
-	}
-	public void setCity(City city) {
-		this.city = city;
 	}
 
 }

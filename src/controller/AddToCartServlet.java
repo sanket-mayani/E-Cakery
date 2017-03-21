@@ -49,10 +49,10 @@ public class AddToCartServlet extends HttpServlet {
 		
 		if(cart.getCount() == 0)
 		{
-			cart.setCity(item.getProduct().getSeller().getCity().getName());
+			cart.setCity(item.getProduct().getSeller().getCity());
 			cart.addItem(item);
 		}
-		else if(item.getProduct().getSeller().getCity().getName().equals(cart.getCity()))
+		else if(item.getProduct().getSeller().getCity().getCid() == cart.getCity().getCid())
 			cart.addItem(item);
 		else
 		{

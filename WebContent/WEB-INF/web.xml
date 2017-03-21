@@ -27,4 +27,12 @@
     <servlet-name>Checkout</servlet-name>
     <url-pattern>/Checkout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Payment</servlet-name>
+    <jsp-file>/payment.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Payment</servlet-name>
+    <url-pattern>/Payment</url-pattern>
+  </servlet-mapping>
 </web-app>

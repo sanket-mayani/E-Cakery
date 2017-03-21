@@ -363,4 +363,29 @@ $(document).ready(function(){
 	});
 	
 	
+/* --------------------
+	checkout.jsp 
+-------------------- */	
+	
+	var mobile_flag = true;
+	
+	$("#checkout #mobile").keyup(function(){		
+		  var phoneno = /^\d{10}$/;
+		  if($("#mobile").val().match(phoneno))
+		  {
+			  $("#mobile_msg").hide();
+			  mobile_flag = true;
+		  }
+		  else
+		  {
+		       $("#mobile_msg").show();
+		       mobile_flag = false;
+		  }		
+	});
+
+	$("#checkout #details").submit(function(){
+		return mobile_flag;
+	});
+	
+	
 });

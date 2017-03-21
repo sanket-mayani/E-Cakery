@@ -47,7 +47,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="checkout">
 
 	<%if(user != null){%>
 	<div class="container">
@@ -69,7 +69,7 @@
 	
 	<div class="container">
 			
-		<form>	
+		<form action="Payment" method="post" id="details">	
 		
 		<div class="alert alert-success alert-dismissable" style="margin-top: 10px;">
   			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -97,7 +97,8 @@
 			</div>
 			<div class="col-sm-3" style="margin-top: 5px;">
 				<small>Mobile</small>
-				<input class="form-control" type="text" name="mobile" value="<%out.print(user.getMob());%>" required>
+				<input class="form-control" type="text" name="mobile" id="mobile" value="<%out.print(user.getMob());%>" maxlength="10" required>
+				<span id="mobile_msg" class="red" hidden>Invalid Mobile Number</span>
 			</div>
 		</div>
 		
@@ -118,7 +119,7 @@
 			</div>
 			<div class="col-sm-3" style="margin-top: 5px;">
 				<small>City</small>
-				<input class="form-control" type="text" name="city" value="<%if(cart.getCity()!=null)out.print(cart.getCity());%>" disabled required>
+				<input class="form-control" type="text" name="city" value="<%if(cart.getCity()!=null)out.print(cart.getCity().getName());%>" disabled required>
 			</div>
 		</div>
 		
@@ -130,7 +131,7 @@
 		
 		<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 			<div class="col-sm-3">
-				<a class="btn btn-danger">Continue to Payment</a>
+				<input type="submit" class="btn btn-danger" value="Continue to Payment"/>
 			</div>
 		</div>
 		
