@@ -47,7 +47,7 @@
 			<column name="Status"></column>
 		</property>	
 		
-	<!--	<property name="date">
+	<!--	<proprty name="date">
 			<column name="Date"></column>
 		</property>
 		
