@@ -108,7 +108,7 @@ public class AddProductServlet extends HttpServlet {
 								 product.setPrice(value1);}
 							 }
 							 else if(n.equals("quantity")){
-								 product.setQuantity(value);
+								 product.setQuantity(Integer.parseInt(value));
 							 }
 						}
 						else if(!fileItem.isFormField()){

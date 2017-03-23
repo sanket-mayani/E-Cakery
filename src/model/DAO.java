@@ -124,26 +124,6 @@ public class DAO {
 			return null;
 	}
 	
-	// method regarding order
-	
-	public void insertOrder(Order order)
-	{
-		Session s=getSession();
-		
-		try{
-			Transaction tr=s.beginTransaction();
-			s.save(order);
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(s); 
-		}
-	}
-	
-	
-	
-	
 	
 	// Methods regarding Admin
 	
@@ -262,6 +242,25 @@ public class DAO {
 			return list.get(0);
 		else
 			return null;
+	}
+	
+	public int getQuantity(Product product)
+	{
+		Session session = getSession();
+		
+		int quantity = 0;
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("select quantity from Product where pid="+product.getPid());
+			quantity=(int)q.uniqueResult();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return quantity;
 	}
 	
 	
@@ -394,6 +393,40 @@ public class DAO {
 			closeSession(session); 
 		}
 		return al;
+	}
+	
+	
+	// Methods regarding Order
+	
+	public boolean placeOrder(Order order)
+	{
+		Product product = order.getProduct();
+		int quantityInDB = getQuantity(product);
+		int quantityOrdered = order.getQuantity();
+		if(quantityInDB >= quantityOrdered)
+		{
+			insertOrder(order);
+			product.setQuantity(quantityInDB - quantityOrdered);
+			updateProduct(product);
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public void insertOrder(Order order)
+	{
+		Session s=getSession();
+		
+		try{
+			Transaction tr=s.beginTransaction();
+			s.save(order);
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(s); 
+		}
 	}
 	
 	

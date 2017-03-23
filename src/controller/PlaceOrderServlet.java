@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -19,18 +18,13 @@ import model.Order;
 import model.Product;
 import model.Seller;
 import model.User;
-
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Timer;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 @WebServlet("/PlaceOrder")
-public class PlaceOrder extends HttpServlet {
+public class PlaceOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    public PlaceOrder() {
+    public PlaceOrderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,13 +53,15 @@ public class PlaceOrder extends HttpServlet {
 				int pin = Integer.parseInt(request.getParameter("pin"));
 				
 				ArrayList<Item> items =cart.getItems();
+				ArrayList<Item> successList = new ArrayList<Item>();
+				ArrayList<Item> failureList = new ArrayList<Item>();
 				
 				for(Item item : items)
 				{
 					Product product =item.getProduct();
 					Seller seller =item.getProduct().getSeller();
-					int QuantityOrdered = item.getQuantity();
-					float amount =(item.getProduct().getPrice()) * QuantityOrdered ;
+					int quantityOrdered = item.getQuantity();
+					float amount =(item.getProduct().getPrice()) * quantityOrdered ;
 					
 					DAO dao = new DAO();
 			        Order order = new Order();
@@ -87,19 +83,31 @@ public class PlaceOrder extends HttpServlet {
 					String status ="placed";
 					order.setStatus(status);
 					
-					order.setQuantity(QuantityOrdered);          
+					order.setQuantity(quantityOrdered);          
 					order.setAmount(amount);
 					
-					dao.insertOrder(order); 
+					boolean result = false;
 					
-					int QuantityInDatabase = product.getQuantity();
+					synchronized (this) {
+						result = dao.placeOrder(order);
+					}
 					
-					int LeftQuantity = ( QuantityInDatabase - QuantityOrdered );
+					if(result)
+						successList.add(item);
+					else
+						failureList.add(item);
 					
-					product.setQuantity(LeftQuantity);
-					
-					dao.updateProduct(product);
 				}
+				
+				for(Item item : successList)
+					cart.removeItem(item);
+				session.setAttribute("cart", cart);
+				
+				session.setAttribute("successList", successList);
+				session.setAttribute("failureList", failureList);
+				
+				response.sendRedirect("Summary");
+				
 			}
 			else
 				response.sendRedirect(request.getHeader("referer"));

@@ -36,6 +36,14 @@
     <url-pattern>/Payment</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>Summary</servlet-name>
+    <jsp-file>/summary.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Summary</servlet-name>
+    <url-pattern>/Summary</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>
