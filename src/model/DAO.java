@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -453,7 +454,25 @@ public class DAO {
 		}
 		return maxPages;
 	}
+	
+	public List<Order> getPackedOrders()
+	{
+		Session session = getSession();
 
+		List<Order> list=new ArrayList<Order>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Order where Status='packed'");
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}	
 	
 
 	
