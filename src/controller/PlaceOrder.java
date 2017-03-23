@@ -90,11 +90,11 @@ public class PlaceOrder extends HttpServlet {
 			Product product =items.get(i).getProduct();
 			Seller seller =items.get(i).getProduct().getSeller();
 			
-			int quantity = items.get(i).getQuantity();
+			int QuantityOrdered = items.get(i).getQuantity();
 			
-			out.println("quantity of this item is : " + quantity);
+			out.println("quantity of this item is : " + QuantityOrdered);
 			
-			float amount =(items.get(i).getProduct().getPrice()) * quantity;
+			float amount =(items.get(i).getProduct().getPrice()) * QuantityOrdered ;
 			
 			DAO dao = new DAO();
 			
@@ -131,10 +131,24 @@ public class PlaceOrder extends HttpServlet {
 			
 		// adding quantity and amnt 
 			
-			order.setQuantity(quantity);
+			order.setQuantity(QuantityOrdered);          
 			order.setAmount(amount);
 			
 			dao.insertOrder(order);      // method need to save everything in DB
+			
+			// quantity here is tht is ordered in this particular order , and jst after placing an order we ve to reduce
+			// quantity in the db of respective product
+			
+			int QuantityInDatabase = Integer.parseInt(product.getQuantity());
+			
+			int LeftQuantity = ( QuantityInDatabase - QuantityOrdered );
+			
+			// updating by new quantity in product db table
+			
+			product.setQuantity(String.valueOf(LeftQuantity));
+			
+			dao.updateProduct(product);;
+	
 		}
 		
 		
