@@ -1,5 +1,18 @@
+//TemporalType.DATE: maps the date as java.sql.Date.
+//TemporalType.TIME: maps the date as java.sql.Time.
+//TemporalType.TIMESTAMP: maps the date as java.sql.Timestamp.
+
+
+
+
 package model;
 
+import javax.persistence.*;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
+
+@Entity
 public class Order {
 	
 	private int oid;
@@ -12,12 +25,30 @@ public class Order {
 	private String address;
 	private int pincode;
 	private String Status;
-	private String date;
-	private String time;
+	//private String date;
+	//private String time;
 	
 	private User user;
 	private Product product;
 	private Seller seller;
+	
+	// for date and time
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    @Temporal(TemporalType.TIME)
+    private Date time;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTime;
+
+    //	
+	
+	
+	
 	
 	public String getFname() {
 		return fname;
@@ -86,6 +117,9 @@ public class Order {
 	public void setStatus(String status) {
 		Status = status;
 	}
+
+/*	
+	
 	public String getDate() {
 		return date;
 	}
@@ -98,6 +132,9 @@ public class Order {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	
+*/	
+	
 	public User getUser() {
 		return user;
 	}
@@ -110,5 +147,41 @@ public class Order {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	
+	// for date and time
+	
+	  public Date getDate() {
+	        return date;
+	    }
 
+	    public void setDate(Date date) {
+	        this.date = date;
+	    }
+
+	    public Date getTime() {
+	        return time;
+	    }
+
+	    public void setTime(Date time) {
+	        this.time = time;
+	    }
+
+	    public Date getDateTime() {
+	        return dateTime;
+	    }
+
+	    public void setDateTime(Date dateTime) {
+	        this.dateTime = dateTime;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "DateAndTime{" +
+	                "id=" + id +
+	                ", date=" + date +
+	                ", time=" + time +
+	                ", dateTime=" + dateTime +
+	                '}';
+	    }
+	
 }

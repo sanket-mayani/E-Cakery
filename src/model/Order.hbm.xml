@@ -47,12 +47,16 @@
 			<column name="Status"></column>
 		</property>	
 		
-		<property name="date">
+	<!--	<property name="date">
 			<column name="Date"></column>
 		</property>
 		
-		<property name="time">
+	 	<property name="time">
 			<column name="Time"></column>
+		</property>    -->
+		
+		<property name="dateTime">
+			<column name="Timestamp"></column>
 		</property>
 		
 		<many-to-one name="user" class="model.User" column="User_ID" lazy="false"></many-to-one>

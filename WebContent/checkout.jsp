@@ -69,7 +69,7 @@
 	
 	<div class="container">
 			
-		<form action="Payment" method="post" id="details">	
+		<form action="PlaceOrder" method="post" id="details">	
 		
 		<div class="alert alert-success alert-dismissable" style="margin-top: 10px;">
   			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -131,7 +131,7 @@
 		
 		<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 			<div class="col-sm-3">
-				<input type="submit" class="btn btn-danger" value="Continue to Payment"/>
+				<input type="submit" class="btn btn-danger" value="Place Order"/>
 			</div>
 		</div>
 		

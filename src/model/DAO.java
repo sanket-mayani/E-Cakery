@@ -123,6 +123,26 @@ public class DAO {
 			return null;
 	}
 	
+	// method regarding order
+	
+	public void insertOrder(Order order)
+	{
+		Session s=getSession();
+		
+		try{
+			Transaction tr=s.beginTransaction();
+			s.save(order);
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(s); 
+		}
+	}
+	
+	
+	
+	
 	
 	// Methods regarding Admin
 	
