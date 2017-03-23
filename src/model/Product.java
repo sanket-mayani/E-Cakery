@@ -14,7 +14,7 @@ public class Product {
 	private Flavour flavour;
 	private Seller seller;
 	private Set<Category> categories = new HashSet<Category>(0);
-	private String quantity;
+	private int quantity;
 	
 	public int getPid() {
 		return pid;
@@ -64,7 +64,7 @@ public class Product {
 	public void setSeller(Seller seller) {
 		this.seller = seller;
 	}
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 	public Set<Category> getCategories() {
@@ -73,7 +73,7 @@ public class Product {
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity=quantity;
 	}
 	

@@ -39,7 +39,7 @@
 			<column name="Pincode"></column>
 		</property>
 		
-		<many-to-one name="city" class="model.City" column="City_ID"></many-to-one>
+		<many-to-one name="city" class="model.City" column="City_ID" lazy="false"></many-to-one>
 		
 	</class>
 </hibernate-mapping>

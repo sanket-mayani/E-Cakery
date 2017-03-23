@@ -60,49 +60,45 @@ public class PlaceOrder extends HttpServlet {
 				
 				ArrayList<Item> items =cart.getItems();
 				
-				for(int i=0; i < items.size(); i++)
+				for(Item item : items)
 				{
-					Product product =items.get(i).getProduct();
-					Seller seller =items.get(i).getProduct().getSeller();
-					
-					int quantity = items.get(i).getQuantity();
-					
-					float amount =(items.get(i).getProduct().getPrice()) * quantity;
+					Product product =item.getProduct();
+					Seller seller =item.getProduct().getSeller();
+					int QuantityOrdered = item.getQuantity();
+					float amount =(item.getProduct().getPrice()) * QuantityOrdered ;
 					
 					DAO dao = new DAO();
-					
 			        Order order = new Order();
-			        
-			     // ADDING customer personal info into db      
-			        	order.setFname(fn);
-			        	order.setLname(ln);
-			        	order.setEmail(email);
-			        	order.setMobile(mobile);
-			        	order.setPincode(pin);
-			        	order.setAddress(address);
-			        
-			     // adding date and time into database   	
-			        	
-			        	Date now = new Date();       // current date and time
-			   
-			        	order.setDateTime(now);        // this will add timestamp : date n time togehter
-			        	
-			    // adding pid and sid for this item we ve fetched abv
-			        	
-			        	order.setUser(user);
-			        	order.setSeller(seller);
-			        	order.setProduct(product);
+			           
+			        order.setFname(fn);
+			        order.setLname(ln);
+			        order.setEmail(email);
+			        order.setMobile(mobile);
+			        order.setPincode(pin);
+			        order.setAddress(address);
+			          				        	
+			        Date now = new Date();
+			        order.setDateTime(now);      
+			       	
+			        order.setUser(user);
+			        order.setSeller(seller);
+			        order.setProduct(product);
 			        	
 					String status ="placed";
-					
 					order.setStatus(status);
 					
-				// adding quantity and amnt 
-					
-					order.setQuantity(quantity);
+					order.setQuantity(QuantityOrdered);          
 					order.setAmount(amount);
 					
-					dao.insertOrder(order);      // method need to save everything in DB
+					dao.insertOrder(order); 
+					
+					int QuantityInDatabase = product.getQuantity();
+					
+					int LeftQuantity = ( QuantityInDatabase - QuantityOrdered );
+					
+					product.setQuantity(LeftQuantity);
+					
+					dao.updateProduct(product);
 				}
 			}
 			else
