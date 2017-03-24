@@ -44,6 +44,22 @@
     <url-pattern>/Summary</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>UserProfile</servlet-name>
+    <jsp-file>/user-profile.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserProfile</servlet-name>
+    <url-pattern>/UserProfile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MyOrders</servlet-name>
+    <jsp-file>/user-orders.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyOrders</servlet-name>
+    <url-pattern>/MyOrders</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>

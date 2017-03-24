@@ -42,7 +42,7 @@
 	  z-index:0;
 }
 
-#cake_flavours a, #categories a{
+#cake_flavours a, #categories a, #my_account_links a{
 
 	color: black;
 	
@@ -55,7 +55,7 @@
 	
 }
 
-#cake_flavours, #categories{
+#cake_flavours, #categories, #my_account_links{
 
 	background-color: #eeeeee;
 

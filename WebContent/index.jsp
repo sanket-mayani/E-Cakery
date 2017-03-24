@@ -155,7 +155,13 @@
                     <li><a data-toggle="modal" href="#registration_modal"><span class="glyphicon glyphicon-user"> SignUp</span></a></li>                    
                     <li><a data-toggle="modal" href="#login_modal"><span class="glyphicon glyphicon-log-in"> LogIn</span></a></li>
                 	<%}else{%>
-                	<li><a href="MyAccount"><span class="glyphicon glyphicon-user"></span> <span>My Account</span></a></li>                    
+                	<li class="dropdown">
+                		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span>My Account</span><span class="caret"></span></a>
+                		<ul class="dropdown-menu" id="my_account_links">
+                			<li><a href="UserProfile">My Profile</a></li>
+                			<li><a href="MyOrders">My Orders</a></li>
+                		</ul>
+                	</li>                    
                     <li><a href="LogOut"><span class="glyphicon glyphicon-off"></span> <span>Sign Out</span></a></li>
                 	<%}%>
                 </ul>

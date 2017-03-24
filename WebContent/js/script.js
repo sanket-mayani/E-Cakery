@@ -10,12 +10,12 @@ $(document).ready(function(){
 		Navigation Bar 
 	-------------------- */
 
-	$("#cake_flavours a, #categories a").mouseenter(function(){
+	$("#cake_flavours a, #categories a, #my_account_links a").mouseenter(function(){
 		$(this).css("color","white");
 		$(this).css("background-color","#526369");		
 	});
 
-	$("#cake_flavours a, #categories a").mouseleave(function(){
+	$("#cake_flavours a, #categories a, #my_account_links a").mouseleave(function(){
 		$(this).css("color","black");
 		$(this).css("background-color","#eeeeee");		
 	});
