@@ -6,6 +6,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<html>
+
+<%
+	if(session.getAttribute("message") != null)
+	{
+		String message = session.getAttribute("message").toString();
+		String class_var = session.getAttribute("class").toString();
+		session.removeAttribute("message");
+		session.removeAttribute("class");
+		if(message != null)	
+		{
+%>
+			<div class="alert alert-dismissable <%out.print(class_var);%>" style="text-align: center">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<p style="font-size: 18px"><%out.print(message);%></p>
+			</div>
+<% 			
+		}	
+	}
+%>
 
 <%
 	User user = null;
@@ -14,13 +34,13 @@
 %>
 
 <%
-	if(session.getAttribute("user") != null)
-		user = (User)session.getAttribute("user");
+	if(session.getAttribute("user") == null)
+		response.sendRedirect("index.jsp");
 	else
-		response.sendRedirect(request.getHeader("referer"));
+	{
+		user = (User)session.getAttribute("user");	
 %>
 
-<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>My Profile</title>
@@ -225,4 +245,5 @@
     <script src="js/script.js"></script>
 
 </body>
+<%}%>
 </html>
