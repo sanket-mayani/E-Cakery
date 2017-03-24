@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Cart;
+import model.DAO;
 import model.Product;
 
 /**
@@ -37,7 +38,16 @@ public class UpdateQuantityServlet extends HttpServlet {
 		
 		if(session.getAttribute("cart")!=null){
 			Cart cart = (Cart)session.getAttribute("cart");
-			cart.updateQuantity(pid, quantity);
+			
+			DAO dao = new DAO();
+			Product product = new Product();
+			product.setPid(pid);
+			int quantityInDB = dao.getQuantity(product);
+			if(quantityInDB >= quantity)
+				cart.updateQuantity(pid, quantity);
+			else
+				session.setAttribute("message", "Quantity could not be set to "+quantity+", since only "+quantityInDB+" left in stock.");
+			
 			session.setAttribute("cart",cart);
 		}
 		

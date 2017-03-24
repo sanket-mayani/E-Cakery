@@ -8,6 +8,15 @@
 <html>
 
 <% 
+	if(session.getAttribute("message")!=null){
+%>
+		<p class="red container center"><%out.print(session.getAttribute("message"));%></p>
+<% 
+		session.removeAttribute("message");
+	}
+%>
+
+<% 
 	Cart cart = new Cart();
 	List<Item> items = null;
 %>

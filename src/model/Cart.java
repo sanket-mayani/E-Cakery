@@ -58,10 +58,6 @@ public class Cart
 			}
 		}
 	}
-
-	
-// quantity cn not be updated if stock is limited than wht is entered by the user , so implmnting tht
-// test case below here
 	
 	public void updateQuantity(int pid,int quantity)
 	{
@@ -69,22 +65,10 @@ public class Cart
 		{
 			if(items.get(i).getProduct().getPid() == pid)
 			{	
-				Product product =items.get(i).getProduct();      // getting product object related to item
-				
-				int QuantityInDatabase = product.getQuantity();   
-													// getting quantity frm db of this product 
-				
-				if(QuantityInDatabase >= quantity)
-				{
 				items.get(i).setQuantity(quantity);
-				}
-				
-				else { 
-					// we ve to pass a msg tht only 'QuantityInDatabase' in stock in red letters 
-					// do this sanket
-					}
-				}
+				break;
 			}
+		}
 	}
 	
 	
