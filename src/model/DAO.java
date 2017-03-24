@@ -31,6 +31,24 @@ public class DAO {
 	
 	// Methods regarding User
 	
+	public void updateUser(User user)
+	{	
+		Session s=getSession();
+		
+		try{
+			Transaction tr=s.beginTransaction();
+			s.update(user);
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(s); 
+		}
+	}
+	
+	
+	
+	
 	public void insertUser(User user)
 	{	
 		Session s = getSession();

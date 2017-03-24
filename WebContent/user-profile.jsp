@@ -77,29 +77,29 @@
     		</div>
     	</div>
     	
-    	<form class="form-horizontal" method="post" action="UpdateUserDetails">
+    	<form class="form-horizontal" method="post" action="UpdateUserDetails?action=PersonalDetails">
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="fname">First Name: </label>
     			<div class="col-sm-4">
-    				<input type="text" name="name" id="fname" value="<%out.print(user.getFn());%>" class="form-control" required>
+    				<input type="text" name="fname" id="fname" value="<%out.print(user.getFn());%>" class="form-control" required>
     			</div>
     		</div>
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="lname">Last Name: </label>
     			<div class="col-sm-4">
-    				<input type="text" name="name" id="lname" value="<%out.print(user.getLn());%>" class="form-control" required>
+    				<input type="text" name="lname" id="lname" value="<%out.print(user.getLn());%>" class="form-control" required>
     			</div>
     		</div>
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="email">Email: </label>
     			<div class="col-sm-4">
-    				<input type="email" name="name" id="email" value="<%out.print(user.getUn());%>" class="form-control" disabled>
+    				<input type="email" name="email" id="email" value="<%out.print(user.getUn());%>" class="form-control" disabled>
     			</div>
     		</div>
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="mobile">Mobile: </label>
     			<div class="col-sm-4">
-    				<input type="text" name="name" id="mobile" value="<%out.print(user.getMob());%>" class="form-control" required>
+    				<input type="text" name="mobile" id="mobile" value="<%out.print(user.getMob());%>" class="form-control" required>
     			</div>
     		</div>
     		<div class="row">
@@ -118,17 +118,17 @@
     		</div>
     	</div>
     	
-    	<form class="form-horizontal" method="post" action="UpdateUserAddress">
+    	<form class="form-horizontal" method="post" action="UpdateUserDetails?action=AddressDetails">
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="address">Address: </label>
     			<div class="col-sm-4">
-    				<textarea name="name" id="address" class="form-control" required><%if(user.getAddress() != null)out.print(user.getAddress());%></textarea>
+    				<textarea name="address" id="address" class="form-control" required><%if(user.getAddress() != null)out.print(user.getAddress());%></textarea>
     			</div>
     		</div>
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="pincode">Pincode: </label>
     			<div class="col-sm-4">
-    				<input type="text" name="pincode" id="pincode" value="<%if(user.getPincode()!=0)out.print(user.getLn());%>" class="form-control" required>
+    				<input type="text" name="pincode" id="pincode" value="<%if(user.getPincode()!=0)out.print(user.getPincode());%>" class="form-control" required>
     			</div>
     		</div>
     		<div class="form-group">
@@ -160,23 +160,23 @@
     		</div>
     	</div>
     	
-    	<form class="form-horizontal" method="post" action="ChangeUserPassword">
+    	<form class="form-horizontal" method="post" action="UpdateUserDetails?action=PasswordChange">
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="current">Current Password: </label>
     			<div class="col-sm-4">
-    				<input type="password" name="current" id="current" class="form-control" required/>
+    				<input type="password" name="currentpassword" id="current" class="form-control" required/>
     			</div>
     		</div>
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="new">New Password: </label>
     			<div class="col-sm-4">
-    				<input type="password" name="new" id="new" class="form-control" required/>
+    				<input type="password" name="newpassword" id="new" class="form-control" required/>
     			</div>
     		</div>
     		<div class="form-group">
     			<label class="control-label col-sm-2" for="re-pwd">Re-Enter Password: </label>
     			<div class="col-sm-4">
-    				<input type="password" name="re-pwd" id="re-pwd" class="form-control" required/>
+    				<input type="password" name="newpassword2" id="re-pwd" class="form-control" required/>
     			</div>
     		</div>
     		<div class="row">
