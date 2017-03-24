@@ -251,7 +251,9 @@
 		                        <h4><%out.print(product.getName());%></h4>
 		                        <p><small>Sold by: <%out.print(product.getSeller().getName());%></small></p>
 		                        <div class="row">
-		            				<%if(cart.contains(product)){%>
+		                        	<%if(product.getQuantity() == 0){%>
+		                        		<a href="" class="btn btn-danger col-xs-10 col-xs-offset-1" disabled>Out of Stock</a>
+		            				<%}else if(cart.contains(product)){%>
 		                            	<a href="" class="btn btn-success col-xs-10 col-xs-offset-1" disabled><span class="glyphicon glyphicon-ok"></span> Added to cart</a>
 		                        	<%}else{%>
 		                        		<a href="AddToCart?pid=<%out.print(product.getPid());%>" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</a>
@@ -285,7 +287,9 @@
 			                        <h4><%out.print(product.getName());%></h4>
 			                        <p><small>Sold by: <%out.print(product.getSeller().getName());%></small></p>
 			                        <div class="row">
-			                            <%if(cart.contains(product)){%>
+			                        	<%if(product.getQuantity() == 0){%>
+		                        			<a href="" class="btn btn-danger col-xs-10 col-xs-offset-1" disabled>Out of Stock</a>
+			                            <%}else if(cart.contains(product)){%>
 		                            		<a href="" class="btn btn-success col-xs-10 col-xs-offset-1" disabled><span class="glyphicon glyphicon-ok"></span> Added to cart</a>
 		                        		<%}else{%>
 		                        			<a href="AddToCart?pid=<%out.print(product.getPid());%>" class="btn btn-success col-xs-10 col-xs-offset-1"><span class="glyphicon glyphicon-circle-arrow-down"></span> Add to cart</a>
