@@ -447,6 +447,25 @@ public class DAO {
 		}
 	}
 	
+	public List<Order> getOrderByUser(User user)
+	{
+		Session s=getSession();
+		
+		List<Order> orders = new ArrayList<Order>();
+		try{
+			Transaction tr=s.beginTransaction();
+			Query q=s.createQuery("from Order where user.UID="+user.getUID());
+			orders=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(s); 
+		}
+		
+		return orders;
+	}
+	
 	
 	// Other Methods
 		
