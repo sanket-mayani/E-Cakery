@@ -465,6 +465,28 @@ public class DAO {
 		
 		return orders;
 	}
+
+	public List<Order> FetchOrders(Seller seller, String status)
+	{
+		//This method fetches the orders seller-wise from db where
+		//status is the status of the order, possible values - placed, approved, packed, shipped, delivered, cancelled
+		
+		Session s=getSession();
+		
+		List<Order> orders = new ArrayList<Order>();
+		try{
+			Transaction tr=s.beginTransaction();
+			Query q=s.createQuery("from Order where seller.sid="+seller.getSid()+" and status='"+status+"'");
+			orders=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(s); 
+		}
+		
+		return orders;
+	}
 	
 	
 	// Other Methods
