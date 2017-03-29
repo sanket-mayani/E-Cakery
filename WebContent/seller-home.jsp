@@ -31,8 +31,13 @@
 
 <%!
 	Seller seller = null;
-	String date = null;
-	List<Order> orders = null;
+	String dateString = null;
+	List<Order> placedOrders = null;
+	List<Order> approvedOrders = null;
+	List<Order> packedOrders = null;
+	List<Order> shippedOrders = null;
+	List<Order> deliveredOrders = null;
+	List<Order> cancelledOrders = null;
 	DAO dao = new DAO();
 %>
 <%
@@ -42,8 +47,17 @@
 	{
 		seller = (Seller)session.getAttribute("seller");
 		
-		date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		System.out.println(date);
+		if(request.getParameter("date")!=null)
+			dateString = request.getParameter("date");
+		else
+			dateString = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		
+		placedOrders = dao.FetchOrders(seller,dateString,"placed");
+		approvedOrders = dao.FetchOrders(seller,dateString,"approved");
+		packedOrders = dao.FetchOrders(seller,dateString,"packed");
+		shippedOrders = dao.FetchOrders(seller,dateString,"shipped");
+		deliveredOrders = dao.FetchOrders(seller,dateString,"delivered");
+		cancelledOrders = dao.FetchOrders(seller,dateString,"cancelled");
 %>
 
 <head>
@@ -101,9 +115,9 @@
     <div class="container">
     
     	<div class="row">
-    		<form class="col-sm-9">
+    		<form class="col-sm-9" action="seller-home.jsp" method="post">
     				<span>Show orders for:</span><br> 
-    				<input type="date" value="<%out.print(date);%>"> <input type="submit" value="Go"> 
+    				<input type="date" name="date" value="<%out.print(dateString);%>"> <input type="submit" value="Go"> 
     		</form>
     		<div class="col-sm-3" id="history">
     			<a class="btn btn-primary">Order History</a>
@@ -114,19 +128,18 @@
     		<div class="col-xs-12">
     			
     			<ul class="nav nav-tabs">
-				  <li class="active"><a data-toggle="tab" href="#to_acknowledge">To Acknowledge</a></li>
-				  <li><a data-toggle="tab" href="#approved">Approved</a></li>
-				  <li><a data-toggle="tab" href="#packed">Packed</a></li>
-				  <li><a data-toggle="tab" href="#shipped">Shipped</a></li>
-				  <li><a data-toggle="tab" href="#delivered">Delivered</a></li>
-				  <li><a data-toggle="tab" href="#cancelled">Cancelled</a></li>
+				  <li class="active"><a data-toggle="tab" href="#to_acknowledge">To Acknowledge <span class="badge"><%out.print(placedOrders.size());%></span></a></li>
+				  <li><a data-toggle="tab" href="#approved">Approved <span class="badge"><%out.print(approvedOrders.size());%></span></a></li>
+				  <li><a data-toggle="tab" href="#packed">Packed <span class="badge"><%out.print(packedOrders.size());%></span></a></li>
+				  <li><a data-toggle="tab" href="#shipped">Shipped <span class="badge"><%out.print(shippedOrders.size());%></span></a></li>
+				  <li><a data-toggle="tab" href="#delivered">Delivered <span class="badge"><%out.print(deliveredOrders.size());%></span></a></li>
+				  <li><a data-toggle="tab" href="#cancelled">Cancelled <span class="badge"><%out.print(cancelledOrders.size());%></span></a></li>
 				</ul>
 				
 				<div class="tab-content">
 					<div id="to_acknowledge" class="tab-pane fade in active">
 						<%
-							orders = dao.FetchOrders(seller,"placed");
-							if(orders.size()>0)
+							if(placedOrders.size()>0)
 							{
 						%>
 						<div class="table-responsive">
@@ -141,7 +154,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%for(Order order : orders){%>
+									<%for(Order order : placedOrders){%>
 									<tr>
 										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
 										<td>
@@ -176,8 +189,7 @@
 					</div>
 					<div id="approved" class="tab-pane fade in">
 						<%
-							orders = dao.FetchOrders(seller,"approved");
-							if(orders.size()>0)
+							if(approvedOrders.size()>0)
 							{
 						%>
 						<div class="table-responsive">
@@ -192,7 +204,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%for(Order order : orders){%>
+									<%for(Order order : approvedOrders){%>
 									<tr>
 										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
 										<td>
@@ -227,8 +239,7 @@
 					</div>
 					<div id="packed" class="tab-pane fade in">
 						<%
-							orders = dao.FetchOrders(seller,"packed");
-							if(orders.size()>0)
+							if(packedOrders.size()>0)
 							{
 						%>
 						<div class="table-responsive">
@@ -243,7 +254,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%for(Order order : orders){%>
+									<%for(Order order : packedOrders){%>
 									<tr>
 										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
 										<td>
@@ -277,8 +288,7 @@
 					</div>
 					<div id="shipped" class="tab-pane fade in">
 						<%
-							orders = dao.FetchOrders(seller,"shipped");
-							if(orders.size()>0)
+							if(shippedOrders.size()>0)
 							{
 						%>
 						<div class="table-responsive">
@@ -293,7 +303,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%for(Order order : orders){%>
+									<%for(Order order : shippedOrders){%>
 									<tr>
 										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
 										<td>
@@ -329,8 +339,7 @@
 					</div>
 					<div id="delivered" class="tab-pane fade in">
 						<%
-							orders = dao.FetchOrders(seller,"delivered");
-							if(orders.size()>0)
+							if(deliveredOrders.size()>0)
 							{
 						%>
 						<div class="table-responsive">
@@ -345,7 +354,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%for(Order order : orders){%>
+									<%for(Order order : deliveredOrders){%>
 									<tr>
 										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
 										<td>
@@ -380,8 +389,7 @@
 					</div>
 					<div id="cancelled" class="tab-pane fade in">
 						<%
-							orders = dao.FetchOrders(seller,"cancelled");
-							if(orders.size()>0)
+							if(cancelledOrders.size()>0)
 							{
 						%>
 						<div class="table-responsive">
@@ -396,7 +404,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<%for(Order order : orders){%>
+									<%for(Order order : cancelledOrders){%>
 									<tr>
 										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
 										<td>

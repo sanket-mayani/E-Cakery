@@ -466,9 +466,10 @@ public class DAO {
 		return orders;
 	}
 
-	public List<Order> FetchOrders(Seller seller, String status)
+	public List<Order> FetchOrders(Seller seller, String date, String status)
 	{
 		//This method fetches the orders seller-wise from db where
+		//date is the date(of form 'yyyy-MM-dd') for which the records are to be fetched
 		//status is the status of the order, possible values - placed, approved, packed, shipped, delivered, cancelled
 		
 		Session s=getSession();
@@ -476,7 +477,7 @@ public class DAO {
 		List<Order> orders = new ArrayList<Order>();
 		try{
 			Transaction tr=s.beginTransaction();
-			Query q=s.createQuery("from Order where seller.sid="+seller.getSid()+" and status='"+status+"'");
+			Query q=s.createQuery("from Order where (seller.sid="+seller.getSid()+" and dateTime like '"+date+"%' and status='"+status+"') order by dateTime desc");
 			orders=q.list();
 			tr.commit();
 		}catch(Exception ex){
