@@ -226,7 +226,7 @@ public class DAO {
 	
 	public void updateProduct(Product product) {
 		// TODO Auto-generated method stub
-	Session session=getSession();
+		Session session=getSession();
 		
 		try{
 			Transaction tr=session.beginTransaction();
@@ -470,14 +470,14 @@ public class DAO {
 	{
 		//This method fetches the orders seller-wise from db where
 		//date is the date(of form 'yyyy-MM-dd') for which the records are to be fetched
-		//status is the status of the order, possible values - placed, approved, packed, shipped, delivered, cancelled
+		//status is the status of the order, possible values - placed, approved, packed, shipped, delivered, cancelled by customer, cancelled by seller
 		
 		Session s=getSession();
 		
 		List<Order> orders = new ArrayList<Order>();
 		try{
 			Transaction tr=s.beginTransaction();
-			Query q=s.createQuery("from Order where (seller.sid="+seller.getSid()+" and dateTime like '"+date+"%' and status='"+status+"') order by dateTime desc");
+			Query q=s.createQuery("from Order where (seller.sid="+seller.getSid()+" and placedAt like '"+date+"%' and status='"+status+"') order by placedAt desc");
 			orders=q.list();
 			tr.commit();
 		}catch(Exception ex){
@@ -487,6 +487,43 @@ public class DAO {
 		}
 		
 		return orders;
+	}
+	
+	public Order getOrderByOid(int oid)
+	{
+		Session s=getSession();
+		
+		List<Order> orders = null;
+		try{
+			Transaction tr=s.beginTransaction();
+			Query q=s.createQuery("from Order where oid="+oid);
+			orders=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(s); 
+		}
+		
+		if(orders!=null)
+			return orders.get(0);
+		else
+			return null;
+	}
+	
+	public void updateOrder(Order order)
+	{
+		Session session=getSession();
+		
+		try{
+			Transaction tr=session.beginTransaction();
+			session.update(order);
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
 	}
 	
 	

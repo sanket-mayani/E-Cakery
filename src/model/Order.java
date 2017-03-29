@@ -14,13 +14,16 @@ public class Order {
 	private long mobile;
 	private String address;
 	private int pincode;
-	private String Status;
+	private String status;
+	private String cancellationReason; // reason given by customer at the time of canceling the order
 	
 	private User user;
 	private Product product;
 	private Seller seller;
 	
-    private Date dateTime;
+    private Date placedAt; // time and date at which order was placed
+    private Date shippedAt; // time and date at which order was shipped
+    private Date deliveredAt; // time and date at which order was delivered
 
 	public String getFname() {
 		return fname;
@@ -84,11 +87,19 @@ public class Order {
 		this.pincode = pincode;
 	}
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
 	}	
+	
+	public String getCancellationReason() {
+		return cancellationReason;
+	}
+	
+	public void setCancellationReason(String cancellationReason) {
+		this.cancellationReason = cancellationReason;
+	}
 	
 	public User getUser() {
 		return user;
@@ -102,13 +113,23 @@ public class Order {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
-	public Date getDateTime() {
-	      return dateTime;
+	public Date getPlacedAt() {
+		return placedAt;
 	}
-
-	public void setDateTime(Date dateTime) {
-	      this.dateTime = dateTime;
+	public void setPlacedAt(Date placedAt) {
+		this.placedAt = placedAt;
+	}
+	public Date getShippedAt() {
+		return shippedAt;
+	}
+	public void setShippedAt(Date shippedAt) {
+		this.shippedAt = shippedAt;
+	}
+	public Date getDeliveredAt() {
+		return deliveredAt;
+	}
+	public void setDeliveredAt(Date deliveredAt) {
+		this.deliveredAt = deliveredAt;
 	}
 	
 }

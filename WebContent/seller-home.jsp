@@ -38,6 +38,7 @@
 	List<Order> shippedOrders = null;
 	List<Order> deliveredOrders = null;
 	List<Order> cancelledOrders = null;
+	List<Order> cancelledOrders2 = null;
 	DAO dao = new DAO();
 %>
 <%
@@ -57,7 +58,8 @@
 		packedOrders = dao.FetchOrders(seller,dateString,"packed");
 		shippedOrders = dao.FetchOrders(seller,dateString,"shipped");
 		deliveredOrders = dao.FetchOrders(seller,dateString,"delivered");
-		cancelledOrders = dao.FetchOrders(seller,dateString,"cancelled");
+		cancelledOrders = dao.FetchOrders(seller,dateString,"cancelled by customer");
+		cancelledOrders2 = dao.FetchOrders(seller,dateString,"cancelled by seller");
 %>
 
 <head>
@@ -133,7 +135,8 @@
 				  <li><a data-toggle="tab" href="#packed">Packed <span class="badge"><%out.print(packedOrders.size());%></span></a></li>
 				  <li><a data-toggle="tab" href="#shipped">Shipped <span class="badge"><%out.print(shippedOrders.size());%></span></a></li>
 				  <li><a data-toggle="tab" href="#delivered">Delivered <span class="badge"><%out.print(deliveredOrders.size());%></span></a></li>
-				  <li><a data-toggle="tab" href="#cancelled">Cancelled <span class="badge"><%out.print(cancelledOrders.size());%></span></a></li>
+				  <li><a data-toggle="tab" href="#cancelled">Cancelled By Customer <span class="badge"><%out.print(cancelledOrders.size());%></span></a></li>
+				  <li><a data-toggle="tab" href="#cancelled2">Cancelled By You <span class="badge"><%out.print(cancelledOrders2.size());%></span></a></li>
 				</ul>
 				
 				<div class="tab-content">
@@ -156,7 +159,7 @@
 								<tbody>
 									<%for(Order order : placedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
+										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-danger">yet to approve</span>
@@ -177,8 +180,8 @@
 											<small><%out.print(order.getPincode());%></small>
 										</td>
 										<td>
-											<a class="text-success"><span class="glyphicon glyphicon-ok"></span> Approve order</a><br><br>
-											<a class="text-danger"><span class="glyphicon glyphicon-remove"></span> Can not fulfill</a>
+											<a class="text-success" href="ChangeStatus?oid=<%out.print(order.getOid());%>&status=approved"><span class="glyphicon glyphicon-ok"></span> Approve order</a><br><br>
+											<a class="text-danger" href="ChangeStatus?oid=<%out.print(order.getOid());%>&status=cancelled by seller"><span class="glyphicon glyphicon-remove"></span> Can not fulfill</a>
 										</td>
 									</tr>
 									<%}%>
@@ -206,7 +209,7 @@
 								<tbody>
 									<%for(Order order : approvedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
+										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-danger">yet to pack</span>
@@ -227,7 +230,7 @@
 											<small><%out.print(order.getPincode());%></small>
 										</td>
 										<td>
-											<a class="text-success"><span class="glyphicon glyphicon-ok"></span> Order is packed</a><br><br>
+											<a class="text-success" href="ChangeStatus?oid=<%out.print(order.getOid());%>&status=packed"><span class="glyphicon glyphicon-ok"></span> Order is packed</a><br><br>
 											<a class="text-primary"><span class="glyphicon glyphicon-print"></span> Print packing slip</a>
 										</td>
 									</tr>
@@ -256,7 +259,7 @@
 								<tbody>
 									<%for(Order order : packedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
+										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-success">ready to be shipped</span>
@@ -277,7 +280,7 @@
 											<small><%out.print(order.getPincode());%></small>
 										</td>
 										<td>
-											<a class="text-success"><span class="glyphicon glyphicon-ok"></span> Confirm shipping</a><br><br>
+											<a class="text-success" href="ChangeStatus?oid=<%out.print(order.getOid());%>&status=shipped"><span class="glyphicon glyphicon-ok"></span> Confirm shipping</a><br><br>
 										</td>
 									</tr>
 									<%}%>
@@ -305,7 +308,7 @@
 								<tbody>
 									<%for(Order order : shippedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
+										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-success">item is shipped</span>
@@ -326,8 +329,7 @@
 											<small><%out.print(order.getPincode());%></small>
 										</td>
 										<td>
-											Date<br>
-											Time<br>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getShippedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getShippedAt()));%></small><br>
 											<a class="text-success"><span class="glyphicon glyphicon-map-marker"></span> Track item</a><br><br>
 										</td>
 									</tr>
@@ -356,7 +358,7 @@
 								<tbody>
 									<%for(Order order : deliveredOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
+										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-success">successfully delivered</span>
@@ -377,8 +379,7 @@
 											<small><%out.print(order.getPincode());%></small>
 										</td>
 										<td>
-											Date<br>
-											Time<br>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDeliveredAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDeliveredAt()));%></small>
 										</td>
 									</tr>
 									<%}%>
@@ -406,7 +407,7 @@
 								<tbody>
 									<%for(Order order : cancelledOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getDateTime()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getDateTime()));%></small></td>
+										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-danger">order cancelled</span>
@@ -428,6 +429,55 @@
 										</td>
 										<td>
 											<span class="text-danger">Reason for cancellation</span>
+										</td>
+									</tr>
+									<%}%>
+								</tbody>
+							</table>
+						</div>
+						<%}%>
+					</div>
+					<div id="cancelled2" class="tab-pane fade in">
+						<%
+							if(cancelledOrders2.size()>0)
+							{
+						%>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Order Details</th>
+										<th colspan="2">Item Details</th>
+										<th>Customer Details</th>
+										<th>Reason</th>
+									</tr>
+								</thead>
+								<tbody>
+									<%for(Order order : cancelledOrders2){%>
+									<tr>
+										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											Order# <%out.print(order.getOid());%><br>
+											status: <span class="text-danger">order cancelled</span>
+										</td>
+										<td class="image_td">
+											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
+										</td>
+										<td>
+											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
+											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
+											<small>Qty: <%out.print(order.getQuantity());%></small>
+										</td>
+										<td class="address_td">
+											<strong><%out.print(order.getFname()+" "+order.getLname());%></strong><br>
+											<small><%out.print(order.getAddress());%></small><br>
+											<small><%out.print(order.getSeller().getCity().getName());%></small><br>
+											<small><%out.print(order.getPincode());%></small>
+										</td>
+										<td>
+											<span class="text-danger">Can't fulfill</span>
 										</td>
 									</tr>
 									<%}%>
