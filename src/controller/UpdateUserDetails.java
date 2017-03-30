@@ -36,93 +36,85 @@ public class UpdateUserDetails extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		PrintWriter out = response.getWriter();
-		
-		String action = request.getParameter("action");
-		
 		HttpSession session = request.getSession();
 		
-		User user = (User)session.getAttribute("user");
-		
-		DAO dao = new DAO();
-		
-	// updating personal details	
-		
-		if(action.equals("PersonalDetails"))
+		User user = null;
+		if(session.getAttribute("user")==null)
+				response.sendRedirect(request.getHeader("referer"));
+		else
 		{
-		String fname=request.getParameter("fname");
-		String lname=request.getParameter("lname");
-		long mobile=Long.parseLong((request.getParameter("mobile")));
-		
-									out.println(fname);
-									out.println(lname);
-									out.println(mobile);
-									
-		user.setFn(fname);
-		user.setLn(lname);
-		user.setMob(mobile);
-		
-									out.println("personal details are being updated \n\n");
-		
-		}
-	
-		// updating address details	
-		
-		else if(action.equals("AddressDetails"))
-		{
-			String address = request.getParameter("address");
-			int pincode = Integer.parseInt(request.getParameter("pincode"));
-			String city = request.getParameter("city");
-										
-										out.println(address);
-										out.println(pincode);
-										out.println(city);
-										
+			user = (User)session.getAttribute("user");
+			String action = request.getParameter("action");
+			DAO dao = new DAO();
 			
-			City cityob = new City();
-			cityob.setName(city);
+			// updating personal details	
 			
-			user.setAddress(address);
-			user.setCity(cityob);
-			user.setPincode(pincode);
-				
-										out.println("address details are being updated \n\n");
-		}
-			
-	// changing password	
-		
-		else if (action.equals("PasswordChange"))
-		{
-			String currentpassword = request.getParameter("currentpassword");
-			String newpassword = request.getParameter("newpassword");
-			String newpassword2 = request.getParameter("newpassword2");
-			
-			String currentPasswordFromDB = user.getPw();
-			
-			if(currentpassword.equals(currentPasswordFromDB))
+			if(action.equals("PersonalDetails"))
 			{
-				if(newpassword.equals(newpassword2))
+				String fname=request.getParameter("fname");
+				String lname=request.getParameter("lname");
+				long mobile=Long.parseLong((request.getParameter("mobile")));
+										
+				user.setFn(fname);
+				user.setLn(lname);
+				user.setMob(mobile);
+				
+				session.setAttribute("message", "Details Updated Successfully");
+				session.setAttribute("class", "alert-success");
+			}
+		
+			// updating address details	
+			
+			else if(action.equals("AddressDetails"))
+			{
+				String address = request.getParameter("address");
+				int pincode = Integer.parseInt(request.getParameter("pincode"));
+				String city = request.getParameter("city");
+				
+				City cityob = dao.getCityByName(city);
+				
+				user.setAddress(address);
+				user.setCity(cityob);
+				user.setPincode(pincode);
+				
+				session.setAttribute("message", "Address Updated Successfully");
+				session.setAttribute("class", "alert-success");
+			}
+				
+			// changing password	
+			
+			else if (action.equals("PasswordChange"))
+			{
+				String currentpassword = request.getParameter("currentpassword");
+				String newpassword = request.getParameter("newpassword");
+				String newpassword2 = request.getParameter("newpassword2");
+				
+				String currentPasswordFromDB = user.getPw();
+				
+				if(currentpassword.equals(currentPasswordFromDB))
 				{
-				user.setPw(newpassword);
-										out.println("password is being changed");
+					if(newpassword.equals(newpassword2))
+					{
+						user.setPw(newpassword);
+						session.setAttribute("message", "Password Changed Successfully");
+						session.setAttribute("class", "alert-success");
+					}
+					else
+					{
+						session.setAttribute("message", "Re-Entered Password doesn't match");
+						session.setAttribute("class", "alert-danger");
+					}
 				}
 				else
 				{
-					//give an error of enterd passwords dont match
-				}
+					session.setAttribute("message", "Incorrect Current Password");
+					session.setAttribute("class", "alert-danger");
+				}	
 			}
-			else
-			{
-				//give an error of incoorect passwd enterd
-			}
-
 			
+			dao.updateUser(user);
+			response.sendRedirect(request.getHeader("referer"));
 		}
-		
-	
-		dao.updateUser(user);
-		out.println("details updated succesfully.");
-		
 		
 	}
 

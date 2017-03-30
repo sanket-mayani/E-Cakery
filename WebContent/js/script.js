@@ -389,3 +389,14 @@ $(document).ready(function(){
 	
 	
 });
+
+
+/* --------------------
+	user-orders.jsp 
+-------------------- */	
+
+	$("#user_orders .cancel_btn").click(function(){
+		var id = $(this).attr('id');
+		$("#oid_field").val(id);
+		$("#orderCancellationModal").modal('show');
+	});

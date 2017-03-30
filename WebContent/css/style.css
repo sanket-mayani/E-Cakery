@@ -360,6 +360,47 @@
 
 
 /* --------------------
+	seller-home.jsp
+-------------------- */
+
+#seller_home_body .orders_div{
+	min-height: 500px;
+}
+
+#seller_home_body .image_td img{
+	width: 100%;
+}
+
+#seller_home_body .image_td{
+	width: 60px;
+}
+
+#seller_home_body .address_td{
+	width: 200px;
+}
+
+#seller_home_body #history{
+	margin-top: 5px;
+}
+
+#seller_home_body #history a{
+	float: right;
+}
+
+/* --------------------
+	seller-home.jsp media queries
+-------------------- */
+
+@media screen and (max-width: 767px){
+	
+	#seller_home_body #history a{
+		float: left;
+	}
+	
+}
+
+
+/* --------------------
 	General 
 -------------------- */
 

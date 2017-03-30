@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AdminLoginvo;
+import model.Admin;
 import model.User;
 import model.DAO;
 import model.Seller;
@@ -25,13 +25,13 @@ import model.Seller;
  * Servlet implementation class Register
  */
 @WebServlet("/AdminLogin")
-public class AdminLogin extends HttpServlet {
+public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminLogin() {
+    public AdminLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,24 +44,24 @@ public class AdminLogin extends HttpServlet {
 		String s1=request.getParameter("email");
 		String s2=request.getParameter("pw");
 		
-		DAO v1=new DAO();
-		AdminLoginvo v=v1.getAdminByEmail(s1);
-		if(v != null)
+		DAO dao=new DAO();
+		Admin admin=dao.getAdminByEmail(s1);
+		if(admin != null)
 		{
-			if(v.getPw().equals(s2))
+			if(admin.getPw().equals(s2))
 			{
 				HttpSession session = request.getSession(); 
-				session.setAttribute("aloginvo", v);
-				response.sendRedirect("AdminHome.jsp");
+				session.setAttribute("admin", admin);
+				response.sendRedirect("admin-home.jsp");
 			}
 			else
 			{
-				response.sendRedirect("AdminLogin.jsp");
+				response.sendRedirect("admin-index.jsp?msg=wrong password");
 			}
 		}
 		else
 		{
-			response.sendRedirect("AdminLogin.jsp");
+			response.sendRedirect("admin-index.jsp?msg=email not registered");
 		}
 						
 	}

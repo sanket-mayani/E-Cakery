@@ -74,7 +74,7 @@ public class PlaceOrderServlet extends HttpServlet {
 			        order.setAddress(address);
 			          				        	
 			        Date now = new Date();
-			        order.setDateTime(now);      
+			        order.setPlacedAt(now);      
 			       	
 			        order.setUser(user);
 			        order.setSeller(seller);

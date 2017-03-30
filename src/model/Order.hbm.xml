@@ -47,16 +47,20 @@
 			<column name="Status"></column>
 		</property>	
 		
-	<!--	<proprty name="date">
-			<column name="Date"></column>
+		<property name="cancellationReason">
+			<column name="CancellationReason"></column>
 		</property>
 		
-	 	<property name="time">
-			<column name="Time"></column>
-		</property>    -->
+		<property name="placedAt">
+			<column name="PlacedAt"></column>
+		</property>
 		
-		<property name="dateTime">
-			<column name="Timestamp"></column>
+		<property name="shippedAt">
+			<column name="ShippedAt"></column>
+		</property>
+		
+		<property name="deliveredAt">
+			<column name="DeliveredAt"></column>
 		</property>
 		
 		<many-to-one name="user" class="model.User" column="User_ID" lazy="false"></many-to-one>
