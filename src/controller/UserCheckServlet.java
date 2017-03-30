@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-import model.AdminLoginvo;
+import model.Admin;
 import model.User;
 import model.DAO;
 import model.Seller;
@@ -58,7 +58,7 @@ public class UserCheckServlet extends HttpServlet {
 				}
 			}else if(type.equals("admin"))
 			{
-				AdminLoginvo al=r.getAdminByEmail(user);
+				Admin al=r.getAdminByEmail(user);
 				if(al == null){
 					pw.println("0");
 				}

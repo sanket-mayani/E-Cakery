@@ -145,11 +145,11 @@ public class DAO {
 	
 	// Methods regarding Admin
 	
-	public AdminLoginvo getAdminByEmail(String email)
+	public Admin getAdminByEmail(String email)
 	{
 		Session session = getSession();
 
-		List<AdminLoginvo> al=new ArrayList<AdminLoginvo>();
+		List<Admin> al=new ArrayList<Admin>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
