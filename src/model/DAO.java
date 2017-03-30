@@ -454,7 +454,7 @@ public class DAO {
 		List<Order> orders = new ArrayList<Order>();
 		try{
 			Transaction tr=s.beginTransaction();
-			Query q=s.createQuery("from Order where user.UID="+user.getUID());
+			Query q=s.createQuery("from Order where user.UID="+user.getUID()+" order by placedAt desc");
 			orders=q.list();
 			tr.commit();
 		}catch(Exception ex){

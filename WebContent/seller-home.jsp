@@ -428,7 +428,7 @@
 											<small><%out.print(order.getPincode());%></small>
 										</td>
 										<td>
-											<span class="text-danger">Reason for cancellation</span>
+											<span class="text-danger"><%out.print(order.getCancellationReason());%></span>
 										</td>
 									</tr>
 									<%}%>

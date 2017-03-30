@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="model.DAO"%>
 <%@page import="model.Order"%>
 <%@page import="java.util.List"%>
@@ -31,7 +32,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
-<body>
+<body id="user_orders">
 
 	<div class="container">
 	    <div class="row">
@@ -80,17 +81,17 @@
     			for(Order order : orders)
     			{
     	%>
-			    	<div class="panel panel-default">
+			    	<div class="panel <%if(order.getStatus().startsWith("cancelled")){%>panel-danger<%}else{%>panel-success<%}%>">
 			  			<div class="panel-heading" style="font-size: small;">
 			  				<div class="row">
 			  					<div class="col-sm-5">
 			  						<p>Order# <%out.print(order.getOid());%></p>
-			  						<p>Order placed on <%out.print(order.getDateTime().toLocaleString());%></p>
+			  						<p>Order placed on <%out.print(new SimpleDateFormat("dd MMMMM, yyyy hh:mm aaa").format(order.getPlacedAt()));%></p>
 			  					</div>
-			  					<div class="col-sm-3  col-xs-6">
+			  					<div class="col-sm-3">
 			  						<p>Total: <%out.print(order.getAmount());%></p>
 			  					</div>
-			  					<div class="col-sm-4 col-xs-6" style="text-align: right;">
+			  					<div class="col-sm-4">
 			  						<p>Status: <%out.print(order.getStatus());%></p>
 			  					</div>
 			  				</div>
@@ -108,7 +109,12 @@
 			  							<span><small>Qty: <%out.print(order.getQuantity());%></small></span>
 			  						</td>
 			  						<td style="width: 20%; vertical-align: top; padding-left: 10px;">
-			  							<a class="btn btn-warning">Cancel Order</a>
+			  							<%if(order.getStatus().startsWith("cancelled")){%>
+			  							<%}else if(order.getStatus().equals("delivered")){%>
+			  								<a id="<%out.print(order.getOid());%>" class="btn btn-danger return_btn">Return Order</a>
+			  							<%}else{%>
+			  								<a id="<%out.print(order.getOid());%>" class="btn btn-danger cancel_btn">Cancel Order</a>
+			  							<%}%>
 			  						</td>
 			  					</tr>
 			  				</table>
@@ -121,7 +127,12 @@
 			  						<span><small>sold by: <%out.print(order.getSeller().getName());%></small></span><br>
 			  						<span><small>price: <%out.print(order.getProduct().getPrice());%> (+30 Delivery)</small></span><br>
 			  						<span><small>Qty: <%out.print(order.getQuantity());%></small></span><br>
-			  						<a>Cancel Order</a>
+			  							<%if(order.getStatus().startsWith("cancelled")){%>
+			  							<%}else if(order.getStatus().equals("delivered")){%>
+			  								<a id="<%out.print(order.getOid());%>" class="return_btn">Return Order</a>
+			  							<%}else{%>
+			  								<a id="<%out.print(order.getOid());%>" class="cancel_btn">Cancel Order</a>
+			  							<%}%>
 			  					</div>
 			  				</div>
 			  			</div>
@@ -136,6 +147,48 @@
 		<%}%>
     
     </div>
+    
+    <!-- Order Cancellation Modal -->
+	<div id="orderCancellationModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Please choose a reason</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form method="post" action="CancelOrder">
+			    <div class="radio">
+			      <label><input type="radio" name="reason" value="I mistakenly ordered it" checked>I mistakenly ordered it</label>
+			    </div>
+			    <div class="radio">
+			      <label><input type="radio" name="reason" value="Delivery is too late">Delivery is too late</label>
+			    </div>
+			    <div class="radio">
+			      <label><input type="radio" name="reason" value="Price is too high">Price is too high</label>
+			    </div>
+			    <div class="radio">
+			      <label><input type="radio" name="reason" value="I am not available to collect the order">I am not available to collect the order</label>
+			    </div>
+			    <div class="radio">
+			      <label><input type="radio" name="reason" value="It is not needed anymore">It is not needed anymore</label>
+			    </div>
+			    <div class="radio">
+			      <label><input type="radio" name="reason" value="Some other reason">Some other reason</label>
+			    </div>
+			    <input name="oid" id="oid_field" type="hidden" value="">
+	      </div>
+	      <div class="modal-footer">
+	        <input type="submit" value="Cancel Order" class="btn btn-primary">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      	</form>
+	      </div>
+	    </div>
+	
+	  </div>
+	</div><!-- End of Order Cancellation Modal -->
 
 	<script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
