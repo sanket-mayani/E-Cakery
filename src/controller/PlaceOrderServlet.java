@@ -37,6 +37,8 @@ public class PlaceOrderServlet extends HttpServlet {
 		Cart cart = null;
 		User user = null;
 		
+		DAO dao = new DAO();
+		
 		if(session.getAttribute("cart")!=null && ((Cart)session.getAttribute("cart")).getCount()>0)
 		{	
 			cart = (Cart)session.getAttribute("cart");
@@ -52,6 +54,18 @@ public class PlaceOrderServlet extends HttpServlet {
 				String address = request.getParameter("address");
 				int pin = Integer.parseInt(request.getParameter("pin"));
 				
+				String checkbox = request.getParameter("SaveAsDefault");
+				
+				//System.out.println("checkbox val" + checkbox);
+				
+				if(checkbox.equals("true"))
+				{
+					user.setAddress(address);
+					user.setPincode(pin);
+					dao.updateUser(user);
+				}
+				
+				
 				ArrayList<Item> items =cart.getItems();
 				ArrayList<Item> successList = new ArrayList<Item>();
 				ArrayList<Item> failureList = new ArrayList<Item>();
@@ -63,7 +77,7 @@ public class PlaceOrderServlet extends HttpServlet {
 					int quantityOrdered = item.getQuantity();
 					float amount =(item.getProduct().getPrice()) * quantityOrdered ;
 					
-					DAO dao = new DAO();
+					
 			        Order order = new Order();
 			           
 			        order.setFname(fn);

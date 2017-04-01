@@ -125,7 +125,7 @@
 		
 		<div class="row">
 			<div class="col-sm-6" style="margin-top: 5px;">
-				<input type="checkbox" name="save" value="true"> Save this address as default address
+				<input type="checkbox" name="SaveAsDefault" value="true"> Save this address as default address
 			</div>
 		</div>
 		
