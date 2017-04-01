@@ -54,11 +54,9 @@ public class PlaceOrderServlet extends HttpServlet {
 				String address = request.getParameter("address");
 				int pin = Integer.parseInt(request.getParameter("pin"));
 				
-				String checkbox = request.getParameter("SaveAsDefault");
-				
 				//System.out.println("checkbox val" + checkbox);
 				
-				if(checkbox.equals("true"))
+				if(request.getParameter("SaveAsDefault") != null)
 				{
 					user.setAddress(address);
 					user.setPincode(pin);
