@@ -10,11 +10,14 @@ public class Product {
 	private String description;
 	private float price;
 	private String image;
-	private String tier;
+	private int tier;
 	private Flavour flavour;
 	private Seller seller;
 	private Set<Category> categories = new HashSet<Category>(0);
 	private int quantity;
+	private float weight;
+	private float rating;
+	private int numOfRatings;
 	
 	public int getPid() {
 		return pid;
@@ -46,10 +49,10 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getTier() {
+	public int getTier() {
 		return tier;
 	}
-	public void setTier(String tier) {
+	public void setTier(int tier) {
 		this.tier = tier;
 	}
 	public Flavour getFlavour() {
@@ -75,6 +78,24 @@ public class Product {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity=quantity;
+	}
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+	public float getRating() {
+		return rating;
+	}
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+	public int getNumOfRatings() {
+		return numOfRatings;
+	}
+	public void setNumOfRatings(int numOfRatings) {
+		this.numOfRatings = numOfRatings;
 	}
 	
 }

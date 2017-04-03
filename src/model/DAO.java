@@ -529,7 +529,7 @@ public class DAO {
 	
 	// Other Methods
 		
-	public List<Product> fetchCakes(City city,Flavour flavour,Category category,int start) {
+	public List<Product> fetchCakes(City city,Flavour flavour,Category category,float weight,int floors,int price,int sortBy,int start) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
 		
@@ -544,6 +544,46 @@ public class DAO {
 				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
 			if(category != null)
 				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
+			if(weight != 0)
+				cr.add(Restrictions.eq("weight", weight));
+			if(floors != 0)
+				cr.add(Restrictions.eq("tier", floors));
+			if(price != 0)
+			{
+				switch(price)
+				{
+					case 1:
+						cr.add(Restrictions.le("price", 250.0f));
+						break;
+					case 2:
+						cr.add(Restrictions.between("price", 251.0f,500.0f));
+						break;
+					case 3:
+						cr.add(Restrictions.between("price", 501.0f,750.0f));
+						break;
+					case 4:
+						cr.add(Restrictions.between("price", 751.0f,1000.0f));
+						break;
+					case 5:
+						cr.add(Restrictions.gt("price", 1000.0f));
+						break;
+				}
+			}
+			switch(sortBy)
+			{
+				case 1:
+					cr.addOrder(org.hibernate.criterion.Order.desc("numOfRatings"));
+					break;
+				case 2:
+					cr.addOrder(org.hibernate.criterion.Order.desc("rating"));
+					break;
+				case 3:
+					cr.addOrder(org.hibernate.criterion.Order.asc("price"));
+					break;
+				case 4:
+					cr.addOrder(org.hibernate.criterion.Order.desc("price"));
+					break;
+			}
 			cr.setFirstResult(start);
 			cr.setMaxResults(8);
 			list=cr.list();
@@ -556,7 +596,7 @@ public class DAO {
 		return list;
 	}
 	
-	public long getMaxPages(City city,Flavour flavour,Category category) {
+	public long getMaxPages(City city,Flavour flavour,Category category,float weight,int floors,int sortBy,int price) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
 		
@@ -572,7 +612,46 @@ public class DAO {
 				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
 			if(category != null)
 				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
-			
+			if(weight != 0)
+				cr.add(Restrictions.eq("weight", weight));
+			if(floors != 0)
+				cr.add(Restrictions.eq("tier", floors));
+			if(price != 0)
+			{
+				switch(price)
+				{
+					case 1:
+						cr.add(Restrictions.le("price", 250.0f));
+						break;
+					case 2:
+						cr.add(Restrictions.between("price", 251.0f,500.0f));
+						break;
+					case 3:
+						cr.add(Restrictions.between("price", 501.0f,750.0f));
+						break;
+					case 4:
+						cr.add(Restrictions.between("price", 751.0f,1000.0f));
+						break;
+					case 5:
+						cr.add(Restrictions.gt("price", 1000.0f));
+						break;
+				}
+			}
+			switch(sortBy)
+			{
+				case 1:
+					cr.addOrder(org.hibernate.criterion.Order.desc("numOfRatings"));
+					break;
+				case 2:
+					cr.addOrder(org.hibernate.criterion.Order.desc("rating"));
+					break;
+				case 3:
+					cr.addOrder(org.hibernate.criterion.Order.asc("price"));
+					break;
+				case 4:
+					cr.addOrder(org.hibernate.criterion.Order.desc("price"));
+					break;
+			}
 			long records = (long)cr.uniqueResult();
 			maxPages = records/8 + (records%8>0?1:0);
 			

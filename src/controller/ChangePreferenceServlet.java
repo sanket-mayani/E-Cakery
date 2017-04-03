@@ -41,29 +41,28 @@ public class ChangePreferenceServlet extends HttpServlet {
 			session.setAttribute("city",city);
 		}
 		
-		if(request.getParameter("flavour") != null)
+		if(request.getParameter("weight") != null)
 		{
-			String flavourName = request.getParameter("flavour");		
-			if(flavourName.equals("null"))
-				session.removeAttribute("flavour");
-			else
-			{
-				DAO dao = new DAO();
-				Flavour flavour = dao.getFlavourByName(flavourName);
-				session.setAttribute("flavour",flavour);
-			}
+			float weight = Float.parseFloat(request.getParameter("weight"));		
+			session.setAttribute("weight",weight);
 		}
 		
-		if(request.getParameter("category") != null)
+		if(request.getParameter("floors") != null)
 		{
-			String categoryName = request.getParameter("category");
-			if(categoryName.equals("null"))
-				session.removeAttribute("category");
-			else{
-				DAO dao = new DAO();
-				Category category = dao.getCategoryByName(categoryName);
-				session.setAttribute("category",category);
-			}
+			int floors = Integer.parseInt(request.getParameter("floors"));		
+			session.setAttribute("floors",floors);
+		}
+		
+		if(request.getParameter("price") != null)
+		{
+			int price = Integer.parseInt(request.getParameter("price"));		
+			session.setAttribute("price",price);
+		}
+		
+		if(request.getParameter("sortBy") != null)
+		{
+			int sortBy = Integer.parseInt(request.getParameter("sortBy"));		
+			session.setAttribute("sortBy",sortBy);
 		}
 		
 		if(request.getParameter("page") != null)
@@ -76,7 +75,7 @@ public class ChangePreferenceServlet extends HttpServlet {
 		//List<Product> products = dao.fetchCakesByCity(city);
 		//request.setAttribute("products", products);
 		
-		response.sendRedirect("index.jsp");
+		response.sendRedirect(request.getHeader("referer"));
 		
 	}
 

@@ -60,6 +60,30 @@
     <url-pattern>/MyOrders</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>CakesByFlavour</servlet-name>
+    <jsp-file>/cakes-by-flavour.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CakesByFlavour</servlet-name>
+    <url-pattern>/CakesByFlavour</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CakesByCategory</servlet-name>
+    <jsp-file>/cakes-by-category.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CakesByCategory</servlet-name>
+    <url-pattern>/CakesByCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AllCakes</servlet-name>
+    <jsp-file>/all-cakes.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllCakes</servlet-name>
+    <url-pattern>/AllCakes</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>

@@ -23,7 +23,7 @@
 	margin: 0px;
 }
 
-#title a:hover{
+#title a:hover, #title a:visited, #title a:active, #title a:link{
 	color: white;
 	text-decoration: none;
 }
@@ -33,7 +33,7 @@
 	text-align: right;
 }
 
-#cart_section a#cart:hover{
+#cart_section a#cart:hover, #cart_section a#cart:visited, #cart_section a#cart:active, #cart_section a#cart:link{
 	color: white;
 	text-decoration: none;
 }
@@ -81,38 +81,38 @@
 }
 
 /* --------------------
+	Page numbers 
+-------------------- */
+
+#page_nums{
+	text-align: center;
+}
+
+/* --------------------
 	footer 
 -------------------- */
 
 #footer{
-
 	background-color: #6d2854;
 	color: white;
-
 }
 
 #about, #connect, #contact, #credits{
-
 	padding: 15px;
 	padding-left: 20px;
 	text-align: center;
-
 }
 
 #connect img, #contact img{
-
 	width: 25px;
 	height: 25px;
 	margin: 5px;
-
 }
 
 #credits img{
-
 	width: 20px;
 	height: 20px;
 	margin: 0px;
-
 }
 
 /* --------------------
@@ -121,14 +121,40 @@
 
 @media screen and (max-width: 768px){
 	
-	#index #heading_section{
+	#heading_section{
 		text-align: center;
 	}
 	
-	#index #cart_section{
+	#cart_section{
 		text-align: center;
 	}
 	
+}
+
+
+
+/* --------------------
+	chocolate-cakes.jsp
+-------------------- */
+
+.cake_display img{
+	width: 100%;
+	height: 200px;
+}
+
+.cake_display{
+	border: 0px solid #6d2854;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.cake_display h4 a{
+	color: black;
+}
+
+.cake_display h4 a:visited, .cake_display h4 a:active, .cake_display h4 a:link{
+	color: black;
+	text-decoration: none;
 }
 
 
@@ -158,4 +184,8 @@
 
 .red{
 	color: red;	
+}
+
+.grey{
+	background-color: #eeeeee;	
 }

@@ -33,7 +33,19 @@
 		
 		<property name="quantity">
 			<column name="Quantity"></column>
+		</property>
+		
+		<property name="weight">
+			<column name="Weight"></column>
 		</property>	
+		
+		<property name="rating">
+			<column name="Rating"></column>
+		</property>
+		
+		<property name="numOfRatings">
+			<column name="NumOfRatings"></column>
+		</property>
 		
 		<set name="categories" table="ProductCategory" lazy="false">
 			<key column="pid"></key>

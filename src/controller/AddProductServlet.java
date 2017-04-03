@@ -97,7 +97,7 @@ public class AddProductServlet extends HttpServlet {
 								 	values.add(value);
 							 }
 							 else if(n.equals("floor")){
-								 product.setTier(value);
+								 product.setTier(Integer.parseInt(value));
 							 }
 							 else if(n.equals("price")){
 								 float value1 = 0;	

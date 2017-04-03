@@ -1,3 +1,6 @@
+<%@page import="model.Cart"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <%@page import="model.User"%>
 <html>
@@ -23,11 +26,17 @@
 
 <%
 	User user = null;
+	Cart cart = new Cart();
 %>
 
 <%
 	if(session.getAttribute("user")!=null)
 		user = (User)session.getAttribute("user");
+
+	if(session.getAttribute("cart")!=null)
+		cart = (Cart)session.getAttribute("cart");
+	else
+		session.setAttribute("cart", cart);
 %>
 
 <head>
@@ -50,10 +59,10 @@
 			
 				<div class="row">
 					<div class="col-sm-6">
-						<h2 id="title"><a href="" class="white">E-Cakery</a></h2>
+						<h2 id="title"><a href="index.jsp" class="white">E-Cakery</a></h2>
 					</div>
 					<div class="col-sm-6" id="cart_section">
-						<a href="Cart" class="white" id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> 0 items</a>
+						<a href="Cart" class="white" id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> <%out.print(cart.getCount());%> items</a>
 						<span>|</span>
 						<span class="dropdown">
 							<button class="dropdown-toggle" data-toggle="dropdown">Hi, <%if(user==null){%>Guest<%}else{out.print(user.getFn());}%>
@@ -137,35 +146,35 @@
 		<div class="row">
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Chocolate</p>
-				<a href=""><img src="images/chocolate_cake.jpg"></a>
+				<a href="CakesByFlavour?flavour=Chocolate"><img src="images/chocolate_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Black Forest</p>
-				<a href=""><img src="images/black_forest_cake.jpg"></a>
+				<a href="CakesByFlavour?flavour=Black Forest"><img src="images/black_forest_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Butter Scotch</p>
-				<a href=""><img src="images/butterscotch_cake.jpg"></a>
+				<a href="CakesByFlavour?flavour=Butterscotch"><img src="images/butterscotch_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Pineapple</p>
-				<a href=""><img src="images/pineapple_cake.jpg"></a>
+				<a href="CakesByFlavour?flavour=Pineapple"><img src="images/pineapple_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Strawberry</p>
-				<a href=""><img src="images/strawberry_cake.jpg"></a>
+				<a href="CakesByFlavour?flavour=Strawberry"><img src="images/strawberry_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Vanilla</p>
-				<a href=""><img src="images/vanilla_cake.jpg"></a>
+				<a href="CakesByFlavour?flavour=Vanilla"><img src="images/vanilla_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Mixed Fruits</p>
-				<a href=""><img src="images/mixwd_fruit_cake.jpg"></a>
+				<a href="CakesByFlavour?flavour=Mixed Fruit"><img src="images/mixwd_fruit_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">All Cakes</p>
-				<a href=""><img src="images/all_cakes.jpg"></a>
+				<a href="AllCakes"><img src="images/all_cakes.jpg"></a>
 			</div>
 		</div>
 		
@@ -174,27 +183,27 @@
 		<div class="row">
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Birthday</p>
-				<a href=""><img src="images/birthday_cake.jpg"></a>
+				<a href="CakesByCategory?category=Birthday"><img src="images/birthday_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Valentine</p>
-				<a href=""><img src="images/valentine_cake.jpg"></a>
+				<a href="CakesByCategory?category=Valentine"><img src="images/valentine_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Anniversary</p>
-				<a href=""><img src="images/anniversary_cake.jpg"></a>
+				<a href="CakesByCategory?category=Anniversary"><img src="images/anniversary_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Engagement</p>
-				<a href=""><img src="images/engagement_cake.jpg"></a>
+				<a href="CakesByCategory?category=Engagement"><img src="images/engagement_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Cartoon</p>
-				<a href=""><img src="images/cartoon_cake.jpg"></a>
+				<a href="CakesByCategory?category=Cartoon"><img src="images/cartoon_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Eggless</p>
-				<a href=""><img src="images/eggless_cake.jpg"></a>
+				<a href="CakesByCategory?category=Eggless"><img src="images/eggless_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Photo Cake</p>
@@ -202,7 +211,7 @@
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">All Cakes</p>
-				<a href=""><img src="images/all_cakes.jpg"></a>
+				<a href="AllCakes"><img src="images/all_cakes.jpg"></a>
 			</div>
 		</div>
 	
