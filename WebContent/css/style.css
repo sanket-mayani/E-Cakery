@@ -1,0 +1,161 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* --------------------
+	index.jsp 
+-------------------- */
+
+/* --------------------
+	Heading 
+-------------------- */
+
+#heading_section{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: #6d2854;
+	color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#title{
+	font-family: cursive;
+	margin: 0px;
+}
+
+#title a:hover{
+	color: white;
+	text-decoration: none;
+}
+
+#cart_section{
+	padding-top: 10px;
+	text-align: right;
+}
+
+#cart_section a#cart:hover{
+	color: white;
+	text-decoration: none;
+}
+
+#cart_section .dropdown-toggle{
+	background-color: #6d2854;
+	border: 0px;
+}
+
+/* --------------------
+	body 
+-------------------- */
+
+#index #fit_to_screen{
+	height: 100vh;
+}
+
+#index .item{
+	
+}
+
+#index .item img{
+	height: 100%;
+	width: 100%;
+}
+
+#index .img_section{
+	height: 200px;
+	padding: 0px;
+	position: relative;
+}
+
+#index .img_section img{
+	height: 100%;
+	width: 100%;
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#index .img_section p{
+	font-size: 24px;
+	margin-top: 0px;
+}
+
+/* --------------------
+	footer 
+-------------------- */
+
+#footer{
+
+	background-color: #6d2854;
+	color: white;
+
+}
+
+#about, #connect, #contact, #credits{
+
+	padding: 15px;
+	padding-left: 20px;
+	text-align: center;
+
+}
+
+#connect img, #contact img{
+
+	width: 25px;
+	height: 25px;
+	margin: 5px;
+
+}
+
+#credits img{
+
+	width: 20px;
+	height: 20px;
+	margin: 0px;
+
+}
+
+/* --------------------
+	index.jsp media queries
+-------------------- */
+
+@media screen and (max-width: 768px){
+	
+	#index #heading_section{
+		text-align: center;
+	}
+	
+	#index #cart_section{
+		text-align: center;
+	}
+	
+}
+
+
+/* --------------------
+	General 
+-------------------- */
+
+.right{
+	text-align: right;
+}
+
+.white{
+	color: white;
+}
+
+.center{
+	text-align: center;
+}
+
+.font1{
+	font-family: cursive;
+}
+
+.color1{
+	color: #6d2854;
+}
+
+.red{
+	color: red;	
+}

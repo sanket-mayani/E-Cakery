@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	
+	<class name="model.Order" table="Orders">
+	
+		<id name="oid" type="int" column="oid">
+			<generator class="increment"></generator>
+		</id>
+			
+		<property name="quantity">
+			<column name="Quantity"></column>
+		</property>
+		
+		<property name="amount">
+			<column name="Amount"></column>
+		</property>
+		
+		<property name="fname">
+			<column name="FirstName"></column>
+		</property>
+		
+		<property name="lname">
+			<column name="LastName"></column>
+		</property>
+		
+		<property name="email">
+			<column name="Email"></column>
+		</property>
+		
+		<property name="mobile">
+			<column name="Mobile"></column>
+		</property>
+		
+		<property name="address">
+			<column name="Address"></column>
+		</property>
+		
+		<property name="pincode">
+			<column name="Pincode"></column>
+		</property>
+		
+		<property name="status">
+			<column name="Status"></column>
+		</property>	
+		
+		<property name="cancellationReason">
+			<column name="CancellationReason"></column>
+		</property>
+		
+		<property name="placedAt">
+			<column name="PlacedAt"></column>
+		</property>
+		
+		<property name="shippedAt">
+			<column name="ShippedAt"></column>
+		</property>
+		
+		<property name="deliveredAt">
+			<column name="DeliveredAt"></column>
+		</property>
+		
+		<many-to-one name="user" class="model.User" column="User_ID" lazy="false"></many-to-one>
+		<many-to-one name="product" class="model.Product" column="Product_ID" lazy="false"></many-to-one>
+		<many-to-one name="seller" class="model.Seller" column="Seller_ID" lazy="false"></many-to-one>
+		
+	</class>
+</hibernate-mapping>
