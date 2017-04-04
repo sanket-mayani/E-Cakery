@@ -84,6 +84,14 @@
     <url-pattern>/AllCakes</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>Product</servlet-name>
+    <jsp-file>/product.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Product</servlet-name>
+    <url-pattern>/Product</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>

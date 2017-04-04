@@ -159,6 +159,33 @@
 
 
 /* --------------------
+	product.jsp 
+-------------------- */
+
+#product #product_image_section img{
+	width: 100%;
+	height: 300px;
+	margin-top: 70px;
+}
+
+/* --------------------
+	product.jsp media queries
+-------------------- */
+
+@media screen and (max-width: 768px){
+	
+	#product #product_image_section img{
+		margin-top: 0px;
+	}
+	
+	#product #add_to_cart_section{
+		text-align: center;
+	}
+	
+}
+
+
+/* --------------------
 	General 
 -------------------- */
 
@@ -176,6 +203,10 @@
 
 .font1{
 	font-family: cursive;
+}
+
+.font2{
+	font-family: monospace;
 }
 
 .color1{
