@@ -38,8 +38,12 @@ public class GetOrdersWebService {
 		@GET
 		@Path("/getpackedorders")
 		@Produces(MediaType.APPLICATION_JSON)
-		public List<Order> orders() {
-			return dao.getPackedOrders();
+		public List<Order> orders(@QueryParam("order_status") String status) {
+			if(status.equals("packed")){
+				return dao.getPackedOrders();
+			}else{
+				return dao.getDeliveredOrders();
+			}
 		}
 		@GET
 		@Path("/usercheck")
@@ -83,6 +87,26 @@ public class GetOrdersWebService {
 			}
 
 				
+		}
+		@GET
+		@Path("/update_status")
+		@Produces(MediaType.APPLICATION_JSON)
+		public String updateStatus(@QueryParam("order_no") String order_no,@QueryParam("status") String status) {	
+			Order order=dao.getOrderByOid(Integer.parseInt(order_no));
+			if(status.equals("packed")){
+			order.setStatus("Delivered");
+			}
+			else{
+				order.setStatus("packed");
+			}
+			dao.updateOrder(order);;
+			JSONObject obj = new JSONObject();
+	        try {
+	            obj.put("status", new Boolean("true"));
+	        }catch (JSONException e) {
+	            // TODO Auto-generated catch block
+	        }
+	        return obj.toString();
 		}
 
 }

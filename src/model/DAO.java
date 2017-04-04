@@ -526,7 +526,6 @@ public class DAO {
 		}
 	}
 	
-	
 	// Other Methods
 		
 	public List<Product> fetchCakes(City city,Flavour flavour,Category category,int start) {
@@ -603,7 +602,25 @@ public class DAO {
 		}
 		return list;
 	}	
-	
+	public List<Order> getDeliveredOrders()
+	{
+		Session session = getSession();
+
+		List<Order> list=new ArrayList<Order>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Order where Status='delivered'");
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}	
+
 
 	
 		
