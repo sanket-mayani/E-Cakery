@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@page import="model.Product"%>
 <%@page import="model.Item"%>
 <%@page import="java.util.List"%>
@@ -19,12 +20,16 @@
 <% 
 	Cart cart = new Cart();
 	List<Item> items = null;
+	User user = null;
 %>
 <%
 	if(session.getAttribute("cart") != null)
 		cart = (Cart)session.getAttribute("cart");
 	else
 		session.setAttribute("cart", cart);
+
+	if(session.getAttribute("user")!=null)
+		user = (User)session.getAttribute("user");
 
 	items = cart.getItems();
 %>
@@ -39,13 +44,40 @@
 
 <body>
 
+	<div class="container-fluid" id="heading_section">
+			<div class="container">
+			
+				<div class="row">
+					<div class="col-sm-6">
+						<h2 id="title"><a href="index.jsp" class="white">E-Cakery</a></h2>
+					</div>
+					<div class="col-sm-6" id="cart_section">
+						<a href="Cart" class="white" id="cart"><span class="glyphicon glyphicon-shopping-cart"></span> <%out.print(cart.getCount());%> items</a>
+						<span>|</span>
+						<span class="dropdown">
+							<button class="dropdown-toggle" data-toggle="dropdown">Hi, <%if(user==null){%>Guest<%}else{out.print(user.getFn());}%>
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+							   	<%if(user==null){%><li><a data-toggle="modal" href="#login_modal">Login</a></li><%}%>
+							   	<li><a data-toggle="modal" href="#registration_modal">Create New Account</a></li>
+							   	<%if(user!=null){%><li><a href="LogOut">Logout</a></li><%}%>
+							</ul>	
+						</span>
+					</div>
+				</div>
+			
+			</div>
+	</div><!-- End of heading section -->
+
 	<div class="container hidden-xs" style="min-height: 500px;">
 	
-		<div class="row" style="margin-top: 50px; background-color: black; color:white; border-radius: 10px; padding:5px;">
-			<h4 class="col-sm-12">Cart: <%out.print(items.size());%> items</h4>
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-xs-12">
+				<span><a class="color1" href="index.jsp">Home</a></span>
+				<span>></span>
+				<span>Cart (<%out.print(cart.getCount());%> items)</span>
+			</div>
 		</div>
-	
-		<hr style="margin-top: 0px;">
 		
 		<%if(items.size()!= 0){%>
 			<div class="row">
@@ -67,7 +99,7 @@
 					<%for(Item i:items){%>
 						<tr style="">
 							<td style="width: 160px; padding: 5px; border-radius:10px 0px 0px 10px;">
-								<img alt="" src="FetchImage?id=<%out.print(i.getProduct().getImage());%>" style="width: 100%; border: 1px solid black;">
+								<img alt="" src="FetchImage?id=<%out.print(i.getProduct().getImage());%>" style="width: 100%; border: 1px solid black; height: 100px;">
 							</td>
 							<td>
 								<span style="margin-left: 20px;"><%out.print(i.getProduct().getName());%></span>
@@ -129,13 +161,17 @@
 	
 	<div class="container hidden-sm hidden-md hidden-lg">
 	
-		<div class="row" style="margin-top: 50px; background-color: black; color:white; border-radius: 10px; padding:5px;">
-			<h4 class="col-sm-12">Cart: <%out.print(items.size());%> items</h4>
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-xs-12">
+				<span><a class="color1" href="index.jsp">Home</a></span>
+				<span>></span>
+				<span>Cart (<%out.print(cart.getCount());%> items)</span>
+			</div>
 		</div>
 		
 		<%for(Item i:items){%>
 			<div class="row" style="margin-top: 10px;">
-				<img src="FetchImage?id=<%out.print(i.getProduct().getImage());%>" style="float:left; width: 100px; border: 1px solid black; margin-left:10px; margin-right: 10px;">
+				<img src="FetchImage?id=<%out.print(i.getProduct().getImage());%>" style="float:left; width: 100px; height:100px; border: 1px solid black; margin-left:10px; margin-right: 10px;">
 				<p><b><%out.print(i.getProduct().getName());%></b></p>
 				<p><small>Sold By: <%out.print(i.getProduct().getSeller().getName());%></small></p>
 				<p><small>Price(&#8377): <%out.print(i.getProduct().getPrice());%></small></p>

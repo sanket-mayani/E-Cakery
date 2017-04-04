@@ -77,7 +77,14 @@ public class PlaceOrderServlet extends HttpServlet {
 					
 					
 			        Order order = new Order();
-			           
+			        
+			        String msg = null;
+			        if(request.getParameter("msg"+item.getProduct().getPid()) != null)
+			        	msg = request.getParameter("msg"+item.getProduct().getPid());
+			        else
+			        	break;
+			        
+			        order.setMessage(msg);
 			        order.setFname(fn);
 			        order.setLname(ln);
 			        order.setEmail(email);

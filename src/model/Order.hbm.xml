@@ -19,6 +19,10 @@
 			<column name="Amount"></column>
 		</property>
 		
+		<property name="message">
+			<column name="Message"></column>
+		</property>
+		
 		<property name="fname">
 			<column name="FirstName"></column>
 		</property>

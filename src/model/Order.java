@@ -8,6 +8,7 @@ public class Order {
 	private int oid;
 	private int quantity;
 	private float amount;
+	private String message;
 	private String fname;
 	private String lname;
 	private String email;
@@ -25,6 +26,12 @@ public class Order {
     private Date shippedAt; // time and date at which order was shipped
     private Date deliveredAt; // time and date at which order was delivered
 
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public String getFname() {
 		return fname;
 	}
