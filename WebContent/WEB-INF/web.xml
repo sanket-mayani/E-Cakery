@@ -52,12 +52,12 @@
     <url-pattern>/UserProfile</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>MyOrders</servlet-name>
+    <servlet-name>UserOrders</servlet-name>
     <jsp-file>/user-orders.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MyOrders</servlet-name>
-    <url-pattern>/MyOrders</url-pattern>
+    <servlet-name>UserOrders</servlet-name>
+    <url-pattern>/UserOrders</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>CakesByFlavour</servlet-name>

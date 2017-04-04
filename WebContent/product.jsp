@@ -52,9 +52,16 @@
 							<button class="dropdown-toggle" data-toggle="dropdown">Hi, <%if(user==null){%>Guest<%}else{out.print(user.getFn());}%>
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
-							   	<%if(user==null){%><li><a data-toggle="modal" href="#login_modal">Login</a></li><%}%>
-							   	<li><a data-toggle="modal" href="#registration_modal">Create New Account</a></li>
-							   	<%if(user!=null){%><li><a href="LogOut">Logout</a></li><%}%>
+							   	<%if(user==null){%>
+							   		<li><a data-toggle="modal" href="#login_modal">Login</a></li>
+							   		<li><a data-toggle="modal" href="#registration_modal">Create New Account</a></li>
+							   	<%}else{%>
+							   		<li><a href="UserProfile">My Profile</a></li>
+							   		<li><a href="UserOrders">My Orders</a></li>
+							   		<li class="divider"></li>
+							   		<li><a data-toggle="modal" href="#registration_modal">Create New Account</a></li>
+							   		<li><a href="LogOut">Logout</a></li>
+							   	<%}%>
 							</ul>	
 						</span>
 					</div>
