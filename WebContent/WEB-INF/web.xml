@@ -92,6 +92,54 @@
     <url-pattern>/Product</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>SellerHome</servlet-name>
+    <jsp-file>/seller-home.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SellerHome</servlet-name>
+    <url-pattern>/SellerHome</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SellerAccount</servlet-name>
+    <jsp-file>/seller-account.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SellerAccount</servlet-name>
+    <url-pattern>/SellerAccount</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Catalogue</servlet-name>
+    <jsp-file>/catalogue.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Catalogue</servlet-name>
+    <url-pattern>/Catalogue</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Payments</servlet-name>
+    <jsp-file>/payments.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Payments</servlet-name>
+    <url-pattern>/Payments</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddNewCake</servlet-name>
+    <jsp-file>/add-new-cake.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNewCake</servlet-name>
+    <url-pattern>/AddNewCake</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddPhotoCake</servlet-name>
+    <jsp-file>/add-photo-cake.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddPhotoCake</servlet-name>
+    <url-pattern>/AddPhotoCake</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>

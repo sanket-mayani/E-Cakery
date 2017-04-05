@@ -186,6 +186,216 @@
 
 
 /* --------------------
+	seller-index.html
+-------------------- */
+
+
+/* --------------------
+	Header Section 
+-------------------- */
+
+#login_section{
+
+	padding: 10px;
+	margin-top: 40px;
+	
+}
+
+#login_section td{
+	
+	padding: 5px;
+			
+}
+
+#login_section input{
+	
+	height: 30px;
+		
+}
+
+#login_section .btn{
+	
+	padding-top: 3px;
+		
+}
+
+
+/* --------------------
+	Navigation Bar 
+-------------------- */
+
+#seller-navigation_links{
+
+	font-size: 16px;
+	
+}
+
+/* --------------------
+	footer 
+-------------------- */
+
+#seller-index #footer{
+	background-color: #6d2854;
+}
+
+
+/* --------------------
+	Registration Message 
+-------------------- */
+
+#registration_msg{
+		
+	padding: 20px;	
+
+}
+
+#registration_msg .special{
+
+	color: #F06;
+	
+}
+
+#registration_msg .big{
+
+	font-size: 20px;
+	
+}
+
+
+/* --------------------
+	Registration Form
+-------------------- */
+
+#seller_reg_form h3{
+	
+	text-align:center;
+	
+}
+
+#seller_reg_form{
+	
+	background-color: white;
+	padding: 10px;
+	margin-top: 15px;
+	margin-bottom: 20px
+	
+}
+
+#seller_reg_form input{
+	
+	margin-bottom: 10px;
+	padding: 0px;
+	
+}
+
+#seller_reg_form input.submit{
+	
+	margin-top: 10px;
+	padding: 7px;
+	
+}
+
+
+/* --------------------
+	seller-index.html media queries 
+-------------------- */
+
+@media screen and (max-width: 767px){
+	
+	#login_section{
+		display: none;	
+	}
+	
+	#logo_section{
+		text-align: center;	
+	}
+	
+}
+
+@media screen and (min-width: 768px){
+	
+	#seller-navigation_links .navbar-right{
+		display: none;	
+	}
+	
+}
+
+
+/* --------------------
+	seller-home.jsp
+-------------------- */
+
+#seller_home_body .orders_div{
+	min-height: 500px;
+}
+
+#seller_home_body .image_td img{
+	width: 100%;
+}
+
+#seller_home_body .image_td{
+	width: 60px;
+}
+
+#seller_home_body .address_td{
+	width: 200px;
+}
+
+#seller_home_body #history{
+	margin-top: 5px;
+}
+
+#seller_home_body #history a{
+	float: right;
+}
+
+/* --------------------
+	seller-home.jsp media queries
+-------------------- */
+
+@media screen and (max-width: 767px){
+	
+	#seller_home_body #history a{
+		float: left;
+	}
+	
+}
+
+
+/* --------------------
+	seller-account.jsp
+-------------------- */
+
+#apply_changes_div{
+	text-align: center;
+}
+
+#apply_changes_div .btn{
+	margin-bottom: 20px;
+}
+
+
+/* --------------------
+	add-product.jsp
+-------------------- */
+
+#product_img_div{
+	border: 1px solid black;
+	height: 150px;
+	margin-bottom: 20px;
+}
+
+#choose_file{
+	margin-bottom: 20px;
+}
+
+#add_product_btn{
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+
+/* --------------------
 	General 
 -------------------- */
 
@@ -219,4 +429,9 @@
 
 .grey{
 	background-color: #eeeeee;	
+}
+
+.navbar-inverse{
+	background-color:#6d2854;
+	color: white;
 }

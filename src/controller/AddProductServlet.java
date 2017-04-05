@@ -96,6 +96,9 @@ public class AddProductServlet extends HttpServlet {
 							 else if(n.equals("occassion")){
 								 	values.add(value);
 							 }
+							 else if(n.equals("weight")){
+								 product.setWeight(Float.parseFloat(value));
+							 }
 							 else if(n.equals("floor")){
 								 product.setTier(Integer.parseInt(value));
 							 }
@@ -152,7 +155,10 @@ public class AddProductServlet extends HttpServlet {
 			}
 		
 		}
-		response.sendRedirect("add-product.jsp"); 
+		
+		session.setAttribute("message", "Product Added Successfully");
+		session.setAttribute("class", "alert-success");
+		response.sendRedirect("AddNewCake"); 
 
 	}
 }
