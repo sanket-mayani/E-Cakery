@@ -8,6 +8,8 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
+<%request.getRequestDispatcher("message-on-top.jsp").include(request, response);%>
+
 <%
 	User user = null;
 	Cart cart = new Cart(); 
@@ -197,6 +199,8 @@
 	
 	  </div>
 	</div><!-- End of Order Cancellation Modal -->
+	
+	<%request.getRequestDispatcher("registration-and-login-modal.jsp").include(request, response);%>
 
 	<script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

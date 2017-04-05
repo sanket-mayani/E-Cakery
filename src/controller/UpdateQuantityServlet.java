@@ -46,8 +46,11 @@ public class UpdateQuantityServlet extends HttpServlet {
 			if(quantityInDB >= quantity)
 				cart.updateQuantity(pid, quantity);
 			else
+			{
 				session.setAttribute("message", "Quantity could not be set to "+quantity+", since only "+quantityInDB+" left in stock.");
-			
+				session.setAttribute("class", "alert-danger");
+			}
+				
 			session.setAttribute("cart",cart);
 		}
 		

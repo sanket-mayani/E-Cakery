@@ -8,14 +8,7 @@
 <!DOCTYPE html>
 <html> 
 
-<% 
-	if(session.getAttribute("message")!=null){
-%>
-		<p class="red container center"><%out.print(session.getAttribute("message"));%></p>
-<% 
-		session.removeAttribute("message");
-	}
-%>
+<%request.getRequestDispatcher("message-on-top.jsp").include(request, response);%>
 
 <% 
 	Cart cart = new Cart();
@@ -219,6 +212,8 @@
 		<%}%>
 	
 	</div><!-- End of main container for extra small devices -->
+	
+	<%request.getRequestDispatcher("registration-and-login-modal.jsp").include(request, response);%>
 
 	<script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

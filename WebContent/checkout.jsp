@@ -8,24 +8,7 @@
 <!DOCTYPE html>
 <html>
 
-<%
-	if(session.getAttribute("message") != null)
-	{
-		String message = session.getAttribute("message").toString();
-		String class_var = session.getAttribute("class").toString();
-		session.removeAttribute("message");
-		session.removeAttribute("class");
-		if(message != null)	
-		{
-%>
-			<div class="alert alert-dismissable <%out.print(class_var);%>" style="text-align: center">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<p style="font-size: 18px"><%out.print(message);%></p>
-			</div>
-<% 			
-		}	
-	}
-%>
+<%request.getRequestDispatcher("message-on-top.jsp").include(request, response);%>
 
 <%
 	Cart cart = new Cart();
@@ -237,6 +220,8 @@
 
         </div><!-- End of modal dialogue -->
     </div><!-- End of login Modal -->
+    
+    <%request.getRequestDispatcher("registration-and-login-modal.jsp").include(request, response);%>
 	
 	<script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

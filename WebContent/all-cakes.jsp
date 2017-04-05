@@ -11,6 +11,8 @@
 <!DOCTYPE html>
 <html>
 
+<%request.getRequestDispatcher("message-on-top.jsp").include(request, response);%>
+
 <%
 	User user = null;
 	DAO dao = new DAO();
@@ -210,6 +212,8 @@
  		<%}%>
 	
 	</div><!-- End of main container -->
+	
+	<%request.getRequestDispatcher("registration-and-login-modal.jsp").include(request, response);%>
 
 	<script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
