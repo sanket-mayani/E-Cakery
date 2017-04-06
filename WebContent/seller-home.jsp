@@ -137,7 +137,12 @@
 								<tbody>
 									<%for(Order order : placedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small>
+											<%if(order.getProduct().getIsPhotoCake()){%>
+												<br><br><span class="label label-info font1" style="font-size: 12px;"><span class="glyphicon glyphicon-camera"></span> Photo Cake</span>
+											<%}%>
+										</td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-danger">yet to approve</span>
@@ -187,7 +192,12 @@
 								<tbody>
 									<%for(Order order : approvedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small>
+											<%if(order.getProduct().getIsPhotoCake()){%>
+												<br><br><span class="label label-info font1" style="font-size: 12px;"><span class="glyphicon glyphicon-camera"></span> Photo Cake</span>
+											<%}%>
+										</td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-danger">yet to pack</span>
@@ -209,7 +219,8 @@
 										</td>
 										<td>
 											<a class="text-success" href="ChangeStatus?oid=<%out.print(order.getOid());%>&status=packed"><span class="glyphicon glyphicon-ok"></span> Order is packed</a><br><br>
-											<a class="text-primary"><span class="glyphicon glyphicon-print"></span> Print packing slip</a>
+											<a class="text-primary"><span class="glyphicon glyphicon-print"></span> Print packing slip</a><br><br>
+											<%if(order.getProduct().getIsPhotoCake()){%><a class="text-info" href="DownloadUserPhoto?id=<%out.print(order.getUserPhoto());%>"><span class="glyphicon glyphicon-download-alt"></span> Download user photo</a><%}%>
 										</td>
 									</tr>
 									<%}%>
@@ -237,7 +248,12 @@
 								<tbody>
 									<%for(Order order : packedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small>
+											<%if(order.getProduct().getIsPhotoCake()){%>
+												<br><br><span class="label label-info font1" style="font-size: 12px;"><span class="glyphicon glyphicon-camera"></span> Photo Cake</span>
+											<%}%>
+										</td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-success">ready to be shipped</span>
@@ -286,7 +302,12 @@
 								<tbody>
 									<%for(Order order : shippedOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small>
+											<%if(order.getProduct().getIsPhotoCake()){%>
+												<br><br><span class="label label-info font1" style="font-size: 12px;"><span class="glyphicon glyphicon-camera"></span> Photo Cake</span>
+											<%}%>
+										</td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-success">item is shipped</span>
@@ -336,7 +357,12 @@
 								<tbody>
 									<%for(Order order : deliveredOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small>
+											<%if(order.getProduct().getIsPhotoCake()){%>
+												<br><br><span class="label label-info font1" style="font-size: 12px;"><span class="glyphicon glyphicon-camera"></span> Photo Cake</span>
+											<%}%>
+										</td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-success">successfully delivered</span>
@@ -385,7 +411,12 @@
 								<tbody>
 									<%for(Order order : cancelledOrders){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small>
+											<%if(order.getProduct().getIsPhotoCake()){%>
+												<br><br><span class="label label-info font1" style="font-size: 12px;"><span class="glyphicon glyphicon-camera"></span> Photo Cake</span>
+											<%}%>
+										</td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-danger">order cancelled</span>
@@ -434,7 +465,12 @@
 								<tbody>
 									<%for(Order order : cancelledOrders2){%>
 									<tr>
-										<td><%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small></td>
+										<td>
+											<%out.print(new SimpleDateFormat("dd MMMMM, yyyy").format(order.getPlacedAt()));%><br><small><%out.print(new SimpleDateFormat("hh:mm aaa").format(order.getPlacedAt()));%></small>
+											<%if(order.getProduct().getIsPhotoCake()){%>
+												<br><br><span class="label label-info font1" style="font-size: 12px;"><span class="glyphicon glyphicon-camera"></span> Photo Cake</span>
+											<%}%>
+										</td>
 										<td>
 											Order# <%out.print(order.getOid());%><br>
 											status: <span class="text-danger">order cancelled</span>
