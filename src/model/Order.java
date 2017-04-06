@@ -17,6 +17,7 @@ public class Order {
 	private int pincode;
 	private String status;
 	private String cancellationReason; // reason given by customer at the time of canceling the order
+	private String userPhoto; // if the ordered product is a photo cake then this field stores the name of the image uploaded by user 
 	
 	private User user;
 	private Product product;
@@ -108,6 +109,12 @@ public class Order {
 		this.cancellationReason = cancellationReason;
 	}
 	
+	public String getUserPhoto() {
+		return userPhoto;
+	}
+	public void setUserPhoto(String userPhoto) {
+		this.userPhoto = userPhoto;
+	}
 	public User getUser() {
 		return user;
 	}

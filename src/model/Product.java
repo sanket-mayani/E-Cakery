@@ -18,7 +18,14 @@ public class Product {
 	private float weight;
 	private float rating;
 	private int numOfRatings;
+	private boolean isPhotoCake;
 	
+	public boolean getIsPhotoCake() {
+		return isPhotoCake;
+	}
+	public void setIsPhotoCake(boolean isPhotoCake) {
+		this.isPhotoCake = isPhotoCake;
+	}
 	public int getPid() {
 		return pid;
 	}

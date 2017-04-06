@@ -8,6 +8,10 @@
     <param-name>Upload-Path</param-name>
     <param-value>C:\Uploads</param-value>
   </context-param>
+  <context-param>
+    <param-name>User-Photo-Upload-Path</param-name>
+    <param-value>C:\Uploads\User</param-value>
+  </context-param>
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
@@ -84,12 +88,28 @@
     <url-pattern>/AllCakes</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>PhotoCakes</servlet-name>
+    <jsp-file>/photo-cakes.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PhotoCakes</servlet-name>
+    <url-pattern>/PhotoCakes</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Product</servlet-name>
     <jsp-file>/product.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Product</servlet-name>
     <url-pattern>/Product</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PhotoCake</servlet-name>
+    <jsp-file>/photo-cake.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PhotoCake</servlet-name>
+    <url-pattern>/PhotoCake</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SellerHome</servlet-name>

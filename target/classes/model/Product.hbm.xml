@@ -47,6 +47,10 @@
 			<column name="NumOfRatings"></column>
 		</property>
 		
+		<property name="isPhotoCake">
+			<column name="IsPhotoCake"></column>
+		</property>
+		
 		<set name="categories" table="ProductCategory" lazy="false">
 			<key column="pid"></key>
 			<many-to-many column="cid" class="model.Category"/>

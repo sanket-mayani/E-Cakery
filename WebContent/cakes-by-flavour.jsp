@@ -67,8 +67,8 @@
 	cities = dao.getAllCities();
 	
 	start = currentPage*8-8;
-	products = dao.fetchCakes(city, flavour, null, weight, floors, price, sortBy, start);
-	maxPages = dao.getMaxPages(city,flavour,null,weight, floors, sortBy, price);
+	products = dao.fetchCakes(city, flavour, null, false, weight, floors, price, sortBy, start);
+	maxPages = dao.getMaxPages(city,flavour,null,false,weight, floors, sortBy, price);
 	
 %>
 

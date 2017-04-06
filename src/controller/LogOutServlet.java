@@ -28,7 +28,7 @@ public class LogOutServlet extends HttpServlet {
 			session.setAttribute("message", "Successfully logged out");
 			session.setAttribute("class", "alert-warning");
 		}
-		response.sendRedirect("index.jsp");
+		response.sendRedirect(request.getHeader("referer"));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

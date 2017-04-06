@@ -225,7 +225,7 @@ $(document).ready(function(){
 		return (seller_login_email_flag);
 	});
 	
-	/* --------------------
+/* --------------------
 	seller-account.jsp 
 -------------------- */
 	
@@ -375,5 +375,22 @@ $(document).ready(function(){
 	$("#add_product_form").submit(function(){
 		return flavour_flag && category_flag && floor_flag && price_flag && quantity_flag && weight_flag;
 	});	
+	
+	
+/* --------------------
+	photo-cake.jsp 
+-------------------- */	
+	
+	$("#userPhoto").change(function(){
+
+		var reader = new FileReader();
+		
+		reader.onload = function(e){
+			$("#uploadedPhoto").attr("src",e.target.result);
+		}
+		
+		reader.readAsDataURL(this.files[0]);
+	});
+	
 	
 });

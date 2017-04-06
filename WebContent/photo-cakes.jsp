@@ -1,4 +1,3 @@
-<%@page import="model.Category"%>
 <%@page import="model.Flavour"%>
 <%@page import="model.Product"%>
 <%@page import="model.Cart"%>
@@ -28,8 +27,6 @@
 	int currentPage = 1;
 	long maxPages = 0;
 	int start = 0;
-	String categoryName = null;
-	Category category = null;
 %>
 
 <%
@@ -61,21 +58,17 @@
 	if(session.getAttribute("page")!=null)
 		currentPage = (Integer)session.getAttribute("page");
 	
-	if(request.getParameter("category")!=null)
-		categoryName = request.getParameter("category");
-	
-	category = dao.getCategoryByName(categoryName);
 	cities = dao.getAllCities();
 	
 	start = currentPage*8-8;
-	products = dao.fetchCakes(city, null, category, false, weight, floors, price, sortBy, start);
-	maxPages = dao.getMaxPages(city,null,category,false,weight, floors, sortBy, price);
+	products = dao.fetchCakes(city, null, null, true, weight, floors, price, sortBy, start);
+	maxPages = dao.getMaxPages(city,null,null,true,weight, floors, sortBy, price);
 	
 %>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title><%out.print(categoryName);%> Cakes</title>
+	<title>Photo Cakes</title>
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -120,7 +113,7 @@
 			<div class="col-xs-12">
 				<span><a class="color1" href="index.jsp">Home</a></span>
 				<span>></span>
-				<span><%out.print(categoryName);%> Cakes</span>
+				<span>Photo Cakes</span>
 			</div>
 		</div>
 		
@@ -189,11 +182,7 @@
 							<span><small>weight: <%out.print(product.getWeight());%> kg</small></span><br>
 							<span><small>Rs. <%out.print(product.getPrice());%></small></span><br>
 							<small><%out.print(product.getRating());%> <span class="glyphicon glyphicon-star">/</span> 5.0 <span class="glyphicon glyphicon-star">	</span> (<%out.print(product.getNumOfRatings());%> ratings)</small><br>
-							<%if(cart.contains(product)){%>
-								<a style="margin-top: 5px;" class="btn btn-success" disabled>Added to Cart</a>
-							<%}else{%>
-								<a href="AddToCart?pid=<%out.print(product.getPid());%>" style="margin-top: 5px;" class="btn btn-success">Add to Cart</a>
-							<%}%>							
+							<a href="PhotoCake?pid=<%out.print(product.getPid());%>" style="margin-top: 5px;" class="btn btn-success">View Cake</a>							
 						</div>
 					</div>
 				</div>

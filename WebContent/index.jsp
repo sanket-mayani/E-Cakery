@@ -197,7 +197,7 @@
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">Photo Cake</p>
-				<a href=""><img src="images/photo_cake.jpg"></a>
+				<a href="PhotoCakes"><img src="images/photo_cake.jpg"></a>
 			</div>
 			<div class="col-sm-3 col-xs-6 img_section white">
 				<p class="center font1">All Cakes</p>

@@ -190,15 +190,18 @@ public class DAO {
 		
 	}
 
-	public List<Product> getProductsBySeller(Seller seller)
+	public List<Product> getProductsBySeller(Seller seller, boolean photoCake)
 	{
+		// if photoCake == true then this method returns all the photo cakes put by seller
+		// else if photoCake == false then this method returns all the non-photo cakes put by seller
+		
 		Session session = getSession();
 		
 		List<Product> list=new ArrayList<Product>();
 		try 
 		{
 			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Product where Seller_Id="+seller.getSid());
+			Query q=session.createQuery("from Product where Seller_Id="+seller.getSid()+" and isPhotoCake="+photoCake);
 			list=q.list();
 			tr.commit();
 		}catch(Exception ex){
@@ -529,7 +532,7 @@ public class DAO {
 	
 	// Other Methods
 		
-	public List<Product> fetchCakes(City city,Flavour flavour,Category category,float weight,int floors,int price,int sortBy,int start) {
+	public List<Product> fetchCakes(City city,Flavour flavour,Category category,boolean photoCake,float weight,int floors,int price,int sortBy,int start) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
 		
@@ -544,6 +547,7 @@ public class DAO {
 				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
 			if(category != null)
 				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
+			cr.add(Restrictions.eq("isPhotoCake", photoCake));
 			if(weight != 0)
 				cr.add(Restrictions.eq("weight", weight));
 			if(floors != 0)
@@ -596,7 +600,7 @@ public class DAO {
 		return list;
 	}
 	
-	public long getMaxPages(City city,Flavour flavour,Category category,float weight,int floors,int sortBy,int price) {
+	public long getMaxPages(City city,Flavour flavour,Category category,boolean photoCake,float weight,int floors,int sortBy,int price) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
 		
@@ -612,6 +616,7 @@ public class DAO {
 				cr.add(Restrictions.eq("flavour.fid", flavour.getFid()));
 			if(category != null)
 				cr.createCriteria("categories").add(Restrictions.eq("cid", category.getCid()));
+			cr.add(Restrictions.eq("isPhotoCake", photoCake));
 			if(weight != 0)
 				cr.add(Restrictions.eq("weight", weight));
 			if(floors != 0)

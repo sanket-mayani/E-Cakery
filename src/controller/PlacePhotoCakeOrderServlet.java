@@ -1,16 +1,14 @@
 package controller;
 
-import java.io.*;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,28 +16,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Category;
+import model.City;
+import model.DAO;
+import model.Flavour;
+import model.Order;
+import model.Product;
+import model.Seller;
+import model.User;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import model.Category;
-import model.DAO;
-import model.Flavour;
-import model.Product;
-import model.Seller;
-
 /**
- * Servlet implementation class AddProductServlet
+ * Servlet implementation class PlacePhotoCakeOrderServlet
  */
-@WebServlet("/AddProduct")
+@WebServlet("/PlacePhotoCakeOrder")
 @MultipartConfig
-public class AddProductServlet extends HttpServlet {
+public class PlacePhotoCakeOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddProductServlet() {
+    public PlacePhotoCakeOrderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -64,21 +65,19 @@ public class AddProductServlet extends HttpServlet {
 		DAO dao=new DAO();
 		
 		
-		Product product=new Product();
+		Order order = new Order();
 		HttpSession session = request.getSession();		
-		Seller seller = null;
+		User user = null;
 		
-		if(session.getAttribute("seller")!=null)
+		if(session.getAttribute("user")!=null)
 		{
-			seller=(Seller)session.getAttribute("seller");
-
+			user=(User)session.getAttribute("user");
 
 			if(ServletFileUpload.isMultipartContent(request))
 			{
 				try{
 					List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 					String value;
-					List<String> values = new ArrayList<String>();
 					
 					for(FileItem fileItem : fileItems)
 					{
@@ -86,60 +85,47 @@ public class AddProductServlet extends HttpServlet {
 						if(fileItem.isFormField()){
 							String n = fileItem.getFieldName();
 							 value = fileItem.getString();
-							 if(n.equals("name")){
-								 product.setName(value);
-							 }else if(n.equals("desc")){
-								 product.setDescription(value);
-							 }
-							 else if(n.equals("flavour")){
-								 	Flavour flavour=dao.getFlavourByName(value);
-									product.setFlavour(flavour);
-							 }
-							 else if(n.equals("occassion")){
-								 	values.add(value);
-							 }
-							 else if(n.equals("weight")){
-								 product.setWeight(Float.parseFloat(value));
-							 }
-							 else if(n.equals("floor")){
-								 product.setTier(Integer.parseInt(value));
-							 }
-							 else if(n.equals("price")){
-								 float value1 = 0;	
-								 if(value!=null){
-										value1=Float.parseFloat(value);
-									}
-								 if(value1!=0){
-								 product.setPrice(value1);}
-							 }
-							 else if(n.equals("quantity")){
-								 product.setQuantity(Integer.parseInt(value));
-							 }
-							 else if(n.equals("photo_cake")){
-								 product.setIsPhotoCake(Boolean.parseBoolean(value));
+							 if(n.equals("pid")){
+								 Product product = dao.getProductById(Integer.parseInt(value));
+								 order.setQuantity(1);
+								 order.setAmount(product.getPrice() + 30);
+								 order.setStatus("placed");
+								 order.setUser(user);
+								 order.setProduct(product);
+								 order.setSeller(product.getSeller());
+								 order.setPlacedAt(new Date());
+								 order.setProduct(product);
+							 }else if(n.equals("fn")){
+								 order.setFname(value);
+							 }else if(n.equals("ln")){
+								 order.setLname(value);
+							 }else if(n.equals("email")){
+								 order.setEmail(value);
+							 }else if(n.equals("mobile")){
+								 order.setMobile(Long.parseLong(value));
+							 }else if(n.equals("address")){
+								 order.setAddress(value);
+							 }else if(n.equals("pin")){
+								 order.setPincode(Integer.parseInt(value));
+							 }else if(n.equals("msg")){
+								 order.setMessage(value);
 							 }
 						}
 						else if(!fileItem.isFormField()){
 							file=fileItem;
 							name1 = new File(file.getName()).getName();
 							name1 = name1.toLowerCase();
-							if(name1.endsWith(".jpg") || name1.endsWith(".jpeg"))
+							if(name1.endsWith(".jpg") || name1.endsWith(".jpeg") || name1.endsWith(".png"))
 							{
-								product.setImage(name1);
+								order.setUserPhoto(name1);
 								success = true;
 							}
-							else
+							else{
 								success = false;
+							}
 						}
 						
 					}
-					Set<Category> categories = new HashSet<Category>();
-				 	for(String s: values)
-				 	{
-						Category category=dao.getCategoryByName(s);
-						categories.add(category);
-				 	}
-					product.setCategories(categories);
 				}
 				catch(Exception e)
 				{
@@ -147,24 +133,23 @@ public class AddProductServlet extends HttpServlet {
 				}
 				
 			}   
-
+		
 			if(success)
 			{
-				product.setSeller(seller);
-				dao.insertProduct(product);
+				dao.insertOrder(order);
 				
 				String extension = name1.substring(name1.lastIndexOf("."));
-				product.setImage(product.getPid()+extension);
-				dao.updateProduct(product);
+				order.setUserPhoto(order.getOid()+extension);
+				dao.updateOrder(order);
 				
 				try {
-						file.write(new File(getServletContext().getInitParameter("Upload-Path") + File.separator + (product.getImage())));
+						file.write(new File(getServletContext().getInitParameter("User-Photo-Upload-Path") + File.separator + (order.getUserPhoto())));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				session.setAttribute("message", "Product Added Successfully");
+			
+				session.setAttribute("message", "Order Placed Successfully");
 				session.setAttribute("class", "alert-success");
 				response.sendRedirect(request.getHeader("referer"));
 			}
@@ -181,9 +166,7 @@ public class AddProductServlet extends HttpServlet {
 			session.setAttribute("message", "Please Login First");
 			session.setAttribute("class", "alert-danger");
 			response.sendRedirect(request.getHeader("referer")); 
-		}	
+		}
 		
-
 	}
 }
-

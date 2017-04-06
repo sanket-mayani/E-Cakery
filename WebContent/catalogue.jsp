@@ -12,6 +12,7 @@
 	Seller seller;
 	DAO dao = new DAO();
 	List<Product> products =  null;
+	List<Product> photoCakes = null;
 %>
 <%	
 	if(session.getAttribute("seller") != null)
@@ -19,7 +20,8 @@
 	else
 		response.sendRedirect("seller-index.jsp");
 
-	products = dao.getProductsBySeller(seller);
+	products = dao.getProductsBySeller(seller,false);
+	photoCakes = dao.getProductsBySeller(seller,true);
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -72,6 +74,33 @@
 			</div>
 		</div>
 		
+		<div class="row">
+			<%if(photoCakes.size()>0)
+			{
+				for(Product product : photoCakes)
+				{
+			%>
+					<div class="col-sm-3 col-xs-6 cake_display">
+						<div style="border: 1px solid #6d2854; padding-bottom: 5px;">
+							<a href="Product?pid=<%out.print(product.getPid());%>"><img src="FetchImage?id=<%out.print(product.getImage());%>"></a>
+							<div class="center font1">
+								<h4><a href="Product?pid=<%out.print(product.getPid());%>"><%out.print(product.getName());%></a></h4>
+								<span><small>weight: <%out.print(product.getWeight());%> kg</small></span><br>
+								<span><small>Rs. <%out.print(product.getPrice());%></small></span><br>
+								<small><%out.print(product.getRating());%> <span class="glyphicon glyphicon-star">/</span> 5.0 <span class="glyphicon glyphicon-star">	</span> (<%out.print(product.getNumOfRatings());%> ratings)</small><br>				
+							</div>
+						</div>
+					</div>
+			<%	}
+			}else
+			{
+			%>
+				<p class="col-xs-12 red">No cake added of this type.</a></p>
+			<%
+			}
+			%>
+		</div>
+		
 		<div class="row" style="margin-top: 30px;">
 			<div class="col-xs-12">
 				<h3 class="font1">Non-Photograph Cakes (<a href="AddNewCake">Add New Cake</a>)</h3><hr>
@@ -100,7 +129,7 @@
 			}else
 			{
 			%>
-				<p class="col-xs-12 red">You haven't added any product. To add a new item <a href="AddProduct">Click Here</a></p>
+				<p class="col-xs-12 red">No cake added of this type.</a></p>
 			<%
 			}
 			%>
