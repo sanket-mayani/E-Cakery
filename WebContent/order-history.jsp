@@ -14,7 +14,6 @@
 
 <%!
 	Seller seller = null;
-	String dateString = null;
 	List<Order> placedOrders = null;
 	List<Order> approvedOrders = null;
 	List<Order> packedOrders = null;
@@ -31,18 +30,13 @@
 	{
 		seller = (Seller)session.getAttribute("seller");
 		
-		if(request.getParameter("date")!=null)
-			dateString = request.getParameter("date");
-		else
-			dateString = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		
-		placedOrders = dao.FetchOrders(seller,dateString,"placed");
-		approvedOrders = dao.FetchOrders(seller,dateString,"approved");
-		packedOrders = dao.FetchOrders(seller,dateString,"packed");
-		shippedOrders = dao.FetchOrders(seller,dateString,"shipped");
-		deliveredOrders = dao.FetchOrders(seller,dateString,"delivered");
-		cancelledOrders = dao.FetchOrders(seller,dateString,"cancelled by customer");
-		cancelledOrders2 = dao.FetchOrders(seller,dateString,"cancelled by seller");
+		placedOrders = dao.FetchOrders(seller,null,"placed");
+		approvedOrders = dao.FetchOrders(seller,null,"approved");
+		packedOrders = dao.FetchOrders(seller,null,"packed");
+		shippedOrders = dao.FetchOrders(seller,null,"shipped");
+		deliveredOrders = dao.FetchOrders(seller,null,"delivered");
+		cancelledOrders = dao.FetchOrders(seller,null,"cancelled by customer");
+		cancelledOrders2 = dao.FetchOrders(seller,null,"cancelled by seller");
 %>
 
 <head>
@@ -50,7 +44,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Seller Home</title>
+    <title>Order History</title>
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -70,7 +64,7 @@
 						<button class="dropdown-toggle" data-toggle="dropdown">Hi, <%out.print(seller.getName());%>
 						<span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							<li class="active"><a href="SellerHome">My Orders</a></li>
+							<li><a href="SellerHome">My Orders</a></li>
 						   	<li><a href="Catalogue">Catalogue</a></li>
 						   	<li><a href="Payments">Payments</a></li>
 						   	<li><a href="SellerAccount">My Account</a></li>
@@ -90,21 +84,13 @@
 			<div class="col-xs-12">
 				<span><a class="color1" href="seller-index.jsp">Home</a></span>
 				<span>></span>
-				<span>My Orders</span>
+				<span><a class="color1" href="SellerHome">My Orders</a></span>
+				<span>></span>
+				<span>Order History</span>
 			</div>
 		</div>
-    
-    	<div class="row" style="margin-top: 30px;">
-    		<form class="col-sm-9" action="seller-home.jsp" method="post">
-    				<span>Show orders for:</span><br> 
-    				<input type="date" name="date" value="<%out.print(dateString);%>"> <input type="submit" value="Go"> 
-    		</form>
-    		<div class="col-sm-3" id="history">
-    			<a href="OrderHistory" class="btn btn-primary">Order History</a>
-    		</div>
-    	</div><hr><br>
     	
-    	<div class="row orders_div">
+    	<div class="row orders_div" style="margin-top: 30px;">
     		<div class="col-xs-12">
     			
     			<ul class="nav nav-tabs">

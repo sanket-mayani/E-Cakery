@@ -120,6 +120,14 @@
     <url-pattern>/SellerHome</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>OrderHistory</servlet-name>
+    <jsp-file>/order-history.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderHistory</servlet-name>
+    <url-pattern>/OrderHistory</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SellerAccount</servlet-name>
     <jsp-file>/seller-account.jsp</jsp-file>
   </servlet>

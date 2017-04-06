@@ -473,6 +473,7 @@ public class DAO {
 	{
 		//This method fetches the orders seller-wise from db where
 		//date is the date(of form 'yyyy-MM-dd') for which the records are to be fetched
+		//if date is null, then it fetches records for all the dates
 		//status is the status of the order, possible values - placed, approved, packed, shipped, delivered, cancelled by customer, cancelled by seller
 		
 		Session s=getSession();
@@ -480,7 +481,11 @@ public class DAO {
 		List<Order> orders = new ArrayList<Order>();
 		try{
 			Transaction tr=s.beginTransaction();
-			Query q=s.createQuery("from Order where (seller.sid="+seller.getSid()+" and placedAt like '"+date+"%' and status='"+status+"') order by placedAt desc");
+			Query q;
+			if(date != null)
+				q = s.createQuery("from Order where (seller.sid="+seller.getSid()+" and placedAt like '"+date+"%' and status='"+status+"') order by placedAt desc");
+			else
+				q = s.createQuery("from Order where (seller.sid="+seller.getSid()+" and status='"+status+"') order by placedAt desc");
 			orders=q.list();
 			tr.commit();
 		}catch(Exception ex){
