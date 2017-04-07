@@ -168,6 +168,22 @@
     <url-pattern>/AddPhotoCake</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ViewCake</servlet-name>
+    <jsp-file>/view-cake.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewCake</servlet-name>
+    <url-pattern>/ViewCake</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewPhotoCake</servlet-name>
+    <jsp-file>/view-photo-cake.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewPhotoCake</servlet-name>
+    <url-pattern>/ViewPhotoCake</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>
