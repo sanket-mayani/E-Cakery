@@ -23,6 +23,7 @@
 		<mapping resource="model/City.hbm.xml"/>
    		<mapping resource="model/Category.hbm.xml"/>
 		<mapping resource="model/Order.hbm.xml"/>
+		<mapping resource="model/Deliver.hbm.xml"/>
 		
 	
 	</session-factory>
