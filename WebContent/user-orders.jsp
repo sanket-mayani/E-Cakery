@@ -91,18 +91,23 @@
     			for(Order order : orders)
     			{
     	%>
-			    	<div class="panel <%if(order.getStatus().startsWith("cancelled")){%>panel-danger<%}else{%>panel-success<%}%>">
-			  			<div class="panel-heading" style="font-size: small;">
+			    	<div class="panel panel-default">
+			  			<div class="panel-heading font1" style="font-size: small;">
 			  				<div class="row">
 			  					<div class="col-sm-5">
-			  						<p>Order# <%out.print(order.getOid());%></p>
+			  						<p><a href="Order?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a></p>
 			  						<p>Order placed on <%out.print(new SimpleDateFormat("dd MMMMM, yyyy hh:mm aaa").format(order.getPlacedAt()));%></p>
 			  					</div>
 			  					<div class="col-sm-3">
 			  						<p>Total: <%out.print(order.getAmount());%></p>
 			  					</div>
-			  					<div class="col-sm-4">
-			  						<p>Status: <%out.print(order.getStatus());%></p>
+			  					<div class="col-sm-4 center">
+			  						<span class="label <%if(order.getStatus().startsWith("cancelled")){%>label-danger<%}else{%>label-success<%}%>" style="font-size: 12px;"><%out.print(order.getStatus().toUpperCase());%></span>
+			  						<%if(order.getStatus().equals("delivered")){%>
+			  							<a href="Order?oid=<%out.print(order.getOid());%>#rating_section" class="label label-danger">GIVE RATING</a>
+			  						<%}else if(!order.getStatus().startsWith("cancelled")){%>
+			  							<a id="<%out.print(order.getOid());%>" class="label label-danger cancel_btn">CANCEL ORDER</a>
+			  						<%}%>
 			  					</div>
 			  				</div>
 			  			</div>
@@ -113,18 +118,10 @@
 			  							<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>" style="width: 100%; height: 100%;">
 			  						</td>
 			  						<td style="vertical-align: top; padding-left: 20px;">
-			  							<span><strong><%out.print(order.getProduct().getName());%></strong></span><br>
+			  							<span class="font1"><strong><%out.print(order.getProduct().getName());%></strong></span><br>
 			  							<span><small>sold by: <%out.print(order.getSeller().getName());%></small></span><br>
 			  							<span><small>price: <%out.print(order.getProduct().getPrice());%> (+30 Delivery)</small></span><br>
 			  							<span><small>Qty: <%out.print(order.getQuantity());%></small></span>
-			  						</td>
-			  						<td style="width: 20%; vertical-align: top; padding-left: 10px;">
-			  							<%if(order.getStatus().startsWith("cancelled")){%>
-			  							<%}else if(order.getStatus().equals("delivered")){%>
-			  								<a id="<%out.print(order.getOid());%>" class="btn btn-danger return_btn">Return Order</a>
-			  							<%}else{%>
-			  								<a id="<%out.print(order.getOid());%>" class="btn btn-danger cancel_btn">Cancel Order</a>
-			  							<%}%>
 			  						</td>
 			  					</tr>
 			  				</table>
@@ -136,13 +133,7 @@
 			  					<div>
 			  						<span><small>sold by: <%out.print(order.getSeller().getName());%></small></span><br>
 			  						<span><small>price: <%out.print(order.getProduct().getPrice());%> (+30 Delivery)</small></span><br>
-			  						<span><small>Qty: <%out.print(order.getQuantity());%></small></span><br>
-			  							<%if(order.getStatus().startsWith("cancelled")){%>
-			  							<%}else if(order.getStatus().equals("delivered")){%>
-			  								<a id="<%out.print(order.getOid());%>" class="return_btn">Return Order</a>
-			  							<%}else{%>
-			  								<a id="<%out.print(order.getOid());%>" class="cancel_btn">Cancel Order</a>
-			  							<%}%>
+			  						<span><small>Qty: <%out.print(order.getQuantity());%></small></span>
 			  					</div>
 			  				</div>
 			  			</div>
@@ -154,9 +145,15 @@
     		{
 		%>
 			<p class="red">No orders found</p>
-		<%}%>
+		<%
+			}
+		%>
     
     </div>
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
     
     <!-- Order Cancellation Modal -->
 	<div id="orderCancellationModal" class="modal fade" role="dialog">
@@ -201,10 +198,6 @@
 	</div><!-- End of Order Cancellation Modal -->
 	
 	<%request.getRequestDispatcher("registration-and-login-modal.jsp").include(request, response);%>
-
-	<script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
 
 </body>
 </html>

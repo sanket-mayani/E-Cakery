@@ -48,6 +48,13 @@ public class ChangeStatusServlet extends HttpServlet {
 			order.setShippedAt(new Date());
 		}
 		
+		// if new status is 'cancelled by seller' then also add cancellation date-time
+		if(status.equals("cancelled by seller"))
+		{
+			order.setCancelledAt(new Date());
+			order.setCancellationReason("Can't fulfill");
+		}
+		
 		// finally, update the order in db
 		synchronized (this) {
 			dao.updateOrder(order);

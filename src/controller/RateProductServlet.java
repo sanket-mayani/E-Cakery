@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,20 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.DAO;
 import model.Order;
+import model.Product;
 
-/**
- * Servlet implementation class CancelOrderServlet
- */
-@WebServlet("/CancelOrder")
-public class CancelOrderServlet extends HttpServlet {
+
+@WebServlet("/RateProduct")
+public class RateProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	// This Servlet is invoked when customer cancels an order
-	// It accepts two parameters
-	// 1. oid - order which is to be cancelled
-	// 2. reason - as chosen by the customer
-	
-    public CancelOrderServlet() {
+   
+    public RateProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,24 +29,22 @@ public class CancelOrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//get the parameters
 		int oid = Integer.parseInt(request.getParameter("oid"));
-		String reason = request.getParameter("reason");
+		int rating = Integer.parseInt(request.getParameter("rating"));
 		
 		DAO dao = new DAO();
-		
-		// get the order from db, change its status and cancellation reason
-		Order order = dao.getOrderByOid(oid);
-		order.setCancelledAt(new Date());
-		order.setStatus("cancelled by customer");
-		order.setCancellationReason(reason);
-		
-		// update the order in db
 		synchronized (this) {
+			Order order = dao.getOrderByOid(oid);
+			order.setUserRating(rating);
+			Product product = order.getProduct();
+			int num = product.getNumOfRatings();
+			float total = product.getRating() * num;
+			product.setRating((total+rating)/(num+1));
+			product.setNumOfRatings(num+1);
+			dao.updateProduct(product);
 			dao.updateOrder(order);
 		}
 		
-		// get back to previous page 
 		response.sendRedirect(request.getHeader("referer"));
 	}
 

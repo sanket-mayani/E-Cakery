@@ -88,7 +88,7 @@ public class PlacePhotoCakeOrderServlet extends HttpServlet {
 							 if(n.equals("pid")){
 								 Product product = dao.getProductById(Integer.parseInt(value));
 								 order.setQuantity(1);
-								 order.setAmount(product.getPrice() + 30);
+								 order.setAmount(product.getPrice());
 								 order.setStatus("placed");
 								 order.setUser(user);
 								 order.setProduct(product);

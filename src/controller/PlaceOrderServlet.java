@@ -73,7 +73,7 @@ public class PlaceOrderServlet extends HttpServlet {
 					Product product =item.getProduct();
 					Seller seller =item.getProduct().getSeller();
 					int quantityOrdered = item.getQuantity();
-					float amount =(item.getProduct().getPrice()) * quantityOrdered ;
+					float amount =(item.getProduct().getPrice());
 					
 					
 			        Order order = new Order();

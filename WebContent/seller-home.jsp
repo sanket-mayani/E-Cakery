@@ -491,7 +491,7 @@
 											<small><%out.print(order.getPincode());%></small>
 										</td>
 										<td>
-											<span class="text-danger">Can't fulfill</span>
+											<span class="text-danger"><%out.print(order.getCancellationReason());%></span>
 										</td>
 									</tr>
 									<%}%>

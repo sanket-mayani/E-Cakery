@@ -112,6 +112,14 @@
     <url-pattern>/PhotoCake</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>Order</servlet-name>
+    <jsp-file>/order.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Order</servlet-name>
+    <url-pattern>/Order</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SellerHome</servlet-name>
     <jsp-file>/seller-home.jsp</jsp-file>
   </servlet>

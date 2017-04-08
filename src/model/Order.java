@@ -18,6 +18,7 @@ public class Order {
 	private String status;
 	private String cancellationReason; // reason given by customer at the time of canceling the order
 	private String userPhoto; // if the ordered product is a photo cake then this field stores the name of the image uploaded by user 
+	private int userRating; // user rating for this order
 	
 	private User user;
 	private Product product;
@@ -26,6 +27,7 @@ public class Order {
     private Date placedAt; // time and date at which order was placed
     private Date shippedAt; // time and date at which order was shipped
     private Date deliveredAt; // time and date at which order was delivered
+    private Date cancelledAt; // time and date at which order was cancelled
 
 	public String getMessage() {
 		return message;
@@ -115,6 +117,12 @@ public class Order {
 	public void setUserPhoto(String userPhoto) {
 		this.userPhoto = userPhoto;
 	}
+	public int getUserRating() {
+		return userRating;
+	}
+	public void setUserRating(int userRating) {
+		this.userRating = userRating;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -144,6 +152,12 @@ public class Order {
 	}
 	public void setDeliveredAt(Date deliveredAt) {
 		this.deliveredAt = deliveredAt;
+	}
+	public Date getCancelledAt() {
+		return cancelledAt;
+	}
+	public void setCancelledAt(Date cancelledAt) {
+		this.cancelledAt = cancelledAt;
 	}
 	
 }
