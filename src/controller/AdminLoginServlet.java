@@ -44,24 +44,30 @@ public class AdminLoginServlet extends HttpServlet {
 		String s1=request.getParameter("email");
 		String s2=request.getParameter("pw");
 		
+		HttpSession session = request.getSession();
+		
 		DAO dao=new DAO();
 		Admin admin=dao.getAdminByEmail(s1);
 		if(admin != null)
 		{
 			if(admin.getPw().equals(s2))
 			{
-				HttpSession session = request.getSession(); 
+				session = request.getSession(); 
 				session.setAttribute("admin", admin);
 				response.sendRedirect("admin-home.jsp");
 			}
 			else
 			{
-				response.sendRedirect("admin-index.jsp?msg=wrong password");
+				session.setAttribute("message", "Wrong Password");
+				session.setAttribute("class", "alert-danger");
+				response.sendRedirect("admin-index.jsp");
 			}
 		}
 		else
 		{
-			response.sendRedirect("admin-index.jsp?msg=email not registered");
+			session.setAttribute("message", "Email Not Registered");
+			session.setAttribute("class", "alert-danger");
+			response.sendRedirect("admin-index.jsp");
 		}
 						
 	}
