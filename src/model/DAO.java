@@ -287,6 +287,21 @@ public class DAO {
 	
 	// Methods regarding Flavour
 	
+	public void insertFlavour(Flavour flavour)
+	{	
+		Session s = getSession();
+		
+		try{
+			Transaction tr=s.beginTransaction();
+			s.save(flavour);
+			tr.commit();
+		}catch(Exception e){
+			System.out.println(e);
+		}finally{
+			closeSession(s);
+		}	
+	}
+	
 	public Flavour getFlavourByName(String name)
 	{
 		Session session = getSession();
@@ -331,6 +346,21 @@ public class DAO {
 	
 	// Methods regarding Category
 	
+	public void insertCategory(Category category)
+	{	
+		Session s = getSession();
+		
+		try{
+			Transaction tr=s.beginTransaction();
+			s.save(category);
+			tr.commit();
+		}catch(Exception e){
+			System.out.println(e);
+		}finally{
+			closeSession(s);
+		}	
+	}
+	
 	public Category getCategoryByName(String name)
 	{
 		Session session = getSession();
@@ -374,6 +404,21 @@ public class DAO {
 	
 	
 	// Methods regarding City
+	
+	public void insertCity(City city)
+	{	
+		Session s = getSession();
+		
+		try{
+			Transaction tr=s.beginTransaction();
+			s.save(city);
+			tr.commit();
+		}catch(Exception e){
+			System.out.println(e);
+		}finally{
+			closeSession(s);
+		}	
+	}
 	
 	public City getCityByName(String name)
 	{

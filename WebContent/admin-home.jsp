@@ -98,7 +98,7 @@
 					}
 					%>
 				</div>
-				<form action="">
+				<form action="AddCity" method="post">
 					<table style="border-collapse: separate; border-spacing: 10px 0px;">
 						<tr>
 							<td>Add New City:</td>
@@ -137,7 +137,7 @@
 					}
 					%>
 				</div>
-				<form action="">
+				<form action="AddFlavour" method="post">
 					<table style="border-collapse: separate; border-spacing: 10px 0px;">
 						<tr>
 							<td>Add New Flavour:</td>
@@ -176,7 +176,7 @@
 					}
 					%>
 				</div>
-				<form action="">
+				<form action="AddCategory" method="post">
 					<table style="border-collapse: separate; border-spacing: 10px 0px;">
 						<tr>
 							<td>Add New Category:</td>

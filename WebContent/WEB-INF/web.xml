@@ -200,6 +200,14 @@
     <url-pattern>/ViewOrder</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AdminHome</servlet-name>
+    <jsp-file>/admin-home.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminHome</servlet-name>
+    <url-pattern>/AdminHome</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>
