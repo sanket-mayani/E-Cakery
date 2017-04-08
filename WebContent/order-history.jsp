@@ -82,7 +82,7 @@
     
     	<div class="row">
 			<div class="col-xs-12">
-				<span><a class="color1" href="seller-index.jsp">Home</a></span>
+				<span><a class="color1" href="SellerHome">Home</a></span>
 				<span>></span>
 				<span><a class="color1" href="SellerHome">My Orders</a></span>
 				<span>></span>
@@ -130,7 +130,7 @@
 											<%}%>
 										</td>
 										<td>
-											Order# <%out.print(order.getOid());%><br>
+											<a href="ViewOrder?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a><br>
 											status: <span class="text-danger">yet to approve</span>
 										</td>
 										<td class="image_td">
@@ -185,7 +185,7 @@
 											<%}%>
 										</td>
 										<td>
-											Order# <%out.print(order.getOid());%><br>
+											<a href="ViewOrder?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a><br>
 											status: <span class="text-danger">yet to pack</span>
 										</td>
 										<td class="image_td">
@@ -241,7 +241,7 @@
 											<%}%>
 										</td>
 										<td>
-											Order# <%out.print(order.getOid());%><br>
+											<a href="ViewOrder?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a><br>
 											status: <span class="text-success">ready to be shipped</span>
 										</td>
 										<td class="image_td">
@@ -295,7 +295,7 @@
 											<%}%>
 										</td>
 										<td>
-											Order# <%out.print(order.getOid());%><br>
+											<a href="ViewOrder?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a><br>
 											status: <span class="text-success">item is shipped</span>
 										</td>
 										<td class="image_td">
@@ -350,7 +350,7 @@
 											<%}%>
 										</td>
 										<td>
-											Order# <%out.print(order.getOid());%><br>
+											<a href="ViewOrder?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a><br>
 											status: <span class="text-success">successfully delivered</span>
 										</td>
 										<td class="image_td">
@@ -404,7 +404,7 @@
 											<%}%>
 										</td>
 										<td>
-											Order# <%out.print(order.getOid());%><br>
+											<a href="ViewOrder?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a><br>
 											status: <span class="text-danger">order cancelled</span>
 										</td>
 										<td class="image_td">
@@ -458,7 +458,7 @@
 											<%}%>
 										</td>
 										<td>
-											Order# <%out.print(order.getOid());%><br>
+											<a href="ViewOrder?oid=<%out.print(order.getOid());%>">Order# <%out.print(order.getOid());%></a><br>
 											status: <span class="text-danger">order cancelled</span>
 										</td>
 										<td class="image_td">

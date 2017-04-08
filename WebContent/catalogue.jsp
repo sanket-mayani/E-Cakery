@@ -62,7 +62,7 @@
     
     	<div class="row">
 			<div class="col-xs-12">
-				<span><a class="color1" href="seller-index.jsp">Home</a></span>
+				<span><a class="color1" href="SellerHome">Home</a></span>
 				<span>></span>
 				<span>Catalogue</span>
 			</div>

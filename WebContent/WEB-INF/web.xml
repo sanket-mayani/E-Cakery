@@ -192,6 +192,14 @@
     <url-pattern>/ViewPhotoCake</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ViewOrder</servlet-name>
+    <jsp-file>/view-order.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewOrder</servlet-name>
+    <url-pattern>/ViewOrder</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>

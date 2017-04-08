@@ -29,7 +29,7 @@
 			
 				<div class="row">
 					<div class="col-sm-6">
-						<h2 id="title"><a href="index.jsp" class="white">E-Cakery</a></h2>
+						<h2 id="title"><a href="seller-index.jsp" class="white">E-Cakery</a></h2>
 					</div>
 					<div class="col-sm-6" id="cart_section">
 						<span class="dropdown">
@@ -54,7 +54,7 @@
     
     	<div class="row">
 			<div class="col-xs-12">
-				<span><a class="color1" href="seller-index.jsp">Home</a></span>
+				<span><a class="color1" href="SellerHome">Home</a></span>
 				<span>></span>
 				<span>My Account</span>
 			</div>
