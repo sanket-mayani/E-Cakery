@@ -167,6 +167,67 @@ public class DAO {
 			return null;
 	}
 	
+	// Methods regarding Delivery System
+	public Deliver getDeliverByEmail(String email)
+	{
+		Session session = getSession();
+
+		List<Deliver> al=new ArrayList<Deliver>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Deliver where un='"+email+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
+	}
+	
+	public List<Order> getPackedOrders()
+	{
+		Session session = getSession();
+
+		List<Order> list=new ArrayList<Order>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Order where Status='packed' or Status='shipped'");
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}	
+	
+	public List<Order> getDeliveredOrders()
+	{
+		Session session = getSession();
+
+		List<Order> list=new ArrayList<Order>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Order where Status='delivered'");
+			list=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return list;
+	}	
+	
 	
 	// Methods regarding Product
 	
@@ -718,27 +779,6 @@ public class DAO {
 		}
 		return maxPages;
 	}
-	
-	public List<Order> getPackedOrders()
-	{
-		Session session = getSession();
-
-		List<Order> list=new ArrayList<Order>();
-		try 
-		{
-			Transaction tr=session.beginTransaction();
-			Query q=session.createQuery("from Order where Status='packed'");
-			list=q.list();
-			tr.commit();
-		}catch(Exception ex){
-			System.out.println(ex);
-		}finally{
-			closeSession(session); 
-		}
-		return list;
-	}	
-	
-
 	
 		
 }

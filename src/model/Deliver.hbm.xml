@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	
+	<class name="model.Deliver" table="Deliver">
+	
+		<id name="DID" type="int" column="DID">
+			<generator class="increment"></generator>
+		</id>
+			
+		<property name="un">
+			<column name="Email"></column>
+		</property>	
+		
+		<property name="pw">
+			<column name="Password"></column>
+		</property>	
+		
+		<many-to-one name="city" class="model.City" column="City_ID" lazy="false"></many-to-one>
+		
+	</class>
+</hibernate-mapping>
