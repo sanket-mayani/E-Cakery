@@ -137,7 +137,7 @@
 											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
 										</td>
 										<td>
-											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>ViewCake<%}else{%>ViewPhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong><br>
 											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
 											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
 											<small>Qty: <%out.print(order.getQuantity());%></small>
@@ -192,7 +192,7 @@
 											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
 										</td>
 										<td>
-											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>ViewCake<%}else{%>ViewPhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong><br>
 											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
 											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
 											<small>Qty: <%out.print(order.getQuantity());%></small>
@@ -248,7 +248,7 @@
 											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
 										</td>
 										<td>
-											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>ViewCake<%}else{%>ViewPhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong><br>
 											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
 											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
 											<small>Qty: <%out.print(order.getQuantity());%></small>
@@ -302,7 +302,7 @@
 											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
 										</td>
 										<td>
-											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>ViewCake<%}else{%>ViewPhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong><br>
 											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
 											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
 											<small>Qty: <%out.print(order.getQuantity());%></small>
@@ -357,7 +357,7 @@
 											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
 										</td>
 										<td>
-											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>ViewCake<%}else{%>ViewPhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong><br>
 											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
 											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
 											<small>Qty: <%out.print(order.getQuantity());%></small>
@@ -411,7 +411,7 @@
 											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
 										</td>
 										<td>
-											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>ViewCake<%}else{%>ViewPhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong><br>
 											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
 											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
 											<small>Qty: <%out.print(order.getQuantity());%></small>
@@ -465,7 +465,7 @@
 											<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>">
 										</td>
 										<td>
-											<strong><%out.print(order.getProduct().getName());%></strong><br>
+											<strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>ViewCake<%}else{%>ViewPhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong><br>
 											<small>PID: <%out.print(order.getProduct().getPid());%></small><br>
 											<small>Price: <%out.print(order.getProduct().getPrice());%></small><br>
 											<small>Qty: <%out.print(order.getQuantity());%></small>

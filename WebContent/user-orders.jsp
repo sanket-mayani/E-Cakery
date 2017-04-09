@@ -99,7 +99,7 @@
 			  						<p>Order placed on <%out.print(new SimpleDateFormat("dd MMMMM, yyyy hh:mm aaa").format(order.getPlacedAt()));%></p>
 			  					</div>
 			  					<div class="col-sm-3">
-			  						<p>Total: <%out.print(order.getAmount());%></p>
+			  						<p>Total: <%out.print((order.getAmount()*order.getQuantity())+(30*order.getQuantity()));%></p>
 			  					</div>
 			  					<div class="col-sm-4 center">
 			  						<span class="label <%if(order.getStatus().startsWith("cancelled")){%>label-danger<%}else{%>label-success<%}%>" style="font-size: 12px;"><%out.print(order.getStatus().toUpperCase());%></span>
@@ -118,21 +118,21 @@
 			  							<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>" style="width: 100%; height: 100%;">
 			  						</td>
 			  						<td style="vertical-align: top; padding-left: 20px;">
-			  							<span class="font1"><strong><%out.print(order.getProduct().getName());%></strong></span><br>
+			  							<span class="font1"><strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>Product<%}else{%>PhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong></span><br>
 			  							<span><small>sold by: <%out.print(order.getSeller().getName());%></small></span><br>
-			  							<span><small>price: <%out.print(order.getProduct().getPrice());%> (+30 Delivery)</small></span><br>
+			  							<span><small>price: <%out.print(order.getAmount());%> (+30 Delivery)</small></span><br>
 			  							<span><small>Qty: <%out.print(order.getQuantity());%></small></span>
 			  						</td>
 			  					</tr>
 			  				</table>
 			  			</div>
 			  			<div class="panel-body hidden-sm hidden-md hidden-lg">
-			  				<span><strong><%out.print(order.getProduct().getName());%></strong></span><br>
+			  				<span><strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>Product<%}else{%>PhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong></span><br>
 			  				<div style="margin-top: 10px;">
 			  					<img src="FetchImage?id=<%out.print(order.getProduct().getImage());%>" style="width: 100px; height: 100px; float: left; margin-right: 20px;">
 			  					<div>
 			  						<span><small>sold by: <%out.print(order.getSeller().getName());%></small></span><br>
-			  						<span><small>price: <%out.print(order.getProduct().getPrice());%> (+30 Delivery)</small></span><br>
+			  						<span><small>price: <%out.print(order.getAmount());%> (+30 Delivery)</small></span><br>
 			  						<span><small>Qty: <%out.print(order.getQuantity());%></small></span>
 			  					</div>
 			  				</div>

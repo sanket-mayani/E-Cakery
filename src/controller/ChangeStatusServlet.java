@@ -64,7 +64,7 @@ public class ChangeStatusServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("message", "Moved to "+status+" orders");
 		session.setAttribute("class", "alert-success");
-		response.sendRedirect("seller-home.jsp");
+		response.sendRedirect(request.getHeader("referer"));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

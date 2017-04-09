@@ -65,7 +65,7 @@ public class PlaceOrderServlet extends HttpServlet {
 				
 				
 				ArrayList<Item> items =cart.getItems();
-				ArrayList<Item> successList = new ArrayList<Item>();
+				ArrayList<Order> successList = new ArrayList<Order>();
 				ArrayList<Item> failureList = new ArrayList<Item>();
 				
 				for(Item item : items)
@@ -112,14 +112,19 @@ public class PlaceOrderServlet extends HttpServlet {
 					}
 					
 					if(result)
-						successList.add(item);
+						successList.add(order);
 					else
 						failureList.add(item);
 					
 				}
 				
-				for(Item item : successList)
+				for(Order order : successList)
+				{
+					Item item = new Item();
+					item.setProduct(order.getProduct());
 					cart.removeItem(item);
+				}
+					
 				session.setAttribute("cart", cart);
 				
 				session.setAttribute("successList", successList);
