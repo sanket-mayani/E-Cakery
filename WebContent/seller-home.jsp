@@ -43,6 +43,9 @@
 		deliveredOrders = dao.FetchOrders(seller,dateString,"delivered");
 		cancelledOrders = dao.FetchOrders(seller,dateString,"cancelled by customer");
 		cancelledOrders2 = dao.FetchOrders(seller,dateString,"cancelled by seller");
+		
+		if(dateString.equals(new SimpleDateFormat("yyyy-MM-dd").format(new Date())))
+			response.setIntHeader("Refresh", 60);
 %>
 
 <head>
