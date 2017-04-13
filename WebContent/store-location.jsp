@@ -120,8 +120,9 @@
 
       //Set up some of our variables.
       var map; //Will contain map object.
-      var marker = false; ////Has the user plotted their location marker? 
-              
+      var marker; ////Has the user plotted their location marker? 
+      var marker2;        
+    		  
       //Function called to initialize / create the map.
       //This is called when the page has loaded.
       function initMap(position) {
@@ -129,6 +130,7 @@
           //The center location of our map.
           var centerOfMap = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
+          
           //Map options.
           var options = {
             center: centerOfMap, //Set center.
@@ -140,16 +142,26 @@
           
           marker = new google.maps.Marker({
               position: centerOfMap,
-              map: map
+              map: map,
+              title : 'You are here'
             });
-          
-          markerLocation();
 
+          marker2 = new google.maps.Marker({
+              map: map,
+              icon : 'images/icons/store.png',
+              title : 'Your Store Location'
+            });
+          	
+          	<%if(s.getLatitude()!=0 || s.getLongitude()!=0){%>
+          		marker2.setPosition(new google.maps.LatLng(<%out.print(s.getLatitude());%>,<%out.print(s.getLongitude());%>));
+          		markerLocation();
+          	<%}%>
+          	
           //Listen for any clicks on the map.
           google.maps.event.addListener(map, 'click', function(event) {                
               //Get the location that the user clicked.
               var clickedLocation = event.latLng;
-              marker.setPosition(clickedLocation);
+              marker2.setPosition(clickedLocation);
              
               //Get the marker's location.
               markerLocation();
@@ -160,7 +172,7 @@
       //values to our textfields so that we can save the location.
       function markerLocation(){
           //Get location.
-          var currentLocation = marker.getPosition();
+          var currentLocation = marker2.getPosition();
           //Add lat and lng values to a field that we can save.
           document.getElementById('lat').value = currentLocation.lat(); //latitude
           document.getElementById('lng').value = currentLocation.lng(); //longitude

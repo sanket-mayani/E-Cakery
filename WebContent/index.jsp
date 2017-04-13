@@ -130,6 +130,12 @@
 	</div><!-- End of fit to screen -->
 	
 	<div class="container" style="margin-bottom: 50px;">
+		
+		<div class="row" style="margin-top: 70px;">
+			<div class="col-xs-12 center">
+				<a href="FindNearbyStores" class="btn btn-danger font1" style="font-size: 18px;"><span class="glyphicon glyphicon-search"></span> Find Nearby Stores</a>
+			</div>
+		</div>
 	
 		<h3 class="center font1" style="margin-top: 50px;">Shop By Flavour</h3>
 		

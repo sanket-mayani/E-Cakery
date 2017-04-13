@@ -88,6 +88,26 @@ public class DAO {
 	
 	
 	// Methods regarding Seller
+	
+	public List<Seller> getAllSellers()
+	{
+		Session session = getSession();
+
+		List<Seller> sellers=new ArrayList<Seller>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Seller");
+			sellers=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		return sellers;
+		
+	}
 
 	public void insertSeller(Seller slvo)
 	{
@@ -129,6 +149,28 @@ public class DAO {
 		{
 			Transaction tr=session.beginTransaction();
 			Query q=session.createQuery("from Seller where un='"+email+"'");
+			al=q.list();
+			tr.commit();
+		}catch(Exception ex){
+			System.out.println(ex);
+		}finally{
+			closeSession(session); 
+		}
+		if(!al.isEmpty())
+			return al.get(0);
+		else
+			return null;
+	}
+	
+	public Seller getSellerBySid(int sid)
+	{
+		Session session = getSession();
+
+		List<Seller> al=new ArrayList<Seller>();
+		try 
+		{
+			Transaction tr=session.beginTransaction();
+			Query q=session.createQuery("from Seller where sid="+sid);
 			al=q.list();
 			tr.commit();
 		}catch(Exception ex){

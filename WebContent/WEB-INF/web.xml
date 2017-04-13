@@ -64,6 +64,22 @@
     <url-pattern>/UserOrders</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>FindNearbyStores</servlet-name>
+    <jsp-file>/find-nearby-stores.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindNearbyStores</servlet-name>
+    <url-pattern>/FindNearbyStores</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>VisitSeller</servlet-name>
+    <jsp-file>/visit-seller.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VisitSeller</servlet-name>
+    <url-pattern>/VisitSeller</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>CakesByFlavour</servlet-name>
     <jsp-file>/cakes-by-flavour.jsp</jsp-file>
   </servlet>

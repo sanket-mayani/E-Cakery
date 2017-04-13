@@ -60,11 +60,13 @@
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col-xs-12 right font1" style="margin-top: 10px;">
-				<a href="StoreLocation"><span class="glyphicon glyphicon-map-marker"></span> Add Store Location</a>
+		<%if(s.getAddress()!=null){%>
+			<div class="row">
+				<div class="col-xs-12 right font1" style="margin-top: 10px;">
+					<a href="StoreLocation"><span class="glyphicon glyphicon-map-marker"></span> Add Store Location</a>
+				</div>
 			</div>
-		</div>
+		<%}%>
     
     	<form action="UpdateSellerAddressServlet" class="form-horizontal" method="post">
     		
@@ -181,7 +183,7 @@
 		    								for(City city:cities)
 		    								{
 		    							%>
-		    									<option value="<%out.print(city.getName());%>" <%if(s.getCity().getCid() == city.getCid()){%>selected<%}%>><%out.print(city.getName());%></option>
+		    									<option value="<%out.print(city.getName());%>" <%if(s.getCity()!=null && s.getCity().getCid() == city.getCid()){%>selected<%}%>><%out.print(city.getName());%></option>
 		    							<%		
 		    								}
 		    							%>
