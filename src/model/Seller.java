@@ -14,6 +14,8 @@ public class Seller {
 	private String address;
 	private int pincode;
 	private City city;
+	private double latitude;
+	private double longitude;
 	
 	public String getAddress() {
 		return address;
@@ -87,6 +89,18 @@ public class Seller {
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	
 

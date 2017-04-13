@@ -59,13 +59,19 @@
 				<span>My Account</span>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 right font1" style="margin-top: 10px;">
+				<a href="StoreLocation"><span class="glyphicon glyphicon-map-marker"></span> Add Store Location</a>
+			</div>
+		</div>
     
     	<form action="UpdateSellerAddressServlet" class="form-horizontal" method="post">
     		
     		<div class="row" style="margin-top: 30px;">
     		    		
 	    		<div class="col-md-6" id="seller_basic_details">
-	    			<h3>Basic Details <button type="button" class="btn btn-primary edit"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
+	    			<h3 class="font1">Basic Details <button type="button" class="btn btn-primary edit"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
 	    			<div class="row">
 		    			<div class="col-md-12">
 		    				<div class="form-group">
@@ -139,7 +145,7 @@
 	    		</div>
     		
     			<div id="seller_address_details" class="col-md-6">
-	    			<h3>Address Details <button type="button" class="btn btn-primary edit"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
+	    			<h3 class="font1">Address Details <button type="button" class="btn btn-primary edit"><span class="glyphicon glyphicon-pencil"></span><span> Edit</span></button></h3><hr>
 	    			<div class="row">
 		    			<div class="col-md-12">
 		    				<div class="form-group">
@@ -175,7 +181,7 @@
 		    								for(City city:cities)
 		    								{
 		    							%>
-		    									<option value="<%out.print(city.getName());%>"><%out.print(city.getName());%></option>
+		    									<option value="<%out.print(city.getName());%>" <%if(s.getCity().getCid() == city.getCid()){%>selected<%}%>><%out.print(city.getName());%></option>
 		    							<%		
 		    								}
 		    							%>
@@ -188,7 +194,7 @@
 				    		
     		</div>
     		
-    		<div class="row" id="apply_changes_div">
+    		<div class="row font1" id="apply_changes_div">
     			<hr>
     			<input type="submit" class="btn btn-primary" value="Apply Changes">
     		</div>

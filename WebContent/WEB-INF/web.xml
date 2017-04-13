@@ -144,6 +144,14 @@
     <url-pattern>/SellerAccount</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>StoreLocation</servlet-name>
+    <jsp-file>/store-location.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoreLocation</servlet-name>
+    <url-pattern>/StoreLocation</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Catalogue</servlet-name>
     <jsp-file>/catalogue.jsp</jsp-file>
   </servlet>

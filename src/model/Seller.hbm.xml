@@ -50,6 +50,14 @@
 			<column name="Pincode"></column>
 		</property>
 		
+		<property name="latitude">
+			<column name="Latitude"></column>
+		</property>
+		
+		<property name="longitude">
+			<column name="Longitude"></column>
+		</property>
+		
 		<many-to-one name="city" class="model.City" column="City_ID" lazy="false"></many-to-one>
 		
 	</class>
