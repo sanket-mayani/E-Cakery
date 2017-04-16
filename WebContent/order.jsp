@@ -132,7 +132,7 @@
 						<table>
 							<tr>
 								<td>Seller </td>
-								<td> : <%out.print(product.getSeller().getName());%></td>
+								<td> : <a href="VisitSeller?sid=<%out.print(product.getSeller().getSid());%>"><%out.print(product.getSeller().getName());%></a></td>
 							</tr>
 							<tr>
 								<td>Message </td>

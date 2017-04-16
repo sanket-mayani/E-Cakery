@@ -119,7 +119,7 @@
 			  						</td>
 			  						<td style="vertical-align: top; padding-left: 20px;">
 			  							<span class="font1"><strong><a href="<%if(!order.getProduct().getIsPhotoCake()){%>Product<%}else{%>PhotoCake<%}%>?pid=<%out.print(order.getProduct().getPid());%>"><%out.print(order.getProduct().getName());%></a></strong></span><br>
-			  							<span><small>sold by: <%out.print(order.getSeller().getName());%></small></span><br>
+			  							<span><small>sold by: <a href="VisitSeller?sid=<%out.print(order.getProduct().getSeller().getSid());%>"><%out.print(order.getSeller().getName());%></a></small></span><br>
 			  							<span><small>price: <%out.print(order.getAmount());%> (+30 Delivery)</small></span><br>
 			  							<span><small>Qty: <%out.print(order.getQuantity());%></small></span>
 			  						</td>

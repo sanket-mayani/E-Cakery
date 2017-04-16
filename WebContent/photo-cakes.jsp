@@ -176,7 +176,7 @@
 			<%for(Product product : products){%>
 				<div class="col-sm-3 col-xs-6 cake_display">
 					<div style="border: 1px solid #6d2854; padding-bottom: 5px;">
-						<a href="Product?pid=<%out.print(product.getPid());%>"><img src="FetchImage?id=<%out.print(product.getImage());%>"></a>
+						<a href="PhotoCake?pid=<%out.print(product.getPid());%>"><img src="FetchImage?id=<%out.print(product.getImage());%>"></a>
 						<div class="center font1">
 							<h4><a href="Product?pid=<%out.print(product.getPid());%>"><%out.print(product.getName());%></a></h4>
 							<span><small>weight: <%out.print(product.getWeight());%> kg</small></span><br>
